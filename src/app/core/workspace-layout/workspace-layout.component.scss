@@ -1,0 +1,21 @@
+@use "src/styles/abstracts/mixins" as m;
+
+//mat-toolbar {
+//  background-color: darkblue;
+//  color: white;
+//}
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+//.toolbar-title {
+//  @include m.app-title()
+//}
+
+
+
