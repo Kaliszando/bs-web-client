@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { WorkspaceLayoutComponent } from './workspace-layout/workspace-layout.component';
+import { RouterModule } from "@angular/router";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { WorkspaceLayoutComponent } from './workspace-layout/workspace-layout.co
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    RouterModule,
   ]
 })
 export class CoreModule { }
