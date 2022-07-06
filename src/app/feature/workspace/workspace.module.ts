@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FeatureRoutingModule } from './feature-routing.module';
-import { WorkspaceComponent } from './workspace/workspace.component';
-import { CoreModule } from "../core/core.module";
-import { TestContentComponent } from './workspace/test-content/test-content.component';
+import { WorkspaceRoutingModule } from './workspace-routing.module';
+import { WorkspaceComponent } from './workspace.component';
+import { CoreModule } from "../../core/core.module";
+import { TestContentComponent } from './test-content/test-content.component';
 import { MatDividerModule } from "@angular/material/divider";
 import { MatButtonModule } from "@angular/material/button";
 
@@ -17,9 +17,9 @@ import { MatButtonModule } from "@angular/material/button";
   imports: [
     CommonModule,
     CoreModule,
-    FeatureRoutingModule,
+    WorkspaceRoutingModule,
     MatDividerModule,
     MatButtonModule,
   ]
 })
-export class FeatureModule { }
+export class WorkspaceModule { }

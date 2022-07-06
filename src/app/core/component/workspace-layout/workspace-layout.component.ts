@@ -14,11 +14,11 @@ export class WorkspaceLayoutComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
 }

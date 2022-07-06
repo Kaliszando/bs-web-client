@@ -1,0 +1,19 @@
+@use "src/styles/abstracts/mixins" as m;
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.bs-app-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+
+

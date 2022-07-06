@@ -4,10 +4,10 @@
                [opened]="!(isHandset$ | async)">
     <button type="button" routerLink="/main">main</button>
     <button type="button" routerLink="/main/test">main/test</button>
-    <button type="button" routerLink="/main/auth/login">auth</button>
+    <button type="button" routerLink="/auth/login">auth</button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="bs-app-toolbar">
       <button mat-icon-button *ngIf="isHandset$ | async"
               (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
