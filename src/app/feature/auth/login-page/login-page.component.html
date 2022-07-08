@@ -1,2 +1,31 @@
-<p>login-page works!</p>
-<img src="assets/logo/logo.png" alt="Italian Trulli">
+<div class="page-container">
+  <div class="page-content">
+    <div class="intro-container"></div>
+    <div class="login-container">
+
+      <div class="empty"></div>
+      <bs-language-toggle class="item-height"></bs-language-toggle>
+      <button mat-raised-button color="primary" class="item-height">Sign up</button>
+
+      <div class="empty item-x-span"></div>
+      <div class="empty item-x-span"></div>
+
+      <mat-form-field class="item-x-span item-height">
+        <mat-label>Username or email</mat-label>
+        <input type="email" matInput placeholder="example@mail.com">
+      </mat-form-field>
+
+      <mat-form-field class="item-x-span item-height">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="showPassword ? 'text' : 'password'">
+        <button matSuffix mat-icon-button (click)="showPassword=!showPassword">
+          <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+          <mat-icon *ngIf="showPassword">visibility</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button class="item-x-span item-height" mat-raised-button color="primary">Sign in</button>
+
+    </div>
+  </div>
+</div>

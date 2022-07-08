@@ -7,6 +7,9 @@ import { CoreModule } from "../../core/core.module";
 import { TestContentComponent } from './test-content/test-content.component';
 import { MatDividerModule } from "@angular/material/divider";
 import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
 
 
 @NgModule({
@@ -20,6 +23,9 @@ import { MatButtonModule } from "@angular/material/button";
     WorkspaceRoutingModule,
     MatDividerModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
   ]
 })
 export class WorkspaceModule { }
