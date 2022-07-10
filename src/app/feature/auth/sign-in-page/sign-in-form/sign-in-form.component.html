@@ -1,0 +1,47 @@
+<div class="bs-sign-in-page-side-content">
+
+  <div class="empty"></div>
+  <bs-language-toggle class="item-height"></bs-language-toggle>
+  <button mat-raised-button color="primary" class="item-height" routerLink='/auth/sign-up'>Sign up</button>
+
+  <div class="empty item-3col-span"></div>
+  <div class="empty item-3col-span"></div>
+
+  <mat-form-field class="item-3col-span">
+    <mat-label>Email or username</mat-label>
+    <input matInput (keydown.enter)="signIn()" [formControl]="usernameForm">
+    <mat-error *ngIf="usernameForm.hasError('minlength')">
+      Username must consist of at least 6 characters
+    </mat-error>
+    <mat-error *ngIf="usernameForm.hasError('required')">
+      Email or username is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="item-3col-span">
+    <mat-label>Password</mat-label>
+    <input matInput #passwordInput (keydown.enter)="signIn(); passwordInput.blur()"
+           [type]="showPassword ? 'text' : 'password'" [formControl]="passwordForm">
+    <mat-error *ngIf="passwordForm.hasError('minlength')">
+      Password must consist of at least 8 characters
+    </mat-error>
+    <mat-error *ngIf="passwordForm.hasError('required')">
+      Password is required
+    </mat-error>
+    <mat-error *ngIf="usernameForm.hasError('credentials')">
+      Username or password is incorrect
+    </mat-error>
+    <button matSuffix mat-icon-button (click)="showPassword=!showPassword">
+      <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+      <mat-icon *ngIf="showPassword">visibility</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button class="item-3col-span item-height" mat-raised-button color="primary"
+          (click)="signIn()">
+    <div *ngIf="!processing">Sign in</div>
+    <div *ngIf="processing">Signing in ...</div>
+  </button>
+  <mat-progress-bar *ngIf="processing" class="item-3col-span" mode="indeterminate"></mat-progress-bar>
+
+</div>

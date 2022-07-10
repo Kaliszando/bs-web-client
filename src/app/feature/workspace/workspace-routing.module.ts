@@ -6,6 +6,10 @@ import { TestContentComponent } from "./test-content/test-content.component";
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'test',
+  },
+  {
+    path: '',
     component: WorkspaceComponent,
     children: [
       {
@@ -13,7 +17,7 @@ const routes: Routes = [
         component: TestContentComponent,
       },
     ]
-  },
+  }
 ];
 
 @NgModule({

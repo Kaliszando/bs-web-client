@@ -12,8 +12,8 @@ export class LanguageToggleComponent {
   selectedLang: string = 'en'
 
   languages: Lang[] = [
-    { key: "en", value: "EN"},
     { key: "pl", value: "PL"},
+    { key: "en", value: "EN"},
   ];
 
   setLang(lang: string) {

@@ -1,0 +1,74 @@
+<div class="bs-sign-in-page-side-content">
+
+  <div class="empty"></div>
+  <bs-language-toggle class="item-height"></bs-language-toggle>
+  <button mat-raised-button color="primary"
+          class="item-height" routerLink='/auth/sign-in'>Sign in</button>
+
+  <div class="empty item-3col-span"></div>
+
+  <mat-form-field class="item-3col-span">
+    <mat-label>Email</mat-label>
+    <input matInput (keydown.enter)="signUp()" [formControl]="email">
+    <mat-error *ngIf="email.getError('email')">
+      Enter valid email
+    </mat-error>
+    <mat-error *ngIf="email.hasError('required')">
+      Email is required
+    </mat-error>
+  </mat-form-field>
+
+  <div class="item-3col-span name-row">
+    <mat-form-field class=>
+      <mat-label>First name</mat-label>
+      <input matInput (keydown.enter)="signUp()" [formControl]="firstname">
+      <mat-error *ngIf="firstname.getError('minlength')">
+        Enter valid first name
+      </mat-error>
+      <mat-error *ngIf="firstname.hasError('required')">
+        First name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class=>
+      <mat-label>Last name</mat-label>
+      <input matInput (keydown.enter)="signUp()" [formControl]="lastname">
+      <mat-error *ngIf="lastname.getError('minlength')">
+        Enter valid last name
+      </mat-error>
+      <mat-error *ngIf="lastname.hasError('required')">
+        Last name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="item-3col-span">
+    <mat-label>Password</mat-label>
+    <input matInput (keydown.enter)="signUp()" [formControl]="password">
+    <mat-error *ngIf="password.getError('minlength')">
+      Enter valid password
+    </mat-error>
+    <mat-error *ngIf="password.hasError('required')">
+      Password is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="item-3col-span">
+    <mat-label>Confirm password</mat-label>
+    <input matInput (keydown.enter)="signUp()" [formControl]="passwordConfirm">
+    <mat-error *ngIf="password.getError('minlength')">
+      Enter valid password
+    </mat-error>
+    <mat-error *ngIf="password.hasError('required')">
+      Password confirmation is required
+    </mat-error>
+  </mat-form-field>
+
+  <button class="item-3col-span item-height" mat-raised-button color="primary"
+          (click)="processing = !processing">
+    <div *ngIf="!processing">Sign up</div>
+    <div *ngIf="processing">Signing up ...</div>
+  </button>
+  <mat-progress-bar *ngIf="processing" class="item-3col-span" mode="indeterminate"></mat-progress-bar>
+
+</div>
