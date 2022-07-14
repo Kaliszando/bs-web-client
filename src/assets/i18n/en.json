@@ -1,3 +1,4 @@
+
 {
   "signInPage.signIn.content.button.signUpNav": "Create account",
   "signInPage.signIn.content.title": "Log in to your account",
@@ -30,5 +31,10 @@
   "signInPage.signUp.content.input.confirmPassword.error.minlength": "Password is too short",
   "signInPage.signUp.content.input.confirmPassword.error.required": "Password confirmation is required",
   "signInPage.signUp.content.input.confirmPassword.error.nomatch": "Passwords do not match",
-  "signInPage.signUp.content.button.signInSubmit": "Sign up"
+  "signInPage.signUp.content.button.signInSubmit": "Sign up",
+
+  "signInPage.intro.line1": "Sign In to",
+  "signInPage.intro.line2": "Start Tracking",
+  "signInPage.intro.line3": "Don't have an account?",
+  "signInPage.intro.line4": "Register here"
 }

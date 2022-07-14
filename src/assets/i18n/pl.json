@@ -30,5 +30,10 @@
   "signInPage.signUp.content.input.confirmPassword.error.minlength": "Hasło za krótkie",
   "signInPage.signUp.content.input.confirmPassword.error.required": "Powtórzenie hasła jest wymagane",
   "signInPage.signUp.content.input.confirmPassword.error.nomatch": "Hasła się różnią",
-  "signInPage.signUp.content.button.signInSubmit": "Zarejestruj się"
+  "signInPage.signUp.content.button.signInSubmit": "Zarejestruj się",
+
+  "signInPage.intro.line1": "Zaloguj się",
+  "signInPage.intro.line2": "Zacznij śledzić",
+  "signInPage.intro.line3": "Nie masz konta?",
+  "signInPage.intro.line4": "Zarejestruj się tutaj"
 }

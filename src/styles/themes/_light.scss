@@ -1,11 +1,11 @@
 @use '@angular/material' as mat;
 
-$bs-primary: mat.define-palette(mat.$deep-purple-palette, 700);
-$bs-accent: mat.define-palette(mat.$purple-palette, A400, 100);
-$bs-warn: mat.define-palette(mat.$deep-orange-palette, A400);
+$mat-palette-bs-primary: mat.define-palette(mat.$deep-purple-palette, 700);
+$mat-palette-bs-accent: mat.define-palette(mat.$purple-palette, A400, 100);
+$mat-palette-bs-warn: mat.define-palette(mat.$deep-orange-palette, A400);
 
 // colors
-$bs-prim-color: #512DA8;
+$bs-prim-color: #470cce;
 $bs-acc-color: #D500F9;
 
 $bs-acc-1-color: #E0C3FC;
@@ -16,9 +16,9 @@ $icon-color: darkgrey;
 
 $bs-light-theme: mat.define-light-theme((
   color: (
-    primary: $bs-primary,
-    accent: $bs-accent,
-    warn: $bs-warn
+    primary: $mat-palette-bs-primary,
+    accent: $mat-palette-bs-accent,
+    warn: $mat-palette-bs-warn
   )
 ));
 
