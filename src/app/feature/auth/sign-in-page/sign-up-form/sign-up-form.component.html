@@ -1,74 +1,92 @@
-<div class="bs-sign-in-page-side-content">
+<div class="bs-sign-in-page-form-grid">
 
   <div class="empty"></div>
-  <bs-language-toggle class="item-height"></bs-language-toggle>
-  <button mat-raised-button color="primary"
-          class="item-height" routerLink='/auth/sign-in'>Sign in</button>
+  <bs-language-toggle class="grid-row-height"></bs-language-toggle>
+  <button mat-stroked-button color="primary" class="grid-row-height" routerLink='/auth/sign-in'>
+    {{ 'signInPage.signUp.content.button.signInNav' | translate }}
+  </button>
 
-  <div class="empty item-3col-span"></div>
+  <div class="mat-display-1 title grid-col-span">{{ 'signInPage.signUp.content.title' | translate }}</div>
 
-  <mat-form-field class="item-3col-span">
-    <mat-label>Email</mat-label>
+  <mat-form-field class="grid-col-span">
+    <mat-label>{{ 'signInPage.signUp.content.input.email.label' | translate }}</mat-label>
     <input matInput (keydown.enter)="signUp()" [formControl]="email">
     <mat-error *ngIf="email.getError('email')">
-      Enter valid email
+      {{ 'signInPage.signUp.content.input.email.error.email' | translate }}
     </mat-error>
     <mat-error *ngIf="email.hasError('required')">
-      Email is required
+      {{ 'signInPage.signUp.content.input.email.error.required' | translate }}
     </mat-error>
+    <button matSuffix mat-icon-button tabindex="-1">
+      <mat-icon>alternate_email</mat-icon>
+    </button>
   </mat-form-field>
 
-  <div class="item-3col-span name-row">
-    <mat-form-field class=>
-      <mat-label>First name</mat-label>
+  <section class="grid-col-span name-row">
+    <mat-form-field>
+      <mat-label>{{ 'signInPage.signUp.content.input.firstName.label' | translate }}</mat-label>
       <input matInput (keydown.enter)="signUp()" [formControl]="firstname">
       <mat-error *ngIf="firstname.getError('minlength')">
-        Enter valid first name
+        {{ 'signInPage.signUp.content.input.firstName.error.minlength' | translate }}
       </mat-error>
       <mat-error *ngIf="firstname.hasError('required')">
-        First name is required
+        {{ 'signInPage.signUp.content.input.firstName.error.required' | translate }}
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class=>
-      <mat-label>Last name</mat-label>
+    <mat-form-field>
+      <mat-label>{{ 'signInPage.signUp.content.input.lastName.label' | translate }}</mat-label>
       <input matInput (keydown.enter)="signUp()" [formControl]="lastname">
       <mat-error *ngIf="lastname.getError('minlength')">
-        Enter valid last name
+        {{ 'signInPage.signUp.content.input.lastName.error.minlength' | translate }}
       </mat-error>
       <mat-error *ngIf="lastname.hasError('required')">
-        Last name is required
+        {{ 'signInPage.signUp.content.input.lastName.error.required' | translate }}
       </mat-error>
     </mat-form-field>
-  </div>
+  </section>
 
-  <mat-form-field class="item-3col-span">
-    <mat-label>Password</mat-label>
-    <input matInput (keydown.enter)="signUp()" [formControl]="password">
+  <mat-form-field class="grid-col-span">
+    <mat-label>{{ 'signInPage.signUp.content.input.password.label' | translate }}</mat-label>
+    <input matInput #passwordRef (keydown.enter)="signUp(); passwordRef.blur()"
+           [formControl]="password" (input)="onPasswordChange()"
+           [type]="showPassword ? 'text' : 'password'">
     <mat-error *ngIf="password.getError('minlength')">
-      Enter valid password
+      {{ 'signInPage.signUp.content.input.password.error.minlength' | translate }}
     </mat-error>
     <mat-error *ngIf="password.hasError('required')">
-      Password is required
+      {{ 'signInPage.signUp.content.input.password.error.required' | translate }}
     </mat-error>
+    <button matSuffix mat-icon-button (click)="showPassword=!showPassword" tabindex="-1">
+      <mat-icon *ngIf="!showPassword">key_off</mat-icon>
+      <mat-icon *ngIf="showPassword">key</mat-icon>
+    </button>
   </mat-form-field>
 
-  <mat-form-field class="item-3col-span">
-    <mat-label>Confirm password</mat-label>
-    <input matInput (keydown.enter)="signUp()" [formControl]="passwordConfirm">
-    <mat-error *ngIf="password.getError('minlength')">
-      Enter valid password
+  <mat-form-field class="grid-col-span">
+    <mat-label>{{ 'signInPage.signUp.content.input.confirmPassword.label' | translate }}</mat-label>
+    <input matInput #passwordConfirmRef (keydown.enter)="signUp(); passwordConfirmRef.blur()"
+           [formControl]="passwordConfirm" (input)="onPasswordChange()"
+           [type]="showConfirmPassword ? 'text' : 'password'">
+    <mat-error *ngIf="passwordConfirm.getError('minlength')">
+      {{ 'signInPage.signUp.content.input.confirmPassword.error.minlength' | translate }}
     </mat-error>
-    <mat-error *ngIf="password.hasError('required')">
-      Password confirmation is required
+    <mat-error *ngIf="passwordConfirm.hasError('required')">
+      {{ 'signInPage.signUp.content.input.confirmPassword.error.required' | translate }}
     </mat-error>
+    <mat-error *ngIf="passwordConfirm.hasError('nomatch') && !passwordConfirm.hasError('required')
+               && !passwordConfirm.hasError('minlength')">
+      {{ 'signInPage.signUp.content.input.confirmPassword.error.nomatch' | translate }}
+    </mat-error>
+    <button matSuffix mat-icon-button (click)="showConfirmPassword=!showConfirmPassword" tabindex="-1">
+      <mat-icon *ngIf="!showConfirmPassword">key_off</mat-icon>
+      <mat-icon *ngIf="showConfirmPassword">key</mat-icon>
+    </button>
   </mat-form-field>
 
-  <button class="item-3col-span item-height" mat-raised-button color="primary"
-          (click)="processing = !processing">
-    <div *ngIf="!processing">Sign up</div>
-    <div *ngIf="processing">Signing up ...</div>
+  <button class="grid-col-span grid-row-height" mat-raised-button color="primary" (click)="signUp()">
+    {{ 'signInPage.signUp.content.button.signInSubmit' | translate }}
   </button>
-  <mat-progress-bar *ngIf="processing" class="item-3col-span" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="processing" class="grid-col-span" mode="indeterminate"></mat-progress-bar>
 
 </div>

@@ -1,13 +1,13 @@
 <div class="container">
   <div *ngFor="let language of languages">
     <div *ngIf="language.key === selectedLang" class="full-height">
-      <button mat-raised-button color="primary" (click)="setLang(language.key)" class="full-height">
+      <button mat-stroked-button color="primary" (click)="setLang(language.key)" class="full-height">
         <img src="assets/flags/{{language.key}}.png" alt="">
         {{language.value}}
       </button>
     </div>
     <div *ngIf="language.key !== selectedLang" class="full-height">
-      <button mat-stroked-button color="primary" (click)="setLang(language.key)" class="full-height">
+      <button mat-button color="primary" (click)="setLang(language.key)" class="full-height grey-disabled">
         <img src="assets/flags/{{language.key}}.png" alt="">
         {{language.value}}
       </button>

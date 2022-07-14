@@ -8,6 +8,8 @@ import { FormControl, Validators } from "@angular/forms";
 })
 export class SignUpFormComponent {
 
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   processing: boolean = false;
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -17,5 +19,12 @@ export class SignUpFormComponent {
   passwordConfirm = new FormControl('', [Validators.required, Validators.minLength(8)]);
 
   signUp(): void {
+    this.processing = !this.processing;
+  }
+
+  onPasswordChange() {
+    this.password.value !== this.passwordConfirm.value
+      ? this.passwordConfirm.setErrors({ nomatch: true })
+      : this.passwordConfirm.setValue(this.passwordConfirm.value)
   }
 }

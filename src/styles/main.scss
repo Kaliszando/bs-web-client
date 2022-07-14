@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
-// include core only once per application!
-@include mat.core();
+@include mat.core(); // include core only once per application!
 
 @import "abstracts/functions";
 @import "abstracts/mixins";

@@ -1,0 +1,42 @@
+@import "abstracts/variables";
+@import "themes/light";
+
+.bs-sign-in-page-form-grid {
+  $padding-x: 13%;
+  $padding-y: 50px;
+
+  display: grid;
+  column-gap: $col-gap;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(8, 1fr);;
+  padding: $padding-y $padding-x;
+  border-radius: 10px;
+  height: calc(100% - 2 * #{$padding-y});
+  background-color: ghostwhite;
+  @extend .mat-elevation-z10;
+
+
+  mat-form-field {
+    background-color: white;
+    border-radius: 6px;
+    height: 59px;
+  }
+
+  .grid-row-height {
+    height: 40px;
+  }
+
+  .grid-col-span {
+    grid-column: 1 / 4;
+  }
+
+  mat-icon {
+    color: darkgrey;
+  }
+
+  .title {
+    margin: 0;
+    color: $bs-prim-color;
+    text-align: center;
+  }
+}

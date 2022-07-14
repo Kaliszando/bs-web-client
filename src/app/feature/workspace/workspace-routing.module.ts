@@ -4,18 +4,10 @@ import { WorkspaceComponent } from "./workspace.component";
 import { TestContentComponent } from "./test-content/test-content.component";
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'test',
-  },
-  {
-    path: '',
-    component: WorkspaceComponent,
+  { path: '', redirectTo: 'test' },
+  { path: '', component: WorkspaceComponent,
     children: [
-      {
-        path: 'test',
-        component: TestContentComponent,
-      },
+      { path: 'test', component: TestContentComponent },
     ]
   }
 ];

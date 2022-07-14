@@ -1,7 +1,8 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../../../../core/service/auth.service";
 import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'bs-sign-in',
@@ -21,22 +22,24 @@ export class SignInFormComponent {
 
 
   signIn(): void {
-    if (!this.usernameForm.valid || !this.passwordForm.valid) return;
+    if (!this.usernameForm.valid || !this.passwordForm.valid) {
+      this.oninvalidInput();
+      return;
+    }
 
     this.processing = true;
     this.authService.signIn({ username: this.usernameForm.value, password: this.passwordForm.value })
       .subscribe({
-        error: () => {
-          this.processing = false;
-          this.usernameForm.setValue('');
-          this.passwordForm.setValue('');
-          this.usernameForm.setErrors({ credentials: true })
-          this.passwordForm.setErrors({ credentials: true })
-        },
+        error: () => this.oninvalidInput(),
         complete: () => this.router.navigateByUrl('main'),
       })
   }
 
-
-
+  oninvalidInput() {
+    this.processing = false;
+    this.usernameForm.setValue('');
+    this.passwordForm.setValue('');
+    this.usernameForm.setErrors({ credentials: true })
+    this.passwordForm.setErrors({ credentials: true })
+  }
 }

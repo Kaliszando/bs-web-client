@@ -1,47 +1,53 @@
-<div class="bs-sign-in-page-side-content">
+<div class="bs-sign-in-page-form-grid">
 
   <div class="empty"></div>
-  <bs-language-toggle class="item-height"></bs-language-toggle>
-  <button mat-raised-button color="primary" class="item-height" routerLink='/auth/sign-up'>Sign up</button>
+  <bs-language-toggle class="grid-row-height"></bs-language-toggle>
+  <button mat-stroked-button color="primary" class="grid-row-height" routerLink='/auth/sign-up'>
+    {{ 'signInPage.signIn.content.button.signUpNav' | translate }}
+  </button>
 
-  <div class="empty item-3col-span"></div>
-  <div class="empty item-3col-span"></div>
+  <div class="empty grid-col-span"></div>
 
-  <mat-form-field class="item-3col-span">
-    <mat-label>Email or username</mat-label>
-    <input matInput (keydown.enter)="signIn()" [formControl]="usernameForm">
+  <div class="mat-display-1 title grid-col-span">{{ 'signInPage.signIn.content.title' | translate }}</div>
+
+  <mat-form-field class="grid-col-span">
+    <mat-label>{{ 'signInPage.signIn.content.input.emailOrUsername.label' | translate }}</mat-label>
+    <input matInput (keydown.enter)="signIn()" [formControl]="usernameForm"
+           placeholder="{{ 'signInPage.signIn.content.input.emailOrUsername.placeholder' | translate }}">
     <mat-error *ngIf="usernameForm.hasError('minlength')">
-      Username must consist of at least 6 characters
+      {{ 'signInPage.signIn.content.input.emailOrUsername.error.minlength' | translate }}
     </mat-error>
     <mat-error *ngIf="usernameForm.hasError('required')">
-      Email or username is required
+      {{ 'signInPage.signIn.content.input.emailOrUsername.error.required' | translate }}
     </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="item-3col-span">
-    <mat-label>Password</mat-label>
-    <input matInput #passwordInput (keydown.enter)="signIn(); passwordInput.blur()"
-           [type]="showPassword ? 'text' : 'password'" [formControl]="passwordForm">
-    <mat-error *ngIf="passwordForm.hasError('minlength')">
-      Password must consist of at least 8 characters
-    </mat-error>
-    <mat-error *ngIf="passwordForm.hasError('required')">
-      Password is required
-    </mat-error>
-    <mat-error *ngIf="usernameForm.hasError('credentials')">
-      Username or password is incorrect
-    </mat-error>
-    <button matSuffix mat-icon-button (click)="showPassword=!showPassword">
-      <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
-      <mat-icon *ngIf="showPassword">visibility</mat-icon>
+    <button matSuffix mat-icon-button tabindex="-1">
+      <mat-icon>alternate_email</mat-icon>
     </button>
   </mat-form-field>
 
-  <button class="item-3col-span item-height" mat-raised-button color="primary"
-          (click)="signIn()">
-    <div *ngIf="!processing">Sign in</div>
-    <div *ngIf="processing">Signing in ...</div>
+  <mat-form-field class="grid-col-span">
+    <mat-label>{{ 'signInPage.signIn.content.input.password.label' | translate }}</mat-label>
+    <input matInput #passwordInput (keydown.enter)="signIn(); passwordInput.blur()"
+           [type]="showPassword ? 'text' : 'password'" [formControl]="passwordForm"
+           placeholder="{{ 'signInPage.signIn.content.input.password.placeholder' | translate}}">
+    <mat-error *ngIf="passwordForm.hasError('minlength')">
+      {{ 'signInPage.signIn.content.input.password.error.minlength' | translate }}
+    </mat-error>
+    <mat-error *ngIf="passwordForm.hasError('required')">
+      {{ 'signInPage.signIn.content.input.password.error.required' | translate }}
+    </mat-error>
+    <mat-error *ngIf="usernameForm.hasError('credentials')">
+      {{ 'signInPage.signIn.content.input.password.error.credentials' | translate }}
+    </mat-error>
+    <button matSuffix mat-icon-button (click)="showPassword=!showPassword" tabindex="-1">
+      <mat-icon *ngIf="!showPassword">key_off</mat-icon>
+      <mat-icon *ngIf="showPassword">key</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button class="grid-col-span grid-row-height" mat-raised-button color="primary" (click)="signIn()">
+    {{ 'signInPage.signIn.content.button.signInSubmit' | translate }}
   </button>
-  <mat-progress-bar *ngIf="processing" class="item-3col-span" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="processing" class="grid-col-span" mode="indeterminate"></mat-progress-bar>
 
 </div>

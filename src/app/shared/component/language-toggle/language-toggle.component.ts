@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Lang } from "../../../core/model/lang";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'bs-language-toggle',
@@ -8,15 +9,19 @@ import { Lang } from "../../../core/model/lang";
 })
 export class LanguageToggleComponent {
 
-  @Input()
-  selectedLang: string = 'en'
+  selectedLang: string = 'en';
 
   languages: Lang[] = [
     { key: "pl", value: "PL"},
     { key: "en", value: "EN"},
   ];
 
+  constructor(private translateService: TranslateService) {
+    this.selectedLang = this.translateService.currentLang;
+  }
+
   setLang(lang: string) {
     this.selectedLang = lang;
+    this.translateService.use(lang);
   }
 }

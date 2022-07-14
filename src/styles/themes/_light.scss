@@ -1,8 +1,18 @@
 @use '@angular/material' as mat;
 
-$bs-primary: mat.define-palette(mat.$indigo-palette, 800);
-$bs-accent: mat.define-palette(mat.$amber-palette, 700, 100);
+$bs-primary: mat.define-palette(mat.$deep-purple-palette, 700);
+$bs-accent: mat.define-palette(mat.$purple-palette, A400, 100);
 $bs-warn: mat.define-palette(mat.$deep-orange-palette, A400);
+
+// colors
+$bs-prim-color: #512DA8;
+$bs-acc-color: #D500F9;
+
+$bs-acc-1-color: #E0C3FC;
+$bs-acc-2-color: #8EC5FC;
+$bs-acc-3-color: #afdbf5;
+
+$icon-color: darkgrey;
 
 $bs-light-theme: mat.define-light-theme((
   color: (
@@ -13,3 +23,8 @@ $bs-light-theme: mat.define-light-theme((
 ));
 
 @include mat.all-component-themes($bs-light-theme);
+
+.bs-gradient {
+  background-color: $bs-acc-2-color;
+  background-image: linear-gradient(315deg, $bs-acc-2-color 0%, $bs-acc-1-color 50%, white 100%);
+}

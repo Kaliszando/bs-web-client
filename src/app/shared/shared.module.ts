@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageToggleComponent } from './component/language-toggle/language-toggle.component';
 import { MatButtonModule } from "@angular/material/button";
+import { TranslateModule } from "@ngx-translate/core";
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { MatButtonModule } from "@angular/material/button";
     LanguageToggleComponent
   ],
   exports: [
-    LanguageToggleComponent
+    LanguageToggleComponent,
+    TranslateModule,
   ],
   imports: [
     CommonModule,
