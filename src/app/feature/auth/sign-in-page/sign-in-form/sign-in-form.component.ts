@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { AuthService } from "../../../../core/service/auth.service";
 import { Router } from "@angular/router";
+import { AuthEndpointService } from "../../../../api/services/auth-endpoint.service";
 
 
 @Component({
@@ -11,35 +11,35 @@ import { Router } from "@angular/router";
 })
 export class SignInFormComponent {
 
-  showPassword: boolean = false;
-  processing: boolean = false;
+  showPassword: boolean = false
+  processing: boolean = false
 
-  usernameForm = new FormControl('', [Validators.required, Validators.minLength(6)])
-  passwordForm = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  emailForm = new FormControl('', [Validators.required, Validators.minLength(6)])
+  passwordForm = new FormControl('', [Validators.required, Validators.minLength(8)])
 
-  constructor(private authService: AuthService,
+  constructor(private authService: AuthEndpointService,
               private router: Router) {}
 
 
   signIn(): void {
-    if (!this.usernameForm.valid || !this.passwordForm.valid) {
-      this.oninvalidInput();
-      return;
+    if (!this.emailForm.valid || !this.passwordForm.valid) {
+      this.oninvalidInput()
+      return
     }
 
-    this.processing = true;
-    this.authService.signIn({ username: this.usernameForm.value, password: this.passwordForm.value })
+    this.processing = true
+    this.authService.signIn({ body: { email: this.emailForm.value, password: this.passwordForm.value }})
       .subscribe({
-        error: () => this.oninvalidInput(),
-        complete: () => this.router.navigateByUrl('main'),
+        next: () => this.router.navigateByUrl('main'),
+        error: err => { if (err.status === 401) this.oninvalidInput() }
       })
   }
 
   oninvalidInput() {
     this.processing = false;
-    this.usernameForm.setValue('');
-    this.passwordForm.setValue('');
-    this.usernameForm.setErrors({ credentials: true })
+    this.emailForm.setValue('')
+    this.passwordForm.setValue('')
+    this.emailForm.setErrors({ credentials: true })
     this.passwordForm.setErrors({ credentials: true })
   }
 }

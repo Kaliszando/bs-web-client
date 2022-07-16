@@ -24,19 +24,19 @@ import { A11yModule } from "@angular/cdk/a11y";
     SignUpFormComponent,
     IntroContentComponent
   ],
-    imports: [
-        CommonModule,
-        AuthRoutingModule,
-        SharedModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        FormsModule,
-        MatProgressBarModule,
-        ReactiveFormsModule,
-        A11yModule,
-    ],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    SharedModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    A11yModule,
+  ],
   providers: [
     AuthService,
   ]

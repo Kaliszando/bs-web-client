@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Credentials } from "../model/credentials";
 import { Observable } from "rxjs";
 import jwtDecode from "jwt-decode";
 import { DecodedToken } from "../model/token";
+import { LoginCredentials } from "../../api/models/login-credentials";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signIn(credentials: Credentials): Observable<HttpResponse<any>> {
-    let response = this.http.post('/api/auth/sign-in',
-      { username: credentials.username, password: credentials.password },
+  signIn(credentials: LoginCredentials): Observable<HttpResponse<any>> {
+    let response = this.http.post('/api/v1/auth/sign-in',
+      { email: credentials.email, password: credentials.password },
       { observe: 'response'});
 
     // let token = response.headers.get('authorization');
