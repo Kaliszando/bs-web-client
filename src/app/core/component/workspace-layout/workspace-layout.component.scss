@@ -1,9 +1,76 @@
+@import "themes/light";
+
 mat-sidenav {
-  width: 250px;
+  width: max-content;
+  background-color: white;
+  padding: 10px 10px 0;
 }
 
 mat-sidenav-container {
   height: 100%;
+}
+
+mat-divider {
+  margin: 0;
+}
+
+.spacer {
+  display: block;
+  min-height: 20px;
+  width: 100%;
+}
+
+.section-title {
+  color: $bs-prim-color;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.app-logo {
+  margin-left: 16px;
+  transform: translateY(7px);
+  cursor: pointer;
+}
+
+.app-name-container {
+  font-size: 30px;
+  font-weight: 700;
+  padding: 0 13px;
+  cursor: pointer;
+
+  .name-1 {
+    color: $bs-prim-color;
+  }
+  .name-2 {
+    color: #7d44ff;
+  }
+}
+
+.mat-nav-list {
+  padding-top: 0;
+  mat-list-item {
+    border-radius: 7px;
+    margin-top: 5px;
+    height: 45px;
+    font-size: 17px;
+
+    div {
+      min-width: 100px;
+      padding-left: 15px;
+    }
+
+    mat-icon {
+      color: grey;
+    }
+  }
+
+  mat-list-item.active {
+    background: rgb(239, 233, 245);
+    font-weight: 500;
+    mat-icon {
+      color: #7d44ff;
+    }
+  }
 }
 
 .app-toolbar {
@@ -11,4 +78,62 @@ mat-sidenav-container {
   position: -webkit-sticky; /* For macOS/iOS Safari */
   top: 0; /* Sets the sticky toolbar to be on top */
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  background-color: white;
+}
+
+.toolbar-content {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  column-gap: 20px;
+  align-items: center;
+  height: 60px;
+
+  mat-form-field {
+    margin-top: 16px;
+    max-width: 350px;
+  }
+
+  mat-icon {
+    transform: translateY(3px) scale(0.9) translateX(-8px);
+    color: darkgrey;
+  }
+}
+
+.project-info {
+  display: grid;
+  column-gap: 5px;
+  grid-template-rows: 26px 20px;
+  grid-template-columns: 60px auto;
+  cursor: pointer;
+
+  h5 {
+    color: #656565;
+  }
+
+  h2 {
+    color: $bs-prim-color;
+  }
+
+  img {
+    margin-left: 4px;
+    justify-self: center;
+    grid-row: 1 / 3;
+  }
+}
+
+.project-selector {
+  display: flex;
+  justify-content: center;
+  top: -38px;
+  max-width: 0;
+  max-height: 0;
+  margin: 0 auto;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.project-container {
+  max-height: 50px;
+  min-height: 50px;
 }

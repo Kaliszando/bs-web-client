@@ -1,0 +1,30 @@
+<section>
+  <div mat-dialog-title class="dialog-title">
+    <h2 class="mat-display-2">Create new project</h2>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close="" tabindex="-1">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-content class="content">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="My project name" [formControl]="nameForm">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Friendly ID</mat-label>
+      <input matInput placeholder="MYTAG" [formControl]="tagForm">
+      <mat-hint>This tag will be included in uri of project issues</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Textarea</mat-label>
+      <textarea matInput [formControl]="descriptionForm"></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-flat-button (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onCreateClick()" [disabled]="!isFormValid()">Create project</button>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+<section class="header-section">
+  <div class="mat-display-2 page-title">Project management</div>
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" color="primary">
+    <a mat-tab-link routerLink="/main/projects/list" [active]="router.url === '/main/projects/list'">List</a>
+    <a mat-tab-link routerLink="/main/projects/config" [active]="router.url === '/main/projects/config'">Settings</a>
+  </nav>
+</section>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

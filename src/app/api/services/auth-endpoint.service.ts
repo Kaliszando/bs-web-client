@@ -9,12 +9,8 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { LoginCredentials } from '../models/login-credentials';
+import { LoginCredentialsDto } from '../models/login-credentials-dto';
 
-
-/**
- * Services related to authorization functionality
- */
 @Injectable({
   providedIn: 'root',
 })
@@ -32,9 +28,7 @@ export class AuthEndpointService extends BaseService {
   static readonly SignInPath = '/auth/sign-in';
 
   /**
-   * User login endpoint.
-   *
-   * User login consumes json as credentials, using POST method
+   * User login endpoint
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `signIn()` instead.
@@ -42,11 +36,7 @@ export class AuthEndpointService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   signIn$Response(params?: {
-
-    /**
-     * loginCredntials
-     */
-    body?: LoginCredentials
+    body?: LoginCredentialsDto
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AuthEndpointService.SignInPath, 'post');
@@ -66,9 +56,7 @@ export class AuthEndpointService extends BaseService {
   }
 
   /**
-   * User login endpoint.
-   *
-   * User login consumes json as credentials, using POST method
+   * User login endpoint
    *
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `signIn$Response()` instead.
@@ -76,14 +64,57 @@ export class AuthEndpointService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   signIn(params?: {
-
-    /**
-     * loginCredntials
-     */
-    body?: LoginCredentials
+    body?: LoginCredentialsDto
   }): Observable<void> {
 
     return this.signIn$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation ping
+   */
+  static readonly PingPath = '/auth/ping';
+
+  /**
+   * Service endpoint for test purposes
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `ping()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  ping$Response(params?: {
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AuthEndpointService.PingPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * Service endpoint for test purposes
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `ping$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  ping(params?: {
+  }): Observable<void> {
+
+    return this.ping$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

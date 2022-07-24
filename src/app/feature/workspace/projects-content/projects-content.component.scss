@@ -1,0 +1,22 @@
+@import "themes/light";
+
+.header-section {
+  padding: 30px 50px 0;
+  background-color: white;
+
+  .page-title {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  nav {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+.active {
+  font-weight: 500;
+  border-bottom: $bs-prim-color;
+}
+

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthEndpointService } from "../../../../api/services/auth-endpoint.service";
+import { LoginCredentialsDto } from "../../../../api/models";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class SignInFormComponent {
   emailForm = new FormControl('', [Validators.required, Validators.minLength(6)])
   passwordForm = new FormControl('', [Validators.required, Validators.minLength(8)])
 
-  constructor(private authService: AuthEndpointService,
+  constructor(private authEndpointService: AuthEndpointService,
               private router: Router) {}
 
 
@@ -28,7 +29,11 @@ export class SignInFormComponent {
     }
 
     this.processing = true
-    this.authService.signIn({ body: { email: this.emailForm.value, password: this.passwordForm.value }})
+    let loginCredentials: LoginCredentialsDto = {
+      email: this.emailForm.value,
+      password: this.passwordForm.value
+    }
+    this.authEndpointService.signIn({ body: loginCredentials})
       .subscribe({
         next: () => this.router.navigateByUrl('main'),
         error: err => { if (err.status === 401) this.oninvalidInput() }

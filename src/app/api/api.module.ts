@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthEndpointService } from './services/auth-endpoint.service';
+import { ContextEndpointService } from './services/context-endpoint.service';
+import { UserEndpointService } from './services/user-endpoint.service';
+import { ProjectEndpointService } from './services/project-endpoint.service';
 
 /**
  * Module that provides all services and configuration.
@@ -15,6 +18,9 @@ import { AuthEndpointService } from './services/auth-endpoint.service';
   declarations: [],
   providers: [
     AuthEndpointService,
+    ContextEndpointService,
+    UserEndpointService,
+    ProjectEndpointService,
     ApiConfiguration
   ],
 })

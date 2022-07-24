@@ -1,19 +1,104 @@
-<mat-sidenav-container>
+<mat-sidenav-container autosize>
   <mat-sidenav #sidenav
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)">
-    <button type="button" routerLink="/main">main</button>
-    <button type="button" routerLink="/main/test">main/test</button>
-    <button type="button" routerLink="/auth/sign-in">auth</button>
+
+
+    <img class="app-logo" src="/assets/img/favicon-32x32.png" alt="" (click)="toggleExpand()">
+    <span *ngIf="expanded" class="app-name-container" (click)="toggleExpand()">
+      <span class="name-1">Bug</span>
+      <span class="name-2">Stalker</span>
+    </span>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+    <div class="project-container">
+      <div class="project-info" (click)="projectSelectorRef.open()" *ngIf="areProjectsAvailable">
+        <img src="https://avatars.dicebear.com/api/bottts/{{selectedProject.name}}.svg?size=50" alt="">
+        <h2 *ngIf="expanded">{{selectedProject.name}}</h2>
+        <h5 class="mat-body-1" *ngIf="expanded">{{selectedProject.tag}}</h5>
+      </div>
+      <mat-form-field class="project-selector">
+        <mat-select [(value)]="selectedProject" placeholder="Project" #projectSelectorRef (selectionChange)="projectSelectorChange()">
+          <ng-container>
+            <mat-option *ngFor="let project of projects" [value]="project">
+              <span>{{project.name}}</span>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="spacer"></div>
+    <mat-divider></mat-divider>
+    <div class="spacer"></div>
+
+    <mat-nav-list role="navigation">
+      <mat-list-item routerLink="/main/projects" routerLinkActive="active">
+        <mat-icon mat-list-icon>library_books</mat-icon>
+        <div *ngIf="expanded">Projects</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/backlog" routerLinkActive="active" *ngIf="areProjectsAvailable">
+        <mat-icon mat-list-icon>library_books</mat-icon>
+        <div *ngIf="expanded">Backlog</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/board" routerLinkActive="active" *ngIf="areProjectsAvailable">
+        <mat-icon mat-list-icon>view_column</mat-icon>
+        <div *ngIf="expanded">Board</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/list" routerLinkActive="active" *ngIf="areProjectsAvailable">
+        <mat-icon mat-list-icon>view_list</mat-icon>
+        <div *ngIf="expanded">List</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/reports" routerLinkActive="active" *ngIf="areProjectsAvailable">
+        <mat-icon mat-list-icon>ssid_chart</mat-icon>
+        <div *ngIf="expanded">Reports</div>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <div class="spacer"></div>
+    <mat-divider></mat-divider>
+    <div class="spacer"></div>
+
+    <mat-nav-list role="navigation">
+      <mat-list-item routerLink="/main/issues" routerLinkActive="active" *ngIf="areProjectsAvailable">
+        <mat-icon mat-list-icon>bug_report</mat-icon>
+        <div *ngIf="expanded">Issues</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/customer-drafts" routerLinkActive="active" *ngIf="areProjectsAvailable">
+        <mat-icon mat-list-icon>feedback</mat-icon>
+        <div *ngIf="expanded">Customer issues</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/test" routerLinkActive="active" *ngIf="isAdmin()">
+        <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+        <div *ngIf="expanded">Admin panel</div>
+      </mat-list-item>
+    </mat-nav-list>
+
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="app-toolbar">
-      <button mat-icon-button *ngIf="isHandset$ | async"
-              (click)="sidenav.toggle()">
+    <mat-toolbar class="app-toolbar">
+      <button mat-icon-button *ngIf="isHandset$ | async" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <div>BugStalker</div>
+
+      <div class="toolbar-content">
+        <mat-form-field class="mat-form-field-infix">
+          <input matInput placeholder="Search" [formControl]="searchControl" [matAutocomplete]="auto"/>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              <span>{{option}}</span>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+
+        <img src="https://avatars.dicebear.com/api/initials/{{userContext.firstName + '-' + userContext.lastName}}.svg?r=15&size=40" alt="">
+        <div>{{userContext.username}}</div>
+      </div>
+
     </mat-toolbar>
-    <ng-content></ng-content>
+    <ng-content class="scrollable-content"></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

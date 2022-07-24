@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface LoginCredentials {
+export interface LoginCredentialsDto {
   email: string;
   password: string;
 }

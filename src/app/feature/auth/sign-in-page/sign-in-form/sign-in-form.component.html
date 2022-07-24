@@ -11,18 +11,19 @@
   <div class="mat-display-1 title grid-col-span">{{ 'signInPage.signIn.content.title' | translate }}</div>
 
   <mat-form-field class="grid-col-span">
-    <mat-label>{{ 'signInPage.signIn.content.input.emailOrUsername.label' | translate }}</mat-label>
+    <mat-label>{{ 'signInPage.signIn.content.input.login.label' | translate }}</mat-label>
     <input matInput (keydown.enter)="signIn()" [formControl]="emailForm"
-           placeholder="{{ 'signInPage.signIn.content.input.emailOrUsername.placeholder' | translate }}">
+           placeholder="{{ 'signInPage.signIn.content.input.login.placeholder' | translate }}">
     <mat-error *ngIf="emailForm.hasError('minlength')">
-      {{ 'signInPage.signIn.content.input.emailOrUsername.error.minlength' | translate }}
+      {{ 'signInPage.signIn.content.input.login.error.minlength' | translate }}
     </mat-error>
     <mat-error *ngIf="emailForm.hasError('required')">
-      {{ 'signInPage.signIn.content.input.emailOrUsername.error.required' | translate }}
+      {{ 'signInPage.signIn.content.input.login.error.required' | translate }}
     </mat-error>
     <button matSuffix mat-icon-button tabindex="-1">
       <mat-icon>alternate_email</mat-icon>
     </button>
+    <mat-hint>{{ 'signInPage.signIn.content.input.login.hint' | translate }}</mat-hint>
   </mat-form-field>
 
   <mat-form-field class="grid-col-span">
@@ -46,8 +47,8 @@
   </mat-form-field>
 
   <button class="grid-col-span grid-row-height" mat-raised-button color="primary" (click)="signIn()">
-    {{ 'signInPage.signIn.content.button.signInSubmit' | translate }}
+    <span>{{ 'signInPage.signIn.content.button.signInSubmit' | translate }}</span>
   </button>
-  <mat-progress-bar *ngIf="processing" class="grid-col-span" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="processing" class="grid-col-span" mode="indeterminate" color="accent"></mat-progress-bar>
 
 </div>

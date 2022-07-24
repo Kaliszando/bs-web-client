@@ -1,0 +1,21 @@
+<div class="actions">
+  <button mat-stroked-button color="primary">Edit</button>
+  <button mat-raised-button color="primary" (click)="openDialog()">New project</button>
+</div>
+<mat-divider></mat-divider>
+<div class="container">
+  <mat-expansion-panel *ngFor="let project of projects">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <img src="https://avatars.dicebear.com/api/bottts/{{project.name}}.svg?size=70" alt="">
+        <p>{{this.project.name}}</p>
+        <p>{{this.project.tag}}</p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>Project description</p>
+  </mat-expansion-panel>
+  <button mat-stroked-button color="" class="new-button" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
