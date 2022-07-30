@@ -23,9 +23,56 @@ export class ProjectEndpointService extends BaseService {
   }
 
   /**
+   * Path part for operation getProjects
+   */
+  static readonly GetProjectsPath = '/project';
+
+  /**
+   * Returns list of available projects for current user
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProjects()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProjects$Response(params?: {
+  }): Observable<StrictHttpResponse<Array<ProjectInfoDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ProjectEndpointService.GetProjectsPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<ProjectInfoDto>>;
+      })
+    );
+  }
+
+  /**
+   * Returns list of available projects for current user
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `getProjects$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProjects(params?: {
+  }): Observable<Array<ProjectInfoDto>> {
+
+    return this.getProjects$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<ProjectInfoDto>>) => r.body as Array<ProjectInfoDto>)
+    );
+  }
+
+  /**
    * Path part for operation createProject
    */
-  static readonly CreateProjectPath = '/project/';
+  static readonly CreateProjectPath = '/project';
 
   /**
    * Creates project with current user as owner

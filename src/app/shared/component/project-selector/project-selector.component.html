@@ -1,0 +1,14 @@
+<mat-form-field>
+  <button mat-icon-button matPrefix tabindex="-1">
+    <img src="https://avatars.dicebear.com/api/bottts/{{selectedProject.name}}.svg?size=30" alt="">
+  </button>
+  <mat-label>Select project</mat-label>
+  <mat-select [(ngModel)]="selectedProject" required="true">
+    <mat-option *ngFor="let project of availableProjects" [value]="project">
+      <div>
+        <img src="https://avatars.dicebear.com/api/bottts/{{project.name}}.svg?size=40" alt="">
+        <p>{{project.name}}</p>
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

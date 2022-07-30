@@ -1,0 +1,27 @@
+@import "themes/light";
+
+mat-form-field {
+  width: 100%;
+
+  button {
+    transform: translateY(-9px);
+  }
+}
+
+mat-option {
+  height: max-content;
+  min-height: 60px !important;
+}
+
+div {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+
+  :last-child {
+    margin: 0;
+    font-weight: 500;
+    font-size: 17px;
+    color: $bs-prim-color;
+  }
+}

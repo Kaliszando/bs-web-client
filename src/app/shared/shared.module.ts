@@ -10,27 +10,51 @@ import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatChipsModule } from "@angular/material/chips";
+import { CreateIssueDialogComponent } from './dialog/create-issue-dialog/create-issue-dialog.component';
+import { MatGridListModule } from "@angular/material/grid-list";
+import { ProjectSelectorComponent } from './component/project-selector/project-selector.component';
+import { IssueTypeSelectorComponent } from './component/issue-type-selector/issue-type-selector.component';
+import { LabelsInputComponent } from './component/labels-input/labels-input.component';
+import { IssueSeveritySelectorComponent } from './component/issue-severity-selector/issue-severity-selector.component';
+import { MatSelectModule } from "@angular/material/select";
+import { IssueTypeIconComponent } from './component/issue-type-icon/issue-type-icon.component';
+import { IssueSeverityIconComponent } from './component/issue-severity-icon/issue-severity-icon.component';
 
 
 @NgModule({
   declarations: [
     LanguageToggleComponent,
-    CreateProjectDialogComponent
+    CreateProjectDialogComponent,
+    CreateIssueDialogComponent,
+    ProjectSelectorComponent,
+    IssueTypeSelectorComponent,
+    LabelsInputComponent,
+    IssueSeveritySelectorComponent,
+    IssueTypeIconComponent,
+    IssueSeverityIconComponent,
   ],
   exports: [
     LanguageToggleComponent,
     TranslateModule,
   ],
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatDividerModule,
-        MatIconModule,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDividerModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatGridListModule,
+    MatSelectModule
+  ]
 })
 export class SharedModule { }

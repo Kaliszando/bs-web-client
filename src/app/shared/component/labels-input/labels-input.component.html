@@ -1,0 +1,15 @@
+<mat-form-field>
+  <mat-label>Custom labels</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let label of labels" (removed)="remove(label)">
+      {{label}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input placeholder="New label" [(ngModel)]="inputValue"
+           [matChipInputFor]="chipList"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="add()">
+  </mat-chip-list>
+</mat-form-field>

@@ -1,0 +1,68 @@
+@import "themes/light";
+
+.mat-dialog-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-display-2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.dialog-title {
+  column-gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.full-span-container {
+  margin: 18px 0 15px 0;
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  row-gap: 15px;
+}
+
+.divider-top {
+  margin: 20px 0;
+}
+
+mat-grid-tile {
+  min-width: 210px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+
+mat-form-field, .external-form-field {
+  max-height: 63px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.mat-dialog-content {
+  padding: 30px 70px;
+  height: 100%;
+}
+
+.additional-section {
+  section {
+    display: block;
+    height: 800px;
+  }
+  display: flex;
+  flex-direction: column;
+
+  :last-child {
+    max-width: 150px;
+    margin: auto auto;
+  }
+}

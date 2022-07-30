@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { UserInfoDto } from "../../api/models";
+import { StoreService } from "../../core/service/store.service";
 
 @Component({
   selector: 'bs-workspace',
@@ -8,13 +8,13 @@ import { UserInfoDto } from "../../api/models";
 })
 export class WorkspaceComponent implements OnInit {
 
-  userContext: UserInfoDto = <UserInfoDto>{};
-
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute,
+              private store: StoreService) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ userContext }) => {
-      this.userContext = userContext;
+    this.activatedRoute.data.subscribe(({ context }) => {
+      this.store.userContext$.next(context)
+      this.store.reloadProjects()
     })
   }
 }

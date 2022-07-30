@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfoDto } from "../../../api/models";
+import { ProjectInfoDto, UserInfoDto } from "../../../api/models";
 import { ActivatedRoute } from "@angular/router";
 import { StoreService } from "../../../core/service/store.service";
-import { Project } from "../../../core/model/project";
 
 @Component({
   selector: 'bs-test-content',
@@ -11,7 +10,7 @@ import { Project } from "../../../core/model/project";
 })
 export class TestContentComponent implements OnInit {
   userContext: UserInfoDto = <UserInfoDto>{};
-  project: Project = <Project>{};
+  project: ProjectInfoDto = <ProjectInfoDto>{};
 
   constructor(private activatedRoute: ActivatedRoute,
               public store: StoreService) {}

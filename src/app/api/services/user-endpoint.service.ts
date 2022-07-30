@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { UserInfoDto } from '../models/user-info-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class UserEndpointService extends BaseService {
   /**
    * Path part for operation getUserByPhrase
    */
-  static readonly GetUserByPhrasePath = '/user/';
+  static readonly GetUserByPhrasePath = '/user';
 
   /**
    * Finds user by given input phrase
@@ -36,7 +37,7 @@ export class UserEndpointService extends BaseService {
    */
   getUserByPhrase$Response(params?: {
     query?: string;
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<Array<UserInfoDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserEndpointService.GetUserByPhrasePath, 'get');
     if (params) {
@@ -44,12 +45,12 @@ export class UserEndpointService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<UserInfoDto>>;
       })
     );
   }
@@ -64,10 +65,10 @@ export class UserEndpointService extends BaseService {
    */
   getUserByPhrase(params?: {
     query?: string;
-  }): Observable<void> {
+  }): Observable<Array<UserInfoDto>> {
 
     return this.getUserByPhrase$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<Array<UserInfoDto>>) => r.body as Array<UserInfoDto>)
     );
   }
 

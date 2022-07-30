@@ -106,6 +106,9 @@ mat-divider {
   grid-template-rows: 26px 20px;
   grid-template-columns: 60px auto;
   cursor: pointer;
+  border-radius: 5px;
+  background-color: ghostwhite;
+  min-height: 55px;
 
   h5 {
     color: #656565;
@@ -134,6 +137,13 @@ mat-divider {
 }
 
 .project-container {
-  max-height: 50px;
-  min-height: 50px;
+  max-height: 70px;
+  min-height: 70px;
+  min-width: 10px;
+}
+
+.button-action {
+  min-height: 38px;
+  width: 100%;
+  min-width: 20px;
 }

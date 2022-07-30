@@ -12,13 +12,15 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { SharedModule } from "../../shared/shared.module";
 import { BoardContentComponent } from './board-content/board-content.component';
-import { ListContentComponent } from './list-content/list-content.component';
+import { TasksContentComponent } from './tasks-content/tasks-content.component';
 import { BacklogContentComponent } from './backlog-content/backlog-content.component';
 import { ProjectsContentComponent } from './projects-content/projects-content.component';
 import { ProjectListComponent } from './projects-content/project-list/project-list.component';
 import { MatTabsModule } from "@angular/material/tabs";
 import { ProjectConfigComponent } from './projects-content/project-config/project-config.component';
 import { MatExpansionModule } from "@angular/material/expansion";
+import { TasksListComponent } from './tasks-content/tasks-list/tasks-list.component';
+import { TasksConfigComponent } from './tasks-content/tasks-config/tasks-config.component';
 
 
 @NgModule({
@@ -26,11 +28,13 @@ import { MatExpansionModule } from "@angular/material/expansion";
     WorkspaceComponent,
     TestContentComponent,
     BoardContentComponent,
-    ListContentComponent,
+    TasksContentComponent,
     BacklogContentComponent,
     ProjectsContentComponent,
     ProjectListComponent,
-    ProjectConfigComponent
+    ProjectConfigComponent,
+    TasksListComponent,
+    TasksConfigComponent
   ],
     imports: [
         CommonModule,

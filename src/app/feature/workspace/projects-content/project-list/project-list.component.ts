@@ -3,8 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 import {
   CreateProjectDialogComponent
 } from "../../../../shared/dialog/create-project-dialog/create-project-dialog.component";
-import { Project } from "../../../../core/model/project";
 import { StoreService } from "../../../../core/service/store.service";
+import { ProjectInfoDto } from "../../../../api/models/project-info-dto";
 
 @Component({
   selector: 'bs-project-list',
@@ -13,7 +13,8 @@ import { StoreService } from "../../../../core/service/store.service";
 })
 export class ProjectListComponent implements OnInit{
 
-  projects: Project[] = [];
+  projectsList: ProjectInfoDto[] = [] as ProjectInfoDto[];
+  noProjects: boolean = true;
 
   constructor(public dialog: MatDialog,
               private store: StoreService) {}
@@ -21,22 +22,15 @@ export class ProjectListComponent implements OnInit{
   ngOnInit(): void {
     this.store.availableProjects$.subscribe(
       projects => {
-        this.projects = projects
+        this.projectsList = projects
+        this.noProjects = projects === undefined || projects.length === 0
       }
     )
   }
 
   openDialog(): void {
-    const createProjectDialog = this.dialog.open(CreateProjectDialogComponent, {
-      width: 'max-content',
-      data: {
-        name: 'project name',
-        tag: 'hasda',
-      }
-    });
-
-    createProjectDialog.afterClosed().subscribe(result => {
-      // this.animal = result;
+    this.dialog.open(CreateProjectDialogComponent, {
+      width: 'max-content'
     });
   }
 }

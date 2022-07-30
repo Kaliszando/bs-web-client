@@ -3,7 +3,8 @@
 export interface UserInfoDto {
   email: string;
   firstName: string;
+  id?: number;
   lastName: string;
-  role: string;
+  role?: string;
   username: string;
 }

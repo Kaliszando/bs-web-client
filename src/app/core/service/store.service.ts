@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from "rxjs";
-import { Project } from "../model/project";
+import { UserInfoDto } from "../../api/models/user-info-dto";
+import { ProjectInfoDto } from "../../api/models/project-info-dto";
+import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,28 +13,28 @@ export class StoreService {
 
   isAuthorized$: ReplaySubject<boolean> = new ReplaySubject<boolean>()
 
-  selectedProject$: ReplaySubject<Project> = new ReplaySubject<Project>()
+  selectedProject$: ReplaySubject<ProjectInfoDto> = new ReplaySubject<ProjectInfoDto>()
 
-  availableProjects$: ReplaySubject<Project[]> = new ReplaySubject<Project[]>()
+  availableProjects$: ReplaySubject<ProjectInfoDto[]> = new ReplaySubject<ProjectInfoDto[]>()
 
-  setSessionToken(token: string | null | undefined) {
+  userContext$: ReplaySubject<UserInfoDto> = new ReplaySubject<UserInfoDto>()
+
+  constructor(private projectEndpoint: ProjectEndpointService) {
+  }
+
+  setSessionToken(token: string | null) {
     if (token != null) {
       this.sessionToken$.next(token)
       this.isAuthorized$.next(true)
     }
-    else {
-      this.isAuthorized$.next(false)
-      this.sessionToken$.next('')
-    }
   }
 
-  reloadMockContext(): void {
-    this.selectedProject$.next({ name: 'Dupa jasia', tag: 'ASDFAA'})
-
-    this.availableProjects$.next([
-      { name: 'Hello world', tag: 'HWDP'},
-      { name: 'Im awesome', tag: 'ASDFA'},
-      { name: 'Dupa jasia', tag: 'ASDFAA'}
-    ])
+  reloadProjects() {
+    this.projectEndpoint.getProjects().subscribe(
+      newProjects => {
+        this.availableProjects$.next(newProjects)
+        this.selectedProject$.next(newProjects[0])
+      }
+    )
   }
 }

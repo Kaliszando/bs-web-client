@@ -1,0 +1,19 @@
+@import "themes/light";
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-option {
+  max-height: 42px;
+}
+
+div {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+
+  :last-child {
+    margin: 0;
+  }
+}

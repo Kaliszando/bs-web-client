@@ -1,3 +1,5 @@
+@import "themes/light";
+
 .mat-dialog-actions {
   justify-content: flex-end;
 }
@@ -31,4 +33,21 @@ mat-form-field {
 
 .mat-dialog-content {
   padding: 30px 70px;
+}
+
+mat-spinner {
+  margin:0 auto;
+}
+
+.user-options {
+  display: flex;
+  column-gap: 20px;
+
+  :nth-child(2) {
+    font-weight: 600;
+  }
+
+  div {
+    width: 15%;
+  }
 }
