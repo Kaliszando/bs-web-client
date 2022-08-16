@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from "@angular/material/dialog";
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ProjectInfoDto } from "../../../api/models/project-info-dto";
 import { StoreService } from "../../../core/service/store.service";
+import { IssueDetailsDto } from "../../../api/models/issue-details-dto";
 
 @Component({
   selector: 'bs-create-issue-dialog',
@@ -14,8 +15,13 @@ export class CreateIssueDialogComponent implements OnInit {
   availableProjects: ProjectInfoDto[] = [] as ProjectInfoDto[]
   expanded: boolean = false
 
+  dataModel: IssueDetailsDto = {} as IssueDetailsDto
+
   constructor(private dialogRef: MatDialogRef<CreateIssueDialogComponent>,
-              private store: StoreService) { }
+              private store: StoreService,
+              @Inject(MAT_DIALOG_DATA) data: IssueDetailsDto) {
+    this.dataModel = data
+  }
 
   ngOnInit(): void {
     this.store.selectedProject$.subscribe({
@@ -28,7 +34,7 @@ export class CreateIssueDialogComponent implements OnInit {
 
   onCreateIssue() {
     if (!this.isFormValid()) return
-    this.dialogRef.close()
+    this.dialogRef.close(this.dataModel)
   }
 
   onNoClick(): void {
@@ -36,6 +42,6 @@ export class CreateIssueDialogComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    return true;
+    return !!this.dataModel.name;
   }
 }

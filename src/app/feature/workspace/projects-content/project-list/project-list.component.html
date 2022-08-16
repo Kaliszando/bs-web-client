@@ -1,8 +1,8 @@
 <div class="actions">
-<!--  <button mat-stroked-button color="primary">-->
-<!--    <mat-icon>edit</mat-icon>-->
-<!--    Edit-->
-<!--  </button>-->
+  <button mat-stroked-button color="primary">
+    <mat-icon>edit</mat-icon>
+    Edit
+  </button>
   <button *ngIf="!noProjects" mat-raised-button color="primary" (click)="openDialog()">
     <mat-icon>add</mat-icon>
     New project
@@ -19,7 +19,7 @@
     </button>
   </div>
 
-  <mat-expansion-panel *ngFor="let project of projectsList">
+  <mat-expansion-panel [class.mat-elevation-z0]="true" *ngFor="let project of projectsList" >
     <mat-expansion-panel-header>
       <mat-panel-title>
         <img src="https://avatars.dicebear.com/api/bottts/{{project.name}}.svg?size=70" alt="">

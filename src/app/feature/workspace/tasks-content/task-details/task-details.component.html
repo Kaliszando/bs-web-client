@@ -1,0 +1,92 @@
+<div class="actions">
+  <button mat-stroked-button color="primary">
+    <mat-icon>edit</mat-icon>
+    Edit
+  </button>
+</div>
+<mat-divider></mat-divider>
+
+<div class="main-container">
+  <div class="issue-content">
+    <div class="issue-title"><span>{{issue.tagId}}</span> {{issue.name}}</div>
+    <div class="issue-summary">{{issue.summary}}</div>
+    <div class="info-grid">
+      <div class="statuses">
+        <div class="heading-font">Type</div>
+        <div><bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon></div>
+        <div class="content-font">{{issue.issueType}}</div>
+
+        <div class="heading-font">Severity</div>
+        <div><bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon></div>
+        <div class="content-font">{{issue.issueSeverity}}</div>
+
+        <div class="heading-font">Status</div>
+        <div style="grid-column: 2 / span 2">
+          <bs-status-chip [status]="issue.status"></bs-status-chip>
+        </div>
+
+        <div class="heading-font">Labels</div>
+        <div style="grid-column: 2 / span 2">
+          <bs-labels [labels]="issue.labels"></bs-labels>
+        </div>
+      </div>
+      <div class="issue-labels">
+        <div class="heading-font">Epic</div>
+        <div style="grid-column: 2 / span 2">
+          <bs-epic-label [epicName]="issue.epicName"></bs-epic-label>
+        </div>
+
+        <div class="heading-font">Reporter</div>
+        <div class="avatar-container">
+          <img *ngIf="issue.reporter" src="https://avatars.dicebear.com/api/initials/{{issue.reporter.firstName + '-' + issue.reporter.lastName}}.svg?r=10&size=25" alt="">
+        </div>
+        <div class="content-font" *ngIf="issue.reporter">{{issue.reporter.username}}</div>
+
+        <div class="heading-font">Assignee</div>
+        <div class="avatar-container">
+          <img *ngIf="issue.assignee" src="https://avatars.dicebear.com/api/initials/{{issue.assignee.firstName + '-' + issue.assignee.lastName}}.svg?r=10&size=25" alt="">
+        </div>
+        <div class="content-font">
+          <ng-container *ngIf="issue.assignee">{{issue.assignee.username}}</ng-container>
+        </div>
+
+
+      </div>
+
+      <div class="dates">
+        <div class="heading-font">Created at</div>
+        <div class="content-font">{{created | date : 'longDate'}}</div>
+
+        <div class="heading-font">Modified on</div>
+        <div class="content-font">{{modified | date : 'longDate'}}</div>
+
+        <div class="heading-font">Days old</div>
+        <div class="content-font">{{issue.daysOld}} d</div>
+
+        <div class="heading-font">Hours spent</div>
+        <div class="content-font">{{issue.hoursSpent}} h</div>
+      </div>
+    </div>
+
+    <mat-divider class="mb20"></mat-divider>
+
+    <div class="heading-font">Description</div>
+    <div>{{issue.description}}</div>
+
+  </div>
+  <div class="logs">
+    <mat-tab-group>
+      <mat-tab class="logs-history" label="History">History</mat-tab>
+      <mat-tab label="Comments">
+        <div class="logs-content">
+          <div class="accent-text">No comments yet...</div>
+          <mat-form-field>
+            <mat-label>Add new comment</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+      <mat-tab label="Work log">Work log</mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

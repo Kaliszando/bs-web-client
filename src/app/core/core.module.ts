@@ -13,27 +13,31 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatRippleModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
   declarations: [
     WorkspaceLayoutComponent,
   ],
-    imports: [
-        CommonModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        RouterModule,
-        MatDividerModule,
-        MatListModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        ReactiveFormsModule,
-        MatRippleModule,
-        MatSelectModule,
-    ],
+  imports: [
+    CommonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterModule,
+    MatDividerModule,
+    MatListModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    SharedModule,
+  ],
   exports: [
     WorkspaceLayoutComponent,
   ],

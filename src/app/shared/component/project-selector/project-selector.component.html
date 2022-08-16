@@ -4,7 +4,7 @@
   </button>
   <mat-label>Select project</mat-label>
   <mat-select [(ngModel)]="selectedProject" required="true">
-    <mat-option *ngFor="let project of availableProjects" [value]="project">
+    <mat-option *ngFor="let project of availableProjects" [value]="project" (click)="onSelect()">
       <div>
         <img src="https://avatars.dicebear.com/api/bottts/{{project.name}}.svg?size=40" alt="">
         <p>{{project.name}}</p>

@@ -22,6 +22,16 @@ import { IssueSeveritySelectorComponent } from './component/issue-severity-selec
 import { MatSelectModule } from "@angular/material/select";
 import { IssueTypeIconComponent } from './component/issue-type-icon/issue-type-icon.component';
 import { IssueSeverityIconComponent } from './component/issue-severity-icon/issue-severity-icon.component';
+import { ComponentsInputComponent } from './component/components-input/components-input.component';
+import { CodeVersionSelectComponent } from './component/code-version-select/code-version-select.component';
+import { UserSelectComponent } from './component/user-select/user-select.component';
+import { BacklogListSelectComponent } from './component/backlog-list-select/backlog-list-select.component';
+import { FileAttachmentSelectComponent } from './component/file-attachment-select/file-attachment-select.component';
+import { ParentEpicSelectComponent } from './component/parent-epic-select/parent-epic-select.component';
+import { NgxMatFileInputModule } from "@angular-material-components/file-input";
+import { EpicLabelComponent } from './component/epic-label/epic-label.component';
+import { LabelsComponent } from './component/labels/labels.component';
+import { StatusChipComponent } from './component/status-chip/status-chip.component';
 
 
 @NgModule({
@@ -35,11 +45,27 @@ import { IssueSeverityIconComponent } from './component/issue-severity-icon/issu
     IssueSeveritySelectorComponent,
     IssueTypeIconComponent,
     IssueSeverityIconComponent,
+    ComponentsInputComponent,
+    CodeVersionSelectComponent,
+    UserSelectComponent,
+    BacklogListSelectComponent,
+    FileAttachmentSelectComponent,
+    ParentEpicSelectComponent,
+    EpicLabelComponent,
+    LabelsComponent,
+    StatusChipComponent,
   ],
-  exports: [
-    LanguageToggleComponent,
-    TranslateModule,
-  ],
+    exports: [
+        LanguageToggleComponent,
+        TranslateModule,
+        IssueTypeSelectorComponent,
+        IssueSeveritySelectorComponent,
+        IssueTypeIconComponent,
+        IssueSeverityIconComponent,
+        EpicLabelComponent,
+        LabelsComponent,
+        StatusChipComponent,
+    ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -54,7 +80,8 @@ import { IssueSeverityIconComponent } from './component/issue-severity-icon/issu
     MatProgressSpinnerModule,
     MatChipsModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMatFileInputModule
   ]
 })
 export class SharedModule { }

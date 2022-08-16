@@ -1,7 +1,8 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ProjectInfoDto } from "../../../api/models/project-info-dto";
 import { StoreService } from "../../../core/service/store.service";
 import { MatFormField } from "@angular/material/form-field";
+import { IssueDetailsDto } from "../../../api/models/issue-details-dto";
 
 @Component({
   selector: 'bs-project-selector',
@@ -12,6 +13,11 @@ export class ProjectSelectorComponent implements OnInit {
 
   @ViewChildren(MatFormField)
   formFields: QueryList<MatFormField> = {} as QueryList<MatFormField>;
+
+  @Input()
+  dataModel: IssueDetailsDto = {} as IssueDetailsDto
+  @Output()
+  dataModelChange: EventEmitter<IssueDetailsDto> = new EventEmitter<IssueDetailsDto>()
 
   selectedProject: ProjectInfoDto = {} as ProjectInfoDto
   availableProjects: ProjectInfoDto[] = [] as ProjectInfoDto[]
@@ -26,6 +32,7 @@ export class ProjectSelectorComponent implements OnInit {
     this.store.selectedProject$.subscribe({
       next: selected => {
         this.selectedProject = selected
+        this.dataModel.projectId = selected.id
       }
     })
     this.store.availableProjects$.subscribe({
@@ -33,5 +40,9 @@ export class ProjectSelectorComponent implements OnInit {
         this.availableProjects = projects
       }
     })
+  }
+
+  onSelect() {
+    this.dataModel.projectId = this.selectedProject.id
   }
 }

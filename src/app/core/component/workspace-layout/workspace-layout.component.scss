@@ -92,23 +92,27 @@ mat-divider {
   mat-form-field {
     margin-top: 16px;
     max-width: 350px;
+    mat-icon {
+      transform: translateY(3px) scale(0.9) translateX(-8px);
+      color: darkgrey;
+    }
   }
 
-  mat-icon {
-    transform: translateY(3px) scale(0.9) translateX(-8px);
-    color: darkgrey;
-  }
 }
 
 .project-info {
   display: grid;
   column-gap: 5px;
   grid-template-rows: 26px 20px;
-  grid-template-columns: 60px auto;
+  grid-template-columns: 60px auto auto;
   cursor: pointer;
   border-radius: 5px;
-  background-color: ghostwhite;
+  //background-color: ghostwhite;
   min-height: 55px;
+
+  //border-style: solid;
+  //border-width: 1px;
+  //border-color: lightgrey;
 
   h5 {
     color: #656565;
@@ -116,6 +120,11 @@ mat-divider {
 
   h2 {
     color: $bs-prim-color;
+  }
+
+  mat-icon {
+    color: darkgrey;
+    transform: translateY(15px) translateX(-10px);
   }
 
   img {
@@ -143,7 +152,17 @@ mat-divider {
 }
 
 .button-action {
-  min-height: 38px;
+  max-height: 38px;
   width: 100%;
   min-width: 20px;
+}
+
+.logout {
+  color: darkgrey;
+}
+
+@media only screen and (max-width: 800px) {
+  bs-language-toggle {
+    display: none;
+  }
 }

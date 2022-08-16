@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface UserInfoDto {
-  email: string;
-  firstName: string;
+  email?: string;
+  firstName?: string;
   id?: number;
-  lastName: string;
+  lastName?: string;
   role?: string;
-  username: string;
+  username?: string;
 }

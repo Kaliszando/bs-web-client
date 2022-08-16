@@ -1,0 +1,12 @@
+@import "themes/light";
+
+section {
+  display: flex;
+  gap: 5px;
+  div {
+    background-color: #e7e7e7;
+    padding: 0 10px;
+    border-radius: 20px;
+  }
+}
+

@@ -8,17 +8,19 @@ import { Component, Input } from '@angular/core';
 export class IssueTypeIconComponent {
 
   @Input()
-  type: string = 'task'
+  type?: string = 'TASK'
   typeColorMap = new Map<string, string>([
-    ['enhancement','#78DB5F'],
-    ['task','#4E72CE'],
-    ['epic','#A45FDB'],
-    ['subtask','#70BAFF'],
-    ['bug','#FF5454'],
+    ['EPIC','#A45FDB'],
+    ['TASK','#4E72CE'],
+    ['SUBTASK','#70BAFF'],
+    ['BUG','#FF5454'],
+    ['ENHANCEMENT','#78DB5F'],
   ])
 
   getColor() {
-    return this.typeColorMap.get(this.type)
+    if (this.type) {
+      return this.typeColorMap.get(this.type)
+    }
+    return
   }
-
 }

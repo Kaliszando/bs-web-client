@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WorkspaceRoutingModule } from './workspace-routing.module';
 import { WorkspaceComponent } from './workspace.component';
 import { CoreModule } from "../../core/core.module";
-import { TestContentComponent } from './test-content/test-content.component';
+import { TestContentComponent } from './admin/test-content.component';
 import { MatDividerModule } from "@angular/material/divider";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -21,6 +21,18 @@ import { ProjectConfigComponent } from './projects-content/project-config/projec
 import { MatExpansionModule } from "@angular/material/expansion";
 import { TasksListComponent } from './tasks-content/tasks-list/tasks-list.component';
 import { TasksConfigComponent } from './tasks-content/tasks-config/tasks-config.component';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { BacklogListComponent } from './backlog-content/backlog-list/backlog-list.component';
+import { BacklogConfigComponent } from './backlog-content/backlog-config/backlog-config.component';
+import { KanbanBoardComponent } from './board-content/kanban-board/kanban-board.component';
+import { KanbanBoardConfigComponent } from './board-content/kanban-board-config/kanban-board-config.component';
+import { TaskDetailsComponent } from './tasks-content/task-details/task-details.component';
+import { ReportsContentComponent } from './reports/reports-content.component';
+import { ReportsSummaryComponent } from './reports/reports-summary/reports-summary.component';
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 
 @NgModule({
@@ -34,20 +46,32 @@ import { TasksConfigComponent } from './tasks-content/tasks-config/tasks-config.
     ProjectListComponent,
     ProjectConfigComponent,
     TasksListComponent,
-    TasksConfigComponent
+    TasksConfigComponent,
+    BacklogListComponent,
+    BacklogConfigComponent,
+    KanbanBoardComponent,
+    KanbanBoardConfigComponent,
+    TaskDetailsComponent,
+    ReportsContentComponent,
+    ReportsSummaryComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        CoreModule,
-        WorkspaceRoutingModule,
-        MatDividerModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatTabsModule,
-        MatExpansionModule,
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    CoreModule,
+    WorkspaceRoutingModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxChartsModule,
+  ]
 })
 export class WorkspaceModule { }

@@ -55,14 +55,21 @@ mat-form-field, .external-form-field {
 
 .additional-section {
   section {
-    display: block;
-    height: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    grid-template-rows: 63px 63px 63px;
+
+    bs-components-input, bs-file-attachment-select {
+      grid-column: 1 / 3;
+    }
   }
+
   display: flex;
   flex-direction: column;
 
-  :last-child {
+  button {
+    margin: 0 auto;
     max-width: 150px;
-    margin: auto auto;
   }
 }

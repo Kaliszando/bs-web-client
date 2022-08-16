@@ -14,6 +14,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { SuccessResponseInterceptor } from "./core/interceptor/success-response.interceptor";
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { NgxMatFileInputModule } from "@angular-material-components/file-input";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,6 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatSnackBarModule,
     MatGridListModule,
+    NgxMatFileInputModule,
+    NgxChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -41,12 +45,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: HTTP_INTERCEPTORS, useClass: TokenResponseInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenRequestInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SuccessResponseInterceptor, multi: true },
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
+
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3500 } },
   ],
   bootstrap: [AppComponent]
 })

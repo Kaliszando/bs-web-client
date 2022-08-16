@@ -76,23 +76,15 @@ export class CreateProjectDialogComponent implements OnInit {
     }}).subscribe({
       next: () => {
         this.store.reloadProjects()
-        this.snackBar.open('Project created successfully', 'Ok', {
-          horizontalPosition: 'right',
-          panelClass: ['green-snackbar']
-        })
-      },
-      error: () => {
-        this.snackBar.open('Project could not be created', 'Try again', {
-          horizontalPosition: 'right',
-          panelClass: ['red-snackbar']
-        })
       }
     })
     this.dialogRef.close()
   }
 
   onSelectedUser(user: UserInfoDto) {
-    this.chipsUsernames.add(user.username)
+    if (user.username) {
+      this.chipsUsernames.add(user.username)
+    }
   }
 
   removeUserFromChips(username: string) {

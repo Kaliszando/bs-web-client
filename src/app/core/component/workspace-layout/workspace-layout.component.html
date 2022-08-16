@@ -17,6 +17,7 @@
       <div class="project-info" (click)="projectSelectorRef.open()" *ngIf="projectAvailable">
         <img src="https://avatars.dicebear.com/api/bottts/{{selectedProject.name}}.svg?size=50" alt="">
         <h2 *ngIf="expanded">{{selectedProject.name}}</h2>
+        <mat-icon *ngIf="expanded">expand_more</mat-icon>
         <h5 class="mat-body-1" *ngIf="expanded">{{selectedProject.tag}}</h5>
       </div>
       <mat-form-field class="project-selector">
@@ -40,10 +41,6 @@
     <div class="spacer"></div>
 
     <mat-nav-list role="navigation">
-      <mat-list-item routerLink="/main/projects/" routerLinkActive="active">
-        <mat-icon mat-list-icon>library_books</mat-icon>
-        <div *ngIf="expanded">Projects</div>
-      </mat-list-item>
       <mat-list-item routerLink="/main/backlog" routerLinkActive="active" *ngIf="projectAvailable">
         <mat-icon mat-list-icon>view_agenda</mat-icon>
         <div *ngIf="expanded">Backlog</div>
@@ -60,6 +57,10 @@
         <mat-icon mat-list-icon>ssid_chart</mat-icon>
         <div *ngIf="expanded">Reports</div>
       </mat-list-item>
+      <mat-list-item routerLink="/main/projects/" routerLinkActive="active">
+        <mat-icon mat-list-icon>library_books</mat-icon>
+        <div *ngIf="expanded">Projects</div>
+      </mat-list-item>
     </mat-nav-list>
 
     <div class="spacer"></div>
@@ -73,7 +74,7 @@
       </mat-list-item>
       <mat-list-item routerLink="/main/customer-drafts" routerLinkActive="active" *ngIf="projectAvailable">
         <mat-icon mat-list-icon>feedback</mat-icon>
-        <div *ngIf="expanded">Customer issues</div>
+        <div *ngIf="expanded">Feedback</div>
       </mat-list-item>
       <mat-list-item routerLink="/main/test" routerLinkActive="active" *ngIf="isAdmin()">
         <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
@@ -99,8 +100,14 @@
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
 
-        <img src="https://avatars.dicebear.com/api/initials/{{userContext.firstName + '-' + userContext.lastName}}.svg?r=15&size=40" alt="">
+        <bs-language-toggle></bs-language-toggle>
+
+        <img src="https://avatars.dicebear.com/api/initials/{{userContext.firstName + '-' + userContext.lastName}}.svg?r=10&size=40" alt="">
         <div>{{userContext.username}}</div>
+
+        <button mat-icon-button>
+          <mat-icon class="logout" routerLink="/auth/sign-in">logout</mat-icon>
+        </button>
       </div>
 
     </mat-toolbar>

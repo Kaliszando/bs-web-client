@@ -12,7 +12,7 @@
   padding: 20px 50px;
   display: flex;
   gap: 20px;
-  justify-content: end !important;
+  justify-content: flex-end;
 }
 
 mat-panel-title {
@@ -39,6 +39,11 @@ mat-panel-title {
 .mat-expansion-panel-header {
   height: 110px;
   min-height: 110px;
+
+  //border-radius: 5px;
+  //border-width: 1px;
+  //border-style: solid;
+  //border-color: lightgrey;
 }
 
 mat-expansion-panel {
@@ -47,6 +52,10 @@ mat-expansion-panel {
   width: 50%;
   min-width: 550px;
   max-width: 100%;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
 }
 
 .no-data {

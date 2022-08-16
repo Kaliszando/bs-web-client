@@ -6,11 +6,10 @@ import { FormControl } from "@angular/forms";
 import { StoreService } from "../../service/store.service";
 import { UserInfoDto } from "../../../api/models/user-info-dto";
 import { ProjectInfoDto } from "../../../api/models/project-info-dto";
-import {
-  CreateProjectDialogComponent
-} from "../../../shared/dialog/create-project-dialog/create-project-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateIssueDialogComponent } from "../../../shared/dialog/create-issue-dialog/create-issue-dialog.component";
+import { IssueDetailsDto } from "../../../api/models";
+import { IssueEndpointService } from "../../../api/services/issue-endpoint.service";
 
 @Component({
   selector: 'bs-workspace-layout',
@@ -31,15 +30,18 @@ export class WorkspaceLayoutComponent {
 
   constructor(private breakpointObserver: BreakpointObserver,
               private store: StoreService,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog,
+              private issueEndpoint: IssueEndpointService) {}
 
   ngOnInit() {
+
     this.store.userContext$.subscribe(context => {
       this.userContext = context
     })
 
     this.store.selectedProject$.subscribe(selectedProject => {
       this.selectedProject = selectedProject;
+      this.store.issuesReloadedUpdate()
     })
 
     this.store.availableProjects$.subscribe(projects => {
@@ -75,6 +77,8 @@ export class WorkspaceLayoutComponent {
 
   updateProjectState() {
     this.store.selectedProject$.next(this.selectedProject)
+    this.store.selectedProjectValue = this.selectedProject
+    this.store.issuesReloadedUpdate()
   }
 
   projectSelectorChange() {
@@ -82,9 +86,25 @@ export class WorkspaceLayoutComponent {
   }
 
   openIssueDialog() {
-    this.dialog.open(CreateIssueDialogComponent, {
-      maxHeight: '95%',
-      minWidth: 800
+    const dialogRef = this.dialog.open(CreateIssueDialogComponent, {
+      maxHeight: '98%',
+      minWidth: 700,
+      data: {
+        issueType: 'TASK',
+        issueSeverity: 'NORMAL',
+      } as IssueDetailsDto,
     });
+
+    dialogRef.afterClosed().subscribe(
+      data => { if (data) {
+        this.issueEndpoint.createIssue({
+          body: data
+        }).subscribe(
+          () => {
+            this.store.issuesReloadedUpdate()
+          }
+        )
+       }
+      })
   }
 }

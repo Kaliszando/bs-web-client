@@ -16,9 +16,6 @@ export class ProjectsContentComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ projects }) => {
       this.store.availableProjects$.next(projects)
-      if (projects.length > 0) {
-        this.store.selectedProject$.next(projects[0])
-      }
     })
   }
 }

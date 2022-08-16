@@ -1,0 +1,6 @@
+<div>
+  <div class="other" *ngIf="status !== 'in progress' && status !== 'done' && status !== undefined">{{status.toUpperCase()}}</div>
+  <div class="in-progress" *ngIf="status === 'in progress'">{{status.toUpperCase()}}</div>
+  <div class="done" *ngIf="status === 'done'">{{status.toUpperCase()}}</div>
+</div>
+

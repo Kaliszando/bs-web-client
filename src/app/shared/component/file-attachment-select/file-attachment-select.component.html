@@ -1,0 +1,6 @@
+<mat-form-field>
+  <ngx-mat-file-input [(ngModel)]="files" [multiple]="true" (paste)="onPaste($event)"
+                      [accept]="accept" (ngModelChange)="onFileProvided()">
+    <mat-icon ngxMatFileInputIcon color="darkgrey">attach_file</mat-icon>
+  </ngx-mat-file-input>
+</mat-form-field>

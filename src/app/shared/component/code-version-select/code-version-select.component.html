@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label>Code version</mat-label>
+  <input type="text" matInput
+         [(ngModel)]="version" [matAutocomplete]="auto" (ngModelChange)="inputChange()">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

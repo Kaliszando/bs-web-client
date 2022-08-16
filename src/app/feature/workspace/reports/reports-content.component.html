@@ -1,0 +1,14 @@
+<section class="header-section">
+  <div class="mat-display-2 page-title">Reports</div>
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" color="primary">
+    <a mat-tab-link routerLink="/main/reports/summary" [active]="router.url === '/main/reports/summary'">Summary</a>
+    <a mat-tab-link routerLink="/main/reports/bugs" [active]="router.url === '/main/reports/bugs'">Bugs</a>
+    <a mat-tab-link routerLink="/main/reports/worklog" [active]="router.url === '/main/reports/worklog'">Historical</a>
+    <a mat-tab-link routerLink="/main/reports/worklog" [active]="router.url === '/main/reports/worklog'">Worklog</a>
+  </nav>
+</section>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

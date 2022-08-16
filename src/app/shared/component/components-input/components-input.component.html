@@ -1,0 +1,15 @@
+<mat-form-field>
+  <mat-label>Project components</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let label of components" (removed)="remove(label)">
+      {{label}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input [(ngModel)]="inputValue"
+           [matChipInputFor]="chipList"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="add()">
+  </mat-chip-list>
+</mat-form-field>

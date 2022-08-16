@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'bs-tasks-content',
@@ -8,12 +8,15 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class TasksContentComponent implements OnInit{
 
-  constructor(public router: Router,
-              private activatedRoute: ActivatedRoute) {}
+  routeId = '';
+
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
-      value => console.log('INSERT ISSUE RESOLVER HERE', value)
-    )
+    this.routeId = this.router.url.substring(20)
+  }
+
+  onNavChange() {
+    this.routeId = this.router.url.substring(20)
   }
 }

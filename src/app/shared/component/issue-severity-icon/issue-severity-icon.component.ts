@@ -8,14 +8,14 @@ import { Component, Input } from '@angular/core';
 export class IssueSeverityIconComponent  {
 
   @Input()
-  severity: string = 'normal'
+  severity: string = 'NORMAL'
   severitiesMap = new Map<string, string>([
-    ['blocker','#ff2600'],
-    ['critical','#ff2600'],
-    ['major','#ff6400'],
-    ['normal','#575757'],
-    ['minor','#008cff'],
-    ['trivial','#00ad11'],
+    ['BLOCKER','#ff2600'],
+    ['CRITICAL','#ff2600'],
+    ['MAJOR','#ff6400'],
+    ['NORMAL','#575757'],
+    ['MINOR','#008cff'],
+    ['TRIVIAL','#00ad11'],
   ])
 
   getColor() {

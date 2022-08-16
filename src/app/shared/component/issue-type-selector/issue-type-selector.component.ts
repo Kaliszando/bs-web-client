@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatFormField } from "@angular/material/form-field";
+import { IssueDetailsDto } from "../../../api/models/issue-details-dto";
 
 @Component({
   selector: 'bs-issue-type-selector',
@@ -11,16 +12,31 @@ export class IssueTypeSelectorComponent implements OnInit {
   @ViewChildren(MatFormField)
   formFields: QueryList<MatFormField> = {} as QueryList<MatFormField>;
 
-  @Input() selectedType: string = 'task'
-  @Input() preview: boolean = true
+  @Input()
+  dataModel: IssueDetailsDto = {} as IssueDetailsDto
+  @Output()
+  dataModelChange: EventEmitter<IssueDetailsDto> = new EventEmitter<IssueDetailsDto>()
 
-  types: string[] = ['epic','task','subtask','bug','enhancement']
+  @Input()
+  preview: boolean = true
+  @Input()
+  required: boolean = true
+
+  selectedType: string = ''
+  types: string[] = ['EPIC','TASK','SUBTASK','BUG','ENHANCEMENT']
 
   ngAfterViewInit(): void {
     setTimeout(() => this.formFields.forEach(ff => ff.updateOutlineGap()), 100);
   }
 
   ngOnInit(): void {
+    let type = this.dataModel.issueType
+    if (type)
+      this.selectedType = type
   }
 
+  onSelect() {
+    // @ts-ignore
+    this.dataModel.issueType = this.selectedType
+  }
 }

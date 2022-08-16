@@ -1,12 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
+import { BaseDetailsDto } from './base-details-dto';
 import { UserInfoDto } from './user-info-dto';
-export type UserDetailsDto = {
-'version': number;
-'createdBy': string;
-'createdOn': string;
-'modifiedBy': string;
-'modifiedOn': string;
-} & UserInfoDto & {
-'data': string;
+export type UserDetailsDto = BaseDetailsDto & UserInfoDto & {
+'data'?: string;
 };

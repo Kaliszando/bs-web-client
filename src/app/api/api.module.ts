@@ -8,6 +8,7 @@ import { AuthEndpointService } from './services/auth-endpoint.service';
 import { ContextEndpointService } from './services/context-endpoint.service';
 import { UserEndpointService } from './services/user-endpoint.service';
 import { ProjectEndpointService } from './services/project-endpoint.service';
+import { IssueEndpointService } from './services/issue-endpoint.service';
 
 /**
  * Module that provides all services and configuration.
@@ -21,6 +22,7 @@ import { ProjectEndpointService } from './services/project-endpoint.service';
     ContextEndpointService,
     UserEndpointService,
     ProjectEndpointService,
+    IssueEndpointService,
     ApiConfiguration
   ],
 })

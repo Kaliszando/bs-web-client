@@ -11,37 +11,38 @@
   <div mat-dialog-content class="content">
     <mat-grid-list cols="2" gutterSize="20" rowHeight="63" class="essential-data-form">
       <mat-grid-tile>
-        <bs-project-selector class="external-form-field"></bs-project-selector>
+        <bs-project-selector class="external-form-field" [(dataModel)]="dataModel"></bs-project-selector>
       </mat-grid-tile>
 
       <mat-grid-tile>
-        <bs-issue-type-selector class="external-form-field" [selectedType]="'enhancement'"></bs-issue-type-selector>
+        <bs-issue-type-selector class="external-form-field" [(dataModel)]="dataModel"></bs-issue-type-selector>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field>
           <mat-label>Issue name</mat-label>
-          <input matInput required="true">
+          <input matInput required="true" [(ngModel)]="dataModel.name">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
-        <bs-issue-severity-selector class="external-form-field" [selectedSeverity]="'trivial'"></bs-issue-severity-selector>
+        <bs-issue-severity-selector class="external-form-field" [(dataModel)]="dataModel"></bs-issue-severity-selector>
       </mat-grid-tile>
     </mat-grid-list>
 
     <div class="full-span-container">
       <mat-form-field class="external-form-field">
         <mat-label>Summary</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="dataModel.summary">
       </mat-form-field>
 
-      <bs-labels-input class="external-form-field"></bs-labels-input>
+      <bs-labels-input class="external-form-field" [(dataModel)]="dataModel"></bs-labels-input>
     </div>
 
     <mat-form-field>
       <mat-label>Description</mat-label>
-      <textarea matInput cdkTextareaAutosize placeholder="Full issue description"></textarea>
+      <textarea matInput cdkTextareaAutosize [(ngModel)]="dataModel.description"
+                placeholder="Full issue description"></textarea>
     </mat-form-field>
 
     <mat-divider class="divider-top"></mat-divider>
@@ -49,6 +50,12 @@
 
     <div class="additional-section">
       <section *ngIf="expanded">
+        <bs-parent-epic-select [(dataModel)]="dataModel"></bs-parent-epic-select>
+        <bs-code-version-select [(dataModel)]="dataModel"></bs-code-version-select>
+        <bs-components-input [(dataModel)]="dataModel"></bs-components-input>
+        <bs-user-select [(dataModel)]="dataModel"></bs-user-select>
+        <bs-backlog-list-select [(dataModel)]="dataModel"></bs-backlog-list-select>
+        <bs-file-attachment-select [(dataModel)]="dataModel"></bs-file-attachment-select>
       </section>
       <button mat-button (click)="expanded = !expanded" color="accent" class="button-action">
         <ng-container *ngIf="expanded">

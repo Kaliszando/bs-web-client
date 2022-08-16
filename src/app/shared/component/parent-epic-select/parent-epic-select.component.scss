@@ -1,0 +1,14 @@
+mat-form-field {
+  width: 100%;
+}
+
+div {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+
+  :last-child {
+    margin: 0;
+  }
+}
+
