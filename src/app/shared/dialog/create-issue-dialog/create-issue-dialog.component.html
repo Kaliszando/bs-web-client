@@ -1,6 +1,6 @@
 <section>
   <div mat-dialog-title class="dialog-title">
-    <h2 class="mat-display-2">Create new issue</h2>
+    <h2 class="mat-display-2">Issue details</h2>
     <button mat-icon-button aria-label="close dialog" mat-dialog-close="" tabindex="-1">
       <mat-icon>close</mat-icon>
     </button>
@@ -72,6 +72,6 @@
   </div>
   <div mat-dialog-actions class="actions">
     <button mat-flat-button (click)="onNoClick()">Cancel</button>
-    <button mat-flat-button color="primary" (click)="onCreateIssue()" [disabled]="!isFormValid()">Create issue</button>
+    <button mat-flat-button color="primary" (click)="onCreateIssue()" [disabled]="!isFormValid()">Save issue</button>
   </div>
 </section>

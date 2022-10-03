@@ -11,7 +11,7 @@ import { ProjectInfoDto } from "../../../../api/models/project-info-dto";
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss']
 })
-export class ProjectListComponent implements OnInit{
+export class ProjectListComponent implements OnInit {
 
   projectsList: ProjectInfoDto[] = [] as ProjectInfoDto[];
   noProjects: boolean = true;
@@ -23,7 +23,8 @@ export class ProjectListComponent implements OnInit{
     this.store.availableProjects$.subscribe(
       projects => {
         this.projectsList = projects
-        this.noProjects = projects === undefined || projects.length === 0
+        this.noProjects = projects === undefined
+                          || projects.length === 0
       }
     )
   }

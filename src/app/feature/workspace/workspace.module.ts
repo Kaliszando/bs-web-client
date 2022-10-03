@@ -33,6 +33,8 @@ import { TaskDetailsComponent } from './tasks-content/task-details/task-details.
 import { ReportsContentComponent } from './reports/reports-content.component';
 import { ReportsSummaryComponent } from './reports/reports-summary/reports-summary.component';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -55,23 +57,25 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
     ReportsContentComponent,
     ReportsSummaryComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CoreModule,
-    WorkspaceRoutingModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    NgxChartsModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        CoreModule,
+        WorkspaceRoutingModule,
+        MatDividerModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatTabsModule,
+        MatExpansionModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        NgxChartsModule,
+        DragDropModule,
+        FormsModule,
+    ]
 })
 export class WorkspaceModule { }

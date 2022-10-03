@@ -22,7 +22,11 @@ export class IssueTypeSelectorComponent implements OnInit {
   @Input()
   required: boolean = true
 
+  @Input()
   selectedType: string = ''
+  @Output()
+  selectedTypeChange: EventEmitter<string> = new EventEmitter<string>()
+
   types: string[] = ['EPIC','TASK','SUBTASK','BUG','ENHANCEMENT']
 
   ngAfterViewInit(): void {
@@ -38,5 +42,6 @@ export class IssueTypeSelectorComponent implements OnInit {
   onSelect() {
     // @ts-ignore
     this.dataModel.issueType = this.selectedType
+    this.selectedTypeChange.emit(this.selectedType);
   }
 }

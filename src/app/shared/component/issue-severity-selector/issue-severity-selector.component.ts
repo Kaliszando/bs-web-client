@@ -21,7 +21,11 @@ export class IssueSeveritySelectorComponent implements OnInit {
   preview: boolean = true
   @Input()
   required: boolean = true
+
+  @Input()
   selectedSeverity: string = 'BLOCKER'
+  @Output()
+  selectedSeverityChange: EventEmitter<string> = new EventEmitter<string>()
 
   severities: string[] = ['BLOCKER','CRITICAL','MAJOR','NORMAL','MINOR','TRIVIAL']
 
@@ -36,5 +40,6 @@ export class IssueSeveritySelectorComponent implements OnInit {
   onSelect() {
     // @ts-ignore
     this.dataModel.issueSeverity = this.selectedSeverity
+    this.selectedSeverityChange.emit(this.selectedSeverity);
   }
 }

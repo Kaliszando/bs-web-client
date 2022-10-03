@@ -22,7 +22,6 @@ export class FileAttachmentSelectComponent implements OnInit {
   }
 
   onFileProvided() {
-    console.log(this.files)
   }
 
   onPaste(event: ClipboardEvent) {

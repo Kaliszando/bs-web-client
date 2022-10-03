@@ -1,5 +1,5 @@
 <div class="actions">
-  <button mat-stroked-button color="primary">
+  <button mat-stroked-button color="primary" (click)="openIssueDialog()">
     <mat-icon>edit</mat-icon>
     Edit
   </button>
@@ -76,7 +76,6 @@
   </div>
   <div class="logs">
     <mat-tab-group>
-      <mat-tab class="logs-history" label="History">History</mat-tab>
       <mat-tab label="Comments">
         <div class="logs-content">
           <div class="accent-text">No comments yet...</div>
@@ -86,6 +85,7 @@
           </mat-form-field>
         </div>
       </mat-tab>
+      <mat-tab class="logs-history" label="History">History</mat-tab>
       <mat-tab label="Work log">Work log</mat-tab>
     </mat-tab-group>
   </div>

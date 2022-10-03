@@ -15,7 +15,7 @@ export class UserSelectComponent implements OnInit {
   dataModelChange: EventEmitter<IssueDetailsDto> = new EventEmitter<IssueDetailsDto>()
 
   assignee?: string = undefined
-  users: string[] = ['user1', 'user2', 'user3']
+  users: string[] = ['jantes', 'annnow', 'demuse']
 
   ngOnInit(): void {
     this.assignee = this.dataModel.assignee?.username

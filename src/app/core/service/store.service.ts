@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from "rxjs";
+import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 import { UserInfoDto } from "../../api/models/user-info-dto";
 import { ProjectInfoDto } from "../../api/models/project-info-dto";
 import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
@@ -22,6 +22,16 @@ export class StoreService {
   userContext$: ReplaySubject<UserInfoDto> = new ReplaySubject<UserInfoDto>(1)
 
   issuesReloaded$: ReplaySubject<void> = new ReplaySubject<void>(1)
+
+  private currentProject$: BehaviorSubject<ProjectInfoDto> = new BehaviorSubject<ProjectInfoDto>({} as ProjectInfoDto);
+
+  public getCurrentProject$(): Observable<ProjectInfoDto> {
+    return this.currentProject$.asObservable();
+  }
+
+  public setCurrentProject(project: ProjectInfoDto): void {
+    this.currentProject$.next(project);
+  }
 
   constructor(private projectEndpoint: ProjectEndpointService) {
     this.issuesReloadedUpdate()

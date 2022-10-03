@@ -12,5 +12,4 @@ export class BoardContentComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

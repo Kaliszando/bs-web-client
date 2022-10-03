@@ -25,7 +25,7 @@ import { TaskDetailsViewGuard } from "../../core/guard/task-details-view.guard";
 import { ReportsSummaryComponent } from "./reports/reports-summary/reports-summary.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'board' },
+  { path: '', redirectTo: 'projects' },
   { path: '', component: WorkspaceComponent, canActivate: [AuthorizedGuard],
     resolve: { context: InitContextResolver, projects: ProjectsInfoResolver },
     children: [

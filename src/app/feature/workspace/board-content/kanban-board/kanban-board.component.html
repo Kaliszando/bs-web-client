@@ -6,13 +6,15 @@
 </div>
 <mat-divider></mat-divider>
 
-<section class="column-container">
-  <div class="status-column" *ngFor="let column of columns">
+<section class="column-container" cdkDropListGroup>
+  <div class="status-column" *ngFor="let column of columns"
+       cdkDropList [cdkDropListData]="getListByColumnName(column)"
+       (cdkDropListDropped)="drop($event, column)">
     <span class="column-header">
       <bs-status-chip [status]="column"></bs-status-chip>
-      <span>{{prepareIssues(column).length}}</span>
+      <span>{{getListByColumnName(column).length}}</span>
     </span>
-    <div class="issue-card" *ngFor="let issue of prepareIssues(column)">
+    <div class="issue-card example-box" *ngFor="let issue of getListByColumnName(column)" cdkDrag>
       <div class="flex-row">
         <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
         <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>

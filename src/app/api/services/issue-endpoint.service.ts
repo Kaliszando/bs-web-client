@@ -124,6 +124,62 @@ export class IssueEndpointService extends BaseService {
   }
 
   /**
+   * Path part for operation partialUpdateOfIssue
+   */
+  static readonly PartialUpdateOfIssuePath = '/issue';
+
+  /**
+   * Updates partial data of given issue
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `partialUpdateOfIssue()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  partialUpdateOfIssue$Response(params: {
+    tagId: string;
+    newStatus?: string;
+    newBacklogList?: string;
+  }): Observable<StrictHttpResponse<IssueInfoDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, IssueEndpointService.PartialUpdateOfIssuePath, 'patch');
+    if (params) {
+      rb.query('tagId', params.tagId, {});
+      rb.query('newStatus', params.newStatus, {});
+      rb.query('newBacklogList', params.newBacklogList, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<IssueInfoDto>;
+      })
+    );
+  }
+
+  /**
+   * Updates partial data of given issue
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `partialUpdateOfIssue$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  partialUpdateOfIssue(params: {
+    tagId: string;
+    newStatus?: string;
+    newBacklogList?: string;
+  }): Observable<IssueInfoDto> {
+
+    return this.partialUpdateOfIssue$Response(params).pipe(
+      map((r: StrictHttpResponse<IssueInfoDto>) => r.body as IssueInfoDto)
+    );
+  }
+
+  /**
    * Path part for operation getIssueByTagId
    */
   static readonly GetIssueByTagIdPath = '/issue/{tagId}';
@@ -177,6 +233,56 @@ export class IssueEndpointService extends BaseService {
   }): Observable<IssueDetailsDto> {
 
     return this.getIssueByTagId$Response(params).pipe(
+      map((r: StrictHttpResponse<IssueDetailsDto>) => r.body as IssueDetailsDto)
+    );
+  }
+
+  /**
+   * Path part for operation updateIssue
+   */
+  static readonly UpdateIssuePath = '/issue/{tagId}';
+
+  /**
+   * Updates issue details and returns updated issue
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateIssue()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateIssue$Response(params?: {
+    body?: IssueDetailsDto
+  }): Observable<StrictHttpResponse<IssueDetailsDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, IssueEndpointService.UpdateIssuePath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<IssueDetailsDto>;
+      })
+    );
+  }
+
+  /**
+   * Updates issue details and returns updated issue
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `updateIssue$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateIssue(params?: {
+    body?: IssueDetailsDto
+  }): Observable<IssueDetailsDto> {
+
+    return this.updateIssue$Response(params).pipe(
       map((r: StrictHttpResponse<IssueDetailsDto>) => r.body as IssueDetailsDto)
     );
   }

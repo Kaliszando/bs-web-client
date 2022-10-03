@@ -1,13 +1,18 @@
 <div class="actions">
   <mat-form-field class="search-input bs-compact-form-field">
     <mat-label>Filter out by query</mat-label>
-    <input matInput placeholder="Query">
+    <input matInput placeholder="Query"
+           [(ngModel)]="filter.query" (ngModelChange)="filterChange()">
   </mat-form-field>
-  <bs-issue-type-selector [required]="false" class="filter-input bs-compact-form-field"></bs-issue-type-selector>
-  <bs-issue-severity-selector [required]="false" class="filter-input bs-compact-form-field"></bs-issue-severity-selector>
+  <bs-issue-type-selector [required]="false" class="filter-input bs-compact-form-field"
+                          [(selectedType)]="filter.type"
+                          (selectedTypeChange)="filterChange()"></bs-issue-type-selector>
+  <bs-issue-severity-selector [required]="false" class="filter-input bs-compact-form-field"
+                              [(selectedSeverity)]="filter.severity"
+                              (selectedSeverityChange)="filterChange()"></bs-issue-severity-selector>
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Status</mat-label>
-    <mat-select>
+    <mat-select [(value)]="filter.status" (valueChange)="filterChange()">
       <mat-option *ngFor="let status of statuses" [value]="status">
         {{status}}
       </mat-option>
@@ -67,7 +72,7 @@
       <div class="labels">Labels</div>
       <div></div>
     </div>
-    <div *ngFor="let issue of issues" class="table-row">
+    <div *ngFor="let issue of paged" class="table-row">
       <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
       <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
@@ -81,7 +86,7 @@
       <bs-labels [labels]="issue.labels"></bs-labels>
       <mat-icon (click)="removeIssue(issue)">more_vert</mat-icon>
     </div>
-    <mat-paginator [length]="issues.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+    <mat-paginator [length]="issues.length" [pageSize]="25" [pageSizeOptions]="[25, 50, 100]"
                    class="bs-compact-form-field">
     </mat-paginator>
   </section>

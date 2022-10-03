@@ -18,6 +18,9 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           this.router.navigateByUrl('/auth/sign-in')
         }
+        if (error.status === 403) {
+          this.router.navigateByUrl('/error/forbidden')
+        }
         if (error.status === 422) {
           this.snackBar.open('Request could not be created', 'Ok', {
             horizontalPosition: 'right',
