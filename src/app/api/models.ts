@@ -10,3 +10,4 @@ export { IssueSeverity } from './models/issue-severity';
 export { IssueType } from './models/issue-type';
 export { IssueInfoDto } from './models/issue-info-dto';
 export { IssueDetailsDto } from './models/issue-details-dto';
+export { IssuePartialUpdate } from './models/issue-partial-update';

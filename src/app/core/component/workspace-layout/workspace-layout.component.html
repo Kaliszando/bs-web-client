@@ -41,6 +41,10 @@
     <div class="spacer"></div>
 
     <mat-nav-list role="navigation">
+      <mat-list-item routerLink="/main/projects/" routerLinkActive="active">
+        <mat-icon mat-list-icon>library_books</mat-icon>
+        <div *ngIf="expanded">Projects</div>
+      </mat-list-item>
       <mat-list-item routerLink="/main/backlog" routerLinkActive="active" *ngIf="projectAvailable">
         <mat-icon mat-list-icon>view_agenda</mat-icon>
         <div *ngIf="expanded">Backlog</div>
@@ -56,10 +60,6 @@
       <mat-list-item routerLink="/main/reports" routerLinkActive="active" *ngIf="projectAvailable">
         <mat-icon mat-list-icon>ssid_chart</mat-icon>
         <div *ngIf="expanded">Reports</div>
-      </mat-list-item>
-      <mat-list-item routerLink="/main/projects/" routerLinkActive="active">
-        <mat-icon mat-list-icon>library_books</mat-icon>
-        <div *ngIf="expanded">Projects</div>
       </mat-list-item>
     </mat-nav-list>
 

@@ -42,6 +42,7 @@ export class StoreService {
   }
 
   setSessionToken(token: string | null) {
+
     if (token != null) {
       this.sessionToken$.next(token)
       this.isAuthorized$.next(true)

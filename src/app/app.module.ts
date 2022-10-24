@@ -46,11 +46,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenResponseInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenRequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenResponseInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SuccessResponseInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
 
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3500 } },

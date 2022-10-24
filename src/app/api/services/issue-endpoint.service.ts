@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { IssueDetailsDto } from '../models/issue-details-dto';
 import { IssueInfoDto } from '../models/issue-info-dto';
+import { IssuePartialUpdate } from '../models/issue-partial-update';
 
 @Injectable({
   providedIn: 'root',
@@ -124,29 +125,25 @@ export class IssueEndpointService extends BaseService {
   }
 
   /**
-   * Path part for operation partialUpdateOfIssue
+   * Path part for operation partialIssueUpdate
    */
-  static readonly PartialUpdateOfIssuePath = '/issue';
+  static readonly PartialIssueUpdatePath = '/issue/update';
 
   /**
-   * Updates partial data of given issue
+   * Updates issue details and returns updated issue
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `partialUpdateOfIssue()` instead.
+   * To access only the response body, use `partialIssueUpdate()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  partialUpdateOfIssue$Response(params: {
-    tagId: string;
-    newStatus?: string;
-    newBacklogList?: string;
-  }): Observable<StrictHttpResponse<IssueInfoDto>> {
+  partialIssueUpdate$Response(params?: {
+    body?: IssuePartialUpdate
+  }): Observable<StrictHttpResponse<IssueDetailsDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, IssueEndpointService.PartialUpdateOfIssuePath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, IssueEndpointService.PartialIssueUpdatePath, 'post');
     if (params) {
-      rb.query('tagId', params.tagId, {});
-      rb.query('newStatus', params.newStatus, {});
-      rb.query('newBacklogList', params.newBacklogList, {});
+      rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
@@ -155,27 +152,25 @@ export class IssueEndpointService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<IssueInfoDto>;
+        return r as StrictHttpResponse<IssueDetailsDto>;
       })
     );
   }
 
   /**
-   * Updates partial data of given issue
+   * Updates issue details and returns updated issue
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `partialUpdateOfIssue$Response()` instead.
+   * To access the full response (for headers, for example), `partialIssueUpdate$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  partialUpdateOfIssue(params: {
-    tagId: string;
-    newStatus?: string;
-    newBacklogList?: string;
-  }): Observable<IssueInfoDto> {
+  partialIssueUpdate(params?: {
+    body?: IssuePartialUpdate
+  }): Observable<IssueDetailsDto> {
 
-    return this.partialUpdateOfIssue$Response(params).pipe(
-      map((r: StrictHttpResponse<IssueInfoDto>) => r.body as IssueInfoDto)
+    return this.partialIssueUpdate$Response(params).pipe(
+      map((r: StrictHttpResponse<IssueDetailsDto>) => r.body as IssueDetailsDto)
     );
   }
 

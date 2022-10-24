@@ -7,8 +7,7 @@ import { StoreService } from "../service/store.service";
 @Injectable()
 export class TokenResponseInterceptor implements HttpInterceptor {
 
-  constructor(private store: StoreService) {
-  }
+  constructor(private store: StoreService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)

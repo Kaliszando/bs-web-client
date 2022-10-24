@@ -3,6 +3,7 @@ import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
 import { IssueEndpointService } from "../../../../api/services/issue-endpoint.service";
 import { StoreService } from "../../../../core/service/store.service";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { IssuePartialUpdate } from "../../../../api/models/issue-partial-update";
 
 @Component({
   selector: 'bs-backlog-list',
@@ -49,7 +50,7 @@ export class BacklogListComponent implements OnInit {
       const updated = event.container.data.find(issue => issue.backlogList !== newBacklogList);
       if (updated && updated.tagId) {
         this.issueEndpoint
-          .partialUpdateOfIssue({ tagId: updated.tagId, newBacklogList: newBacklogList })
+          .partialIssueUpdate({ body: { tagId: updated.tagId, backlog: newBacklogList } as IssuePartialUpdate })
           .subscribe();
       }
     }
