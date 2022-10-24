@@ -1,0 +1,76 @@
+<section>
+  <div mat-dialog-title class="dialog-title">
+    <h2 class="mat-display-2">Create new project</h2>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close="" tabindex="-1">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-content class="content">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="My project name" [formControl]="nameForm">
+      <mat-error *ngIf="nameForm.hasError('minlength')">
+        Project name need to consist of at least 8 characters
+      </mat-error>
+      <mat-error *ngIf="nameForm.hasError('required')">
+        Project name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Friendly ID</mat-label>
+      <input matInput placeholder="MYTAG" [formControl]="tagForm">
+      <mat-error *ngIf="tagForm.hasError('minlength')">
+        Project tag need to consist of at least 3 characters
+      </mat-error>
+      <mat-error *ngIf="tagForm.hasError('required')">
+        Project friendly ID is required
+      </mat-error>
+      <mat-hint>This tag will be included in uri of project issues</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput [formControl]="descriptionForm"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Add member</mat-label>
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip
+          *ngFor="let username of chipsUsernames"
+          (removed)="removeUserFromChips(username)">
+          {{username}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      <input type="text" placeholder="Search for users" matInput #userQueryInput
+             [formControl]="usersQueryForm"
+             [matAutocomplete]="auto"
+             [matChipInputFor]="chipList">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngIf="usersLoading; else usersOptions" [disabled]="true" class="usersSpinner">
+          <mat-spinner diameter="20"></mat-spinner>
+        </mat-option>
+        <ng-template #usersOptions>
+          <mat-option *ngFor="let user of filteredUsers" (click)="onSelectedUser(user); userQueryInput.value=''">
+            <div class="user-options">
+              <img src="https://avatars.dicebear.com/api/initials/{{user.firstName + '-' + user.lastName}}.svg?r=15&size=20" alt="">
+              <div>{{user.username}}</div>
+              <div>{{user.firstName}}</div>
+              <div>{{user.lastName}}</div>
+            </div>
+          </mat-option>
+        </ng-template>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-flat-button (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onCreateProject()" [disabled]="!isFormValid()">Create project</button>
+  </div>
+</section>

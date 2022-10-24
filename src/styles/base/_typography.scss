@@ -1,0 +1,21 @@
+@use '@angular/material' as mat;
+
+$bs-typography: mat.define-typography-config(
+  $font-family: 'Montserrat',
+
+  //$display-4
+  //$display-3
+  //$display-2
+  //$display-1
+  //$headline
+  //$title
+  //$subheading-2
+  //$subheading-1
+  $body-1: mat.define-typography-level(16px, 28px),
+  $body-2: mat.define-typography-level(16px, 28px, 500)
+  //$caption
+  //$button
+  //$input
+);
+
+@include mat.all-component-typographies($bs-typography);

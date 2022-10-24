@@ -1,0 +1,51 @@
+@use '@angular/material' as mat;
+
+$mat-palette-bs-primary: mat.define-palette(mat.$deep-purple-palette, 700);
+$mat-palette-bs-accent: mat.define-palette(mat.$purple-palette, A400, 100);
+$mat-palette-bs-warn: mat.define-palette(mat.$deep-orange-palette, A400);
+
+// colors
+$bs-prim-color: #470cce;
+$bs-acc-color: #D500F9;
+
+$bs-acc-1-color: #E0C3FC;
+$bs-acc-2-color: #8EC5FC;
+$bs-acc-3-color: #afdbf5;
+
+$icon-color: darkgrey;
+
+$bs-light-theme: mat.define-light-theme((
+  color: (
+    primary: $mat-palette-bs-primary,
+    accent: $mat-palette-bs-accent,
+    warn: $mat-palette-bs-warn
+  )
+));
+
+@include mat.all-component-themes($bs-light-theme);
+
+.bs-gradient {
+  background-color: $bs-acc-2-color;
+  background-image: linear-gradient(315deg, $bs-acc-2-color 0%, $bs-acc-1-color 50%, white 100%);
+}
+
+.green-snackbar {
+  background: green;
+  font-weight: 500;
+  color: white;
+}
+.green-snackbar button {
+  background-color: green;
+  color: white;
+  border: none;
+}
+.red-snackbar {
+  font-weight: 500;
+  background: #F44336;
+  color: white;
+}
+.red-snackbar button {
+  background-color: #F44336;
+  color: white !important;
+  border: none;
+}

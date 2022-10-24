@@ -1,0 +1,105 @@
+@import "themes/light";
+
+.actions {
+  background-color: white;
+  padding: 20px 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+
+  .search-input {
+    width: 320px;
+    max-height: 44px;
+  }
+
+  .filter-input {
+    max-height: 44px;
+    width: 150px;
+  }
+}
+
+.expanded-actions {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.issue-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  //background-color: ghostwhite;
+  border-radius: 5px;
+  //padding: 20px 20px 0;
+  margin: 30px 50px;
+
+  //border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+
+  .row-header {
+    font-weight: 500;
+    //background-color: ghostwhite !important;
+    //border-style: none !important;
+  }
+
+  mat-paginator {
+    background-color: inherit;
+  }
+
+  .table-row {
+    background-color: white;
+    border-radius: inherit;
+    display: flex;
+    gap: 10px;
+    max-height: 40px;
+    padding: 6px 20px;
+    align-items: center;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+
+    :nth-child(1),:nth-child(2) {
+      width: 20px;
+    }
+
+    :nth-child(3) {
+      width: 60px;
+    }
+
+    .avatar {
+      margin: 0 10px;
+      display: block;
+      width: 25px;
+      height: 25px;
+
+      img {
+        width: inherit;
+        height: inherit;
+      }
+    }
+
+    .status {
+      width: 130px;
+    }
+
+    .title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: clamp(100px, 25%, 30%);
+    }
+
+    .epic {
+      width: 150px;
+    }
+
+    :last-child {
+      color: darkgrey;
+      margin-left: auto;
+      padding: 0;
+    }
+  }
+
+}
+

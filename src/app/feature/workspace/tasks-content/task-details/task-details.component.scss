@@ -1,0 +1,128 @@
+.actions {
+  background-color: white;
+  padding: 20px 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.main-container {
+  display: flex;
+  padding: 20px 50px;
+  gap: 30px;
+
+  .issue-content {
+    width: 55%;
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+
+    .issue-title {
+      font-size: 27px;
+      font-weight: 600;
+      margin-bottom: 10px;
+
+      span {
+        color: #5b33c0;
+      }
+    }
+
+    .issue-summary {
+      color: #6b6b6b;
+    }
+
+    .info-grid {
+      margin: 40px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      .statuses {
+        align-content: start;
+        align-items: center;
+        background-color: white;
+        display: grid;
+        gap: 5px;
+        row-gap: 10px;
+        grid-template-columns: 70px 30px auto;
+      }
+
+      .issue-labels {
+        align-content: start;
+        align-items: center;
+        background-color: white;
+        display: grid;
+        gap: 5px;
+        row-gap: 10px;
+        grid-template-columns: 80px 35px auto;
+
+        .avatar-container {
+          height: 25px;
+          width: 25px;
+        }
+      }
+
+      .dates {
+        align-content: start;
+        align-items: center;
+        background-color: white;
+        display: grid;
+        gap: 5px;
+        row-gap: 10px;
+        grid-template-columns: 40% auto;
+      }
+    }
+  }
+
+  .heading-font {
+    color: #606060;
+    font-weight: 500;
+  }
+
+  .content-font {
+    font-weight: 600;
+    color: #313131;
+  }
+
+  .logs {
+    width: auto;
+    background-color: white;
+
+    padding: 20px 30px;
+
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+
+    .logs-content {
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .accent-text {
+      font-size: 20px;
+      font-weight: 500;
+      color: #5b33c0;
+    }
+  }
+
+  .mt20 {
+    margin-top: 20px;
+  }
+
+  .mb20 {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,41 @@
+@import "themes/light";
+
+.container {
+  overflow-y: hidden;
+  height: max-content;
+  padding: 200px 0 0 100px;
+
+  .txt-1 {
+    font-weight: 500;
+    color: $bs-prim-color;
+    margin: 0;
+  }
+
+  .txt-2 {
+    color: $bs-acc-color;
+  }
+
+  .txt-3 {
+    color: #444444;
+    margin: 0;
+  }
+
+  .txt-4 {
+  }
+
+  .dot {
+    position: absolute;
+    top: -15%;
+    left: -50%;
+
+    //height: 120%;
+    height: 110%;
+    width: 100%;
+    background-color: rgba(20,12,255, 5%);
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 0;
+    pointer-events: none;
+    cursor: default;
+  }
+}

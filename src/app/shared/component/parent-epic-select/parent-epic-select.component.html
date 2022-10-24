@@ -1,0 +1,15 @@
+<mat-form-field>
+  <button mat-icon-button matPrefix tabindex="-1" *ngIf="preview && selectedEpic != undefined">
+    <bs-issue-type-icon [type]="'EPIC'"></bs-issue-type-icon>
+  </button>
+  <mat-label>Parent epic</mat-label>
+  <mat-select [(ngModel)]="selectedEpic" (selectionChange)="onSelect()">
+    <mat-option>None</mat-option>
+    <mat-option *ngFor="let epic of epics" [value]="epic">
+      <div>
+        <bs-issue-type-icon [type]="'EPIC'"></bs-issue-type-icon>
+        <p>{{epic}}</p>
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

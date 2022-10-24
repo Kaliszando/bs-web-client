@@ -1,0 +1,72 @@
+@import "themes/light";
+
+.container {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actions {
+  background-color: white;
+  padding: 20px 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+mat-panel-title {
+  display: flex;
+
+  :nth-child(2) {
+    font-size: 23px;
+    font-weight: 600;
+    color: $bs-prim-color;
+    padding: 12px 0 0 20px;
+    align-self: center;
+    min-width: max-content;
+    width: 35%;
+  }
+
+  :nth-child(3) {
+    padding-top: 12px;
+    align-self: center;
+    font-size: 17px;
+    color: #444444;
+  }
+}
+
+.mat-expansion-panel-header {
+  height: 110px;
+  min-height: 110px;
+
+  //border-radius: 5px;
+  //border-width: 1px;
+  //border-style: solid;
+  //border-color: lightgrey;
+}
+
+mat-expansion-panel {
+  height: max-content;
+  margin-bottom: 10px;
+  width: 50%;
+  min-width: 550px;
+  max-width: 100%;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+}
+
+.no-data {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  b {
+    font-weight: 500;
+    color: $bs-prim-color;
+  }
+}

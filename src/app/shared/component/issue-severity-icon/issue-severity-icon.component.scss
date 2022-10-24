@@ -1,0 +1,11 @@
+svg {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+path {
+  scale: 1.2;
+  position: absolute;
+  transform: translateY(-4px) translateX(-4px);
+}

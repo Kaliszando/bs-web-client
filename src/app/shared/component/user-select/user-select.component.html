@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label>Assigned user</mat-label>
+  <input type="text" matInput
+         [(ngModel)]="assignee" [matAutocomplete]="auto" (ngModelChange)="inputChange()">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of users" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

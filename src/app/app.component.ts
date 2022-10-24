@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
+
 
 @Component({
   selector: 'bs-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  title = 'bs-web-client';
+
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 }

@@ -1,0 +1,17 @@
+@import "abstracts/variables";
+@import "themes/light";
+
+$padding-y: 40px;
+$padding-x: 40px;
+
+.page-container {
+  padding: $padding-y $padding-x;
+  height: calc(100% - 2 * #{$padding-y});
+  @extend .bs-gradient;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  height: 100%;
+}

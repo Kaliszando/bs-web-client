@@ -1,0 +1,10 @@
+@import "themes/light";
+
+div {
+  background-color: #E0C3FC;
+  padding: 0 10px;
+  border-radius: 5px;
+  color: $bs-prim-color;
+  font-weight: 500;
+  width: max-content;
+}

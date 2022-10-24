@@ -1,0 +1,22 @@
+<div class="chart-container">
+  <ngx-charts-pie-grid
+    [view]="[1000,400]"
+    [customColors]="issuesSummaryDataColors"
+    [results]="issuesSummaryData">
+  </ngx-charts-pie-grid>
+
+  <ngx-charts-bar-vertical
+      [view]="[1000,400]"
+      [results]="issuesSummaryData"
+      [customColors]="issuesSummaryDataColors"
+      [xAxisLabel]="'Issue types'"
+      [legendTitle]="'Product Sale Chart'"
+      [yAxisLabel]="'Issue type count'"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="false">
+    </ngx-charts-bar-vertical>
+</div>

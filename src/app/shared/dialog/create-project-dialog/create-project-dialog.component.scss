@@ -1,0 +1,53 @@
+@import "themes/light";
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.mat-display-2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.dialog-title {
+  column-gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  margin-top: 3px;
+  width: 100%;
+}
+
+.content {
+  row-gap: 5px;
+  column-gap: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+}
+
+.mat-dialog-content {
+  padding: 30px 70px;
+}
+
+mat-spinner {
+  margin:0 auto;
+}
+
+.user-options {
+  display: flex;
+  column-gap: 20px;
+
+  :nth-child(2) {
+    font-weight: 600;
+  }
+
+  div {
+    width: 15%;
+  }
+}

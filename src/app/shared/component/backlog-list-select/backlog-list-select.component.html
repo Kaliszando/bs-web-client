@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>Backlog list location</mat-label>
+  <mat-select [(ngModel)]="listName" (selectionChange)="onSelect()">
+    <mat-option *ngFor="let list of lists" [value]="list">
+      {{list}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

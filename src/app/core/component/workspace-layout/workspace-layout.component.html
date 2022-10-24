@@ -1,0 +1,116 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="!(isHandset$ | async)">
+
+
+    <img class="app-logo" src="/assets/img/favicon-32x32.png" alt="" (click)="toggleExpand()">
+    <span *ngIf="expanded" class="app-name-container" (click)="toggleExpand()">
+      <span class="name-1">Bug</span>
+      <span class="name-2">Stalker</span>
+    </span>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+    <div class="project-container">
+      <div class="project-info" (click)="projectSelectorRef.open()" *ngIf="projectAvailable">
+        <img src="https://avatars.dicebear.com/api/bottts/{{selectedProject.name}}.svg?size=50" alt="">
+        <h2 *ngIf="expanded">{{selectedProject.name}}</h2>
+        <mat-icon *ngIf="expanded">expand_more</mat-icon>
+        <h5 class="mat-body-1" *ngIf="expanded">{{selectedProject.tag}}</h5>
+      </div>
+      <mat-form-field class="project-selector">
+        <mat-select [(value)]="selectedProject" placeholder="Project" #projectSelectorRef (selectionChange)="projectSelectorChange()">
+          <ng-container>
+            <mat-option *ngFor="let project of projects" [value]="project">
+              <span>{{project.name}}</span>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button *ngIf="projectAvailable" (click)="openIssueDialog()"
+            color="accent" class="button-action">
+      <mat-icon>post_add</mat-icon>
+      <span *ngIf="expanded">New task</span>
+    </button>
+
+    <div class="spacer"></div>
+    <mat-divider></mat-divider>
+    <div class="spacer"></div>
+
+    <mat-nav-list role="navigation">
+      <mat-list-item routerLink="/main/projects/" routerLinkActive="active">
+        <mat-icon mat-list-icon>library_books</mat-icon>
+        <div *ngIf="expanded">Projects</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/backlog" routerLinkActive="active" *ngIf="projectAvailable">
+        <mat-icon mat-list-icon>view_agenda</mat-icon>
+        <div *ngIf="expanded">Backlog</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/board" routerLinkActive="active" *ngIf="projectAvailable">
+        <mat-icon mat-list-icon>view_kanban_outline</mat-icon>
+        <div *ngIf="expanded">Board</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/tasks/" routerLinkActive="active" *ngIf="projectAvailable">
+        <mat-icon mat-list-icon>view_list</mat-icon>
+        <div *ngIf="expanded">Task list</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/reports" routerLinkActive="active" *ngIf="projectAvailable">
+        <mat-icon mat-list-icon>ssid_chart</mat-icon>
+        <div *ngIf="expanded">Reports</div>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <div class="spacer"></div>
+    <mat-divider></mat-divider>
+    <div class="spacer"></div>
+
+    <mat-nav-list role="navigation">
+      <mat-list-item routerLink="/main/issues" routerLinkActive="active" *ngIf="projectAvailable">
+        <mat-icon mat-list-icon>bug_report</mat-icon>
+        <div *ngIf="expanded">Issues</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/customer-drafts" routerLinkActive="active" *ngIf="projectAvailable">
+        <mat-icon mat-list-icon>feedback</mat-icon>
+        <div *ngIf="expanded">Feedback</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/main/test" routerLinkActive="active" *ngIf="isAdmin()">
+        <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+        <div *ngIf="expanded">Admin panel</div>
+      </mat-list-item>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar">
+      <button mat-icon-button *ngIf="isHandset$ | async" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="toolbar-content">
+        <mat-form-field class="mat-form-field-infix">
+          <input matInput placeholder="Search" [formControl]="searchControl" [matAutocomplete]="auto"/>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              <span>{{option}}</span>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+
+        <bs-language-toggle></bs-language-toggle>
+
+        <img src="https://avatars.dicebear.com/api/initials/{{userContext.firstName + '-' + userContext.lastName}}.svg?r=10&size=40" alt="">
+        <div>{{userContext.username}}</div>
+
+        <button mat-icon-button>
+          <mat-icon class="logout" routerLink="/auth/sign-in">logout</mat-icon>
+        </button>
+      </div>
+
+    </mat-toolbar>
+    <ng-content class="scrollable-content"></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

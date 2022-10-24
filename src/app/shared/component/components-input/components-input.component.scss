@@ -1,0 +1,16 @@
+@import "themes/light";
+
+mat-form-field {
+  width: 100%;
+
+  mat-chip {
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .mat-form-field-infix {
+    padding: 5px;
+  }
+}

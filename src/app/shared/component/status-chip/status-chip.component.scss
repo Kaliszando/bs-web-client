@@ -1,0 +1,25 @@
+div {
+
+  width: max-content;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+
+  .other {
+    background-color: #eaeaea;
+    color: #545454;
+    padding: 0 10px;
+  }
+
+  .in-progress {
+    background-color: #c5e3ff;
+    color: #114f8c;
+    padding: 0 10px;
+  }
+
+  .done {
+    background-color: #9bfa9b;
+    color: #005600;
+    padding: 0 10px;
+  }
+}

@@ -1,0 +1,77 @@
+<section>
+  <div mat-dialog-title class="dialog-title">
+    <h2 class="mat-display-2">Issue details</h2>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close="" tabindex="-1">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-content class="content">
+    <mat-grid-list cols="2" gutterSize="20" rowHeight="63" class="essential-data-form">
+      <mat-grid-tile>
+        <bs-project-selector class="external-form-field" [(dataModel)]="dataModel"></bs-project-selector>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <bs-issue-type-selector class="external-form-field" [(dataModel)]="dataModel"></bs-issue-type-selector>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Issue name</mat-label>
+          <input matInput required="true" [(ngModel)]="dataModel.name">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <bs-issue-severity-selector class="external-form-field" [(dataModel)]="dataModel"></bs-issue-severity-selector>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="full-span-container">
+      <mat-form-field class="external-form-field">
+        <mat-label>Summary</mat-label>
+        <input matInput [(ngModel)]="dataModel.summary">
+      </mat-form-field>
+
+      <bs-labels-input class="external-form-field" [(dataModel)]="dataModel"></bs-labels-input>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput cdkTextareaAutosize [(ngModel)]="dataModel.description"
+                placeholder="Full issue description"></textarea>
+    </mat-form-field>
+
+    <mat-divider class="divider-top"></mat-divider>
+
+
+    <div class="additional-section">
+      <section *ngIf="expanded">
+        <bs-parent-epic-select [(dataModel)]="dataModel"></bs-parent-epic-select>
+        <bs-code-version-select [(dataModel)]="dataModel"></bs-code-version-select>
+        <bs-components-input [(dataModel)]="dataModel"></bs-components-input>
+        <bs-user-select [(dataModel)]="dataModel"></bs-user-select>
+        <bs-backlog-list-select [(dataModel)]="dataModel"></bs-backlog-list-select>
+        <bs-file-attachment-select [(dataModel)]="dataModel"></bs-file-attachment-select>
+      </section>
+      <button mat-button (click)="expanded = !expanded" color="accent" class="button-action">
+        <ng-container *ngIf="expanded">
+          <span>Show less</span>
+          <mat-icon>expand_less</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="!expanded">
+          <span>Show more</span>
+          <mat-icon>expand_more</mat-icon>
+        </ng-container>
+      </button>
+    </div>
+
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-flat-button (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onCreateIssue()" [disabled]="!isFormValid()">Save issue</button>
+  </div>
+</section>

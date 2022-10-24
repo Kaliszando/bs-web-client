@@ -1,0 +1,11 @@
+@import "abstracts/variables";
+
+.name-row {
+  display: flex;
+  justify-content: space-between;
+  column-gap: $col-gap;
+
+  mat-form-field {
+    width: 100%;
+  }
+}

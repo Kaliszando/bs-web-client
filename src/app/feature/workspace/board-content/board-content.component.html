@@ -1,0 +1,12 @@
+<section class="header-section">
+  <div class="mat-display-2 page-title">Kanban board</div>
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" color="primary">
+    <a mat-tab-link routerLink="/main/board/kanban" [active]="router.url === '/main/board/kanban'">Kanban</a>
+    <a mat-tab-link routerLink="/main/board/config" [active]="router.url === '/main/board/config'">Settings</a>
+  </nav>
+</section>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>
