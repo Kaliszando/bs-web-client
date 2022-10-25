@@ -21,9 +21,13 @@ export class StoreService {
 
   userContext$: ReplaySubject<UserInfoDto> = new ReplaySubject<UserInfoDto>(1)
 
-  issuesReloaded$: ReplaySubject<void> = new ReplaySubject<void>(1)
+  private issuesReloaded$: ReplaySubject<void> = new ReplaySubject<void>(1)
 
   private currentProject$: BehaviorSubject<ProjectInfoDto> = new BehaviorSubject<ProjectInfoDto>({} as ProjectInfoDto);
+
+  public getIssuesReloaded$(): Observable<void> {
+    return this.issuesReloaded$.asObservable();
+  }
 
   public getCurrentProject$(): Observable<ProjectInfoDto> {
     return this.currentProject$.asObservable();

@@ -20,7 +20,7 @@ export class BacklogListComponent implements OnInit {
               private store: StoreService) { }
 
   ngOnInit(): void {
-    this.store.issuesReloaded$.subscribe(() => {
+    this.store.getIssuesReloaded$().subscribe(() => {
         this.updateIssues()
       }
     )
