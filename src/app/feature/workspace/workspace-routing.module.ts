@@ -10,7 +10,6 @@ import { ProjectsContentComponent } from "./projects-content/projects-content.co
 import { ProjectListComponent } from "./projects-content/project-list/project-list.component";
 import { ProjectConfigComponent } from "./projects-content/project-config/project-config.component";
 import { AuthorizedGuard } from "../../core/guard/authorized.guard";
-import { ProjectsInfoResolver } from "../../core/resolver/projects-info.resolver";
 import { TasksListComponent } from "./tasks-content/tasks-list/tasks-list.component";
 import { TasksConfigComponent } from "./tasks-content/tasks-config/tasks-config.component";
 import { BacklogListComponent } from "./backlog-content/backlog-list/backlog-list.component";
@@ -25,9 +24,9 @@ import { TaskDetailsViewGuard } from "../../core/guard/task-details-view.guard";
 import { ReportsSummaryComponent } from "./reports/reports-summary/reports-summary.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'projects' },
+  { path: '', redirectTo: 'backlog' },
   { path: '', component: WorkspaceComponent, canActivate: [AuthorizedGuard],
-    resolve: { context: InitContextResolver, projects: ProjectsInfoResolver },
+    resolve: { context: InitContextResolver },
     children: [
       { path: 'tasks', component: TasksContentComponent,
         children: [
@@ -52,7 +51,6 @@ const routes: Routes = [
         ]
       },
       { path: 'projects', component: ProjectsContentComponent,
-        resolve: { projects: ProjectsInfoResolver },
         children: [
           { path: 'list', component: ProjectListComponent },
           { path: 'config', component: ProjectConfigComponent },

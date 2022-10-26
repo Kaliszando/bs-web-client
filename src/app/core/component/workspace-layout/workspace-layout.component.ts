@@ -34,6 +34,7 @@ export class WorkspaceLayoutComponent {
               private issueEndpoint: IssueEndpointService) {}
 
   ngOnInit() {
+    this.store.reloadProjects();
 
     this.store.userContext$.subscribe(context => {
       this.userContext = context

@@ -14,7 +14,6 @@ export class WorkspaceComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ context }) => {
       this.store.userContext$.next(context)
-      this.store.reloadProjects()
     })
   }
 }
