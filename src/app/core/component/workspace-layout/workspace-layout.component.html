@@ -3,7 +3,6 @@
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)">
 
-
     <img class="app-logo" src="/assets/img/favicon-32x32.png" alt="" (click)="toggleExpand()">
     <span *ngIf="expanded" class="app-name-container" (click)="toggleExpand()">
       <span class="name-1">Bug</span>
@@ -21,7 +20,7 @@
         <h5 class="mat-body-1" *ngIf="expanded">{{selectedProject.tag}}</h5>
       </div>
       <mat-form-field class="project-selector">
-        <mat-select [(value)]="selectedProject" placeholder="Project" #projectSelectorRef (selectionChange)="projectSelectorChange()">
+        <mat-select [(value)]="selectedProject" placeholder="Project" #projectSelectorRef (valueChange)="projectSelectorChange()">
           <ng-container>
             <mat-option *ngFor="let project of projects" [value]="project">
               <span>{{project.name}}</span>

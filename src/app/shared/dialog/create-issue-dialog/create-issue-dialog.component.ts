@@ -24,7 +24,7 @@ export class CreateIssueDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.selectedProject$.subscribe({
+    this.store.getSelectedProject$().subscribe({
       next: selected => this.selectedProject = selected
     })
     this.store.availableProjects$.subscribe({

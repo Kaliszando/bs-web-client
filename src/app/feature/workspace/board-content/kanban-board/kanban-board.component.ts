@@ -30,8 +30,9 @@ export class KanbanBoardComponent implements OnInit {
   }
 
   updateIssues() {
-    if (this.store.selectedProjectValue.id) {
-      this.issueEndpoint.getAllIssuesByProjectId({projectId: this.store.selectedProjectValue.id}).subscribe(
+    const project = this.store.getSelectedProjectValue();
+    if (project && project.id) {
+      this.issueEndpoint.getAllIssuesByProjectId({ projectId: project.id }).subscribe(
         issues => {
           this.issues = issues
           this.toDo = this.prepareIssues('to do');

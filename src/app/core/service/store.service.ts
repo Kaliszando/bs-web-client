@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from "rxjs";
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
 import { UserInfoDto } from "../../api/models/user-info-dto";
 import { ProjectInfoDto } from "../../api/models/project-info-dto";
 import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
@@ -9,34 +9,45 @@ import { ProjectEndpointService } from "../../api/services/project-endpoint.serv
 })
 export class StoreService {
 
-  sessionToken$: ReplaySubject<string> = new ReplaySubject<string>(1)
+  sessionToken$: Subject<string> = new ReplaySubject<string>(1)
 
-  isAuthorized$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1)
+  isAuthorized$: Subject<boolean> = new ReplaySubject<boolean>(1)
 
-  selectedProject$: ReplaySubject<ProjectInfoDto> = new ReplaySubject<ProjectInfoDto>(1)
+  availableProjects$: Subject<ProjectInfoDto[]> = new ReplaySubject<ProjectInfoDto[]>(1)
 
-  selectedProjectValue: ProjectInfoDto = {} as ProjectInfoDto
+  userContext$: Subject<UserInfoDto> = new ReplaySubject<UserInfoDto>(1)
 
-  availableProjects$: ReplaySubject<ProjectInfoDto[]> = new ReplaySubject<ProjectInfoDto[]>(1)
+  private selectedProject$: BehaviorSubject<ProjectInfoDto> = new BehaviorSubject<ProjectInfoDto>({} as ProjectInfoDto)
 
-  userContext$: ReplaySubject<UserInfoDto> = new ReplaySubject<UserInfoDto>(1)
+  private selectedProjectValue: ProjectInfoDto = {} as ProjectInfoDto
 
   private issuesReloaded$: ReplaySubject<void> = new ReplaySubject<void>(1)
 
   constructor(private projectEndpoint: ProjectEndpointService) {
-    this.issuesReloadedUpdate()
+    this.emitIssuesReloaded()
   }
 
   public getIssuesReloaded$(): Observable<void> {
     return this.issuesReloaded$.asObservable();
   }
 
-  public issuesReloadedUpdate() {
+  public emitIssuesReloaded() {
     this.issuesReloaded$.next()
   }
 
-  setSessionToken(token: string | null) {
+  public getSelectedProjectValue(): ProjectInfoDto {
+    return this.selectedProject$.value;
+  }
 
+  public getSelectedProject$(): Observable<ProjectInfoDto> {
+    return this.selectedProject$.asObservable();
+  }
+
+  public emitSelectedProject(project: ProjectInfoDto) {
+    this.selectedProject$.next(project)
+  }
+
+  setSessionToken(token: string | null) {
     if (token != null) {
       this.sessionToken$.next(token)
       this.isAuthorized$.next(true)
@@ -49,7 +60,7 @@ export class StoreService {
         this.availableProjects$.next(newProjects)
         this.selectedProject$.next(newProjects[0])
         this.selectedProjectValue = newProjects[0]
-        this.issuesReloadedUpdate()
+        this.emitIssuesReloaded()
       }
     )
   }

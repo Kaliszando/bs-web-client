@@ -40,9 +40,9 @@ export class WorkspaceLayoutComponent {
       this.userContext = context
     })
 
-    this.store.selectedProject$.subscribe(selectedProject => {
+    this.store.getSelectedProject$().subscribe(selectedProject => {
       this.selectedProject = selectedProject;
-      this.store.issuesReloadedUpdate()
+      this.store.emitIssuesReloaded()
     })
 
     this.store.availableProjects$.subscribe(projects => {
@@ -77,9 +77,7 @@ export class WorkspaceLayoutComponent {
   }
 
   updateProjectState() {
-    this.store.selectedProject$.next(this.selectedProject)
-    this.store.selectedProjectValue = this.selectedProject
-    this.store.issuesReloadedUpdate()
+    this.store.emitSelectedProject(this.selectedProject)
   }
 
   projectSelectorChange() {
@@ -102,7 +100,7 @@ export class WorkspaceLayoutComponent {
           body: data
         }).subscribe(
           () => {
-            this.store.issuesReloadedUpdate()
+            this.store.emitIssuesReloaded()
           }
         )
        }

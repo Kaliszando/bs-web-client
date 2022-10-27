@@ -29,7 +29,7 @@ export class TasksListComponent implements OnInit {
   }
 
   updateIssues() {
-    this.store.selectedProject$.subscribe(project => {
+    this.store.getSelectedProject$().subscribe(project => {
       if (project.id) {
         this.issueEndpoint.getAllIssuesByProjectId({ projectId: project.id })
           .subscribe(issues => {

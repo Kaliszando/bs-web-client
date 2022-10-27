@@ -19,7 +19,7 @@ export class TestContentComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ userContext }) => {
       this.userContext = userContext
     })
-    this.store.selectedProject$.subscribe(project => {
+    this.store.getSelectedProject$().subscribe(project => {
       this.project = project
     })
   }

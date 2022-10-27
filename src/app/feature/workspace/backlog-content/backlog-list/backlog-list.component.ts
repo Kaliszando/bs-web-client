@@ -27,8 +27,9 @@ export class BacklogListComponent implements OnInit {
   }
 
   updateIssues() {
-    if (this.store.selectedProjectValue.id) {
-      this.issueEndpoint.getAllIssuesByProjectId({projectId: this.store.selectedProjectValue.id}).subscribe(
+    const project = this.store.getSelectedProjectValue();
+    if (project && project.id) {
+      this.issueEndpoint.getAllIssuesByProjectId({ projectId: project.id }).subscribe(
         issues => {
               this.active = issues.filter(issue => issue.backlogList === "active")
               this.inactive = issues.filter(issue => issue.backlogList !== "active")
