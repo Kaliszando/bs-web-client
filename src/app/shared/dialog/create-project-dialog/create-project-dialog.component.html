@@ -58,7 +58,7 @@
         <ng-template #usersOptions>
           <mat-option *ngFor="let user of filteredUsers" (click)="onSelectedUser(user); userQueryInput.value=''">
             <div class="user-options">
-              <img src="https://avatars.dicebear.com/api/initials/{{user.firstName + '-' + user.lastName}}.svg?r=15&size=20" alt="">
+              <img src="https://api.dicebear.com/7.x/thumbs/svg?radius=15&size=20&seed={{user.firstName + '-' + user.lastName}}" alt="">
               <div>{{user.username}}</div>
               <div>{{user.firstName}}</div>
               <div>{{user.lastName}}</div>

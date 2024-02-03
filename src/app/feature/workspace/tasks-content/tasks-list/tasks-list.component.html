@@ -77,8 +77,7 @@
       <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
       <div class="avatar">
-        <img *ngIf="issue.assignee"
-             src="https://avatars.dicebear.com/api/initials/{{issue.assignee.firstName + '-' + issue.assignee.lastName}}.svg?r=10&size=25" alt="">
+        <img *ngIf="issue.assignee" src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=25&seed={{issue.assignee.firstName + '-' + issue.assignee.lastName}}" alt="">
       </div>
       <bs-status-chip class="status" [status]="issue.status"></bs-status-chip>
       <div class="title">{{issue.name}}</div>
