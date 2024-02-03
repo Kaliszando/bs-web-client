@@ -22,7 +22,7 @@
   <mat-expansion-panel [class.mat-elevation-z0]="true" *ngFor="let project of projectsList" >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <img src="https://avatars.dicebear.com/api/bottts/{{project.name}}.svg?size=70" alt="">
+        <img src="https://api.dicebear.com/7.x/bottts/svg?seed={{project.name}}&size=70" alt="">
         <p>{{this.project.name}}</p>
         <p>{{this.project.tag}}</p>
       </mat-panel-title>

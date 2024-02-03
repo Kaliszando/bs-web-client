@@ -25,7 +25,7 @@
       <div class="flex-row">
         <div class="icon-avatar">
           <img *ngIf="issue.assignee"
-               src="https://avatars.dicebear.com/api/initials/{{issue.assignee.firstName + '-' + issue.assignee.lastName}}.svg?r=10&size=25" alt="">
+               src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=25&seed={{issue.assignee.firstName + '-' + issue.assignee.lastName}}" alt="">
         </div>
         <h2 class="over-me">{{issue.name}}</h2>
       </div>
