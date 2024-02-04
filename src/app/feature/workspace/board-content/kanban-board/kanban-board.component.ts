@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
 import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
+import { IssuePartialUpdate } from "../../../../api/models/issue-partial-update";
 import { IssueEndpointService } from "../../../../api/services/issue-endpoint.service";
 import { StoreService } from "../../../../core/service/store.service";
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { IssuePartialUpdate } from "../../../../api/models/issue-partial-update";
 
 @Component({
   selector: 'bs-kanban-board',
   templateUrl: './kanban-board.component.html',
   styleUrls: ['./kanban-board.component.scss']
 })
-export class KanbanBoardComponent implements OnInit {
+export class KanbanBoardComponent implements OnInit, OnDestroy {
 
   issues: IssueInfoDto[] = {} as IssueInfoDto[]
   toDo: IssueInfoDto[] = {} as IssueInfoDto[]
@@ -19,20 +20,27 @@ export class KanbanBoardComponent implements OnInit {
   done: IssueInfoDto[] = {} as IssueInfoDto[]
   columns: string[] = ['to do', 'in progress', 'testing', 'done'];
 
+  private projectSubscription!: Subscription;
+
   constructor(private issueEndpoint: IssueEndpointService,
-              private store: StoreService) { }
+              private store: StoreService) {
+  }
 
   ngOnInit(): void {
-    this.store.getIssuesReloaded$().subscribe(() => {
+    this.projectSubscription = this.store.selectedProject$.subscribe(() => {
         this.updateIssues()
       }
     )
   }
 
+  ngOnDestroy(): void {
+    this.projectSubscription.unsubscribe();
+  }
+
   updateIssues() {
     const project = this.store.getSelectedProjectValue();
     if (project && project.id) {
-      this.issueEndpoint.getAllIssuesByProjectId({ projectId: project.id }).subscribe(
+      this.issueEndpoint.getAllIssuesByProjectId({projectId: project.id}).subscribe(
         issues => {
           this.issues = issues
           this.toDo = this.prepareIssues('to do');
@@ -69,8 +77,10 @@ export class KanbanBoardComponent implements OnInit {
       const updated = event.container.data.find(issue => issue.status !== newStatus);
       if (updated && updated.tagId) {
         this.issueEndpoint
-          .partialIssueUpdate({ body: {
-            tagId: updated.tagId, status: newStatus } as IssuePartialUpdate
+          .partialIssueUpdate({
+            body: {
+              tagId: updated.tagId, status: newStatus
+            } as IssuePartialUpdate
           })
           .subscribe();
       }

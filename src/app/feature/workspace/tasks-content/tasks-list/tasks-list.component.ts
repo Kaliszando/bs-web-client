@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
 import { IssueEndpointService } from "../../../../api/services/issue-endpoint.service";
 import { StoreService } from "../../../../core/service/store.service";
-import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
 import { ListFilter } from "./filter/list-filter";
 
 @Component({
@@ -9,37 +10,42 @@ import { ListFilter } from "./filter/list-filter";
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss']
 })
-export class TasksListComponent implements OnInit {
+export class TasksListComponent implements OnInit, OnDestroy {
 
   issues: IssueInfoDto[] = {} as IssueInfoDto[]
   paged: IssueInfoDto[] = {} as IssueInfoDto[]
-  filter: ListFilter = {} as ListFilter;
+  filter: ListFilter = {query: ''} as ListFilter;
   noIssues = true
   expanded: boolean = false
   statuses: string[] = ['None', 'to do', 'in progress', 'done', 'testing']
 
+  private projectSubscription!: Subscription;
+
   constructor(private issueEndpoint: IssueEndpointService,
-              private store: StoreService) { }
+              private store: StoreService) {
+  }
 
   ngOnInit(): void {
-    this.store.getIssuesReloaded$().subscribe(() =>
+    this.projectSubscription = this.store.selectedProject$.subscribe(() =>
       this.updateIssues()
     )
-    this.filter.query = '';
+  }
+
+  ngOnDestroy(): void {
+    this.projectSubscription.unsubscribe();
   }
 
   updateIssues() {
-    this.store.getSelectedProject$().subscribe(project => {
-      if (project.id) {
-        this.issueEndpoint.getAllIssuesByProjectId({ projectId: project.id })
-          .subscribe(issues => {
-            this.issues = issues
-            this.noIssues = false
-            this.paged = issues;
-            this.filterChange()
-          })
-      }
-    })
+    const project = this.store.getSelectedProjectValue();
+    if (project && project.id) {
+      this.issueEndpoint.getAllIssuesByProjectId({projectId: project.id})
+      .subscribe(issues => {
+        this.issues = issues
+        this.noIssues = false
+        this.paged = issues;
+        this.filterChange()
+      })
+    }
   }
 
   removeIssue(removedIssue: IssueInfoDto) {

@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
-import { Observable, startWith } from "rxjs";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { map, shareReplay } from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { StoreService } from "../../service/store.service";
-import { UserInfoDto } from "../../../api/models/user-info-dto";
-import { ProjectInfoDto } from "../../../api/models/project-info-dto";
 import { MatDialog } from "@angular/material/dialog";
-import { CreateIssueDialogComponent } from "../../../shared/dialog/create-issue-dialog/create-issue-dialog.component";
+import { Observable, startWith } from "rxjs";
+import { map, shareReplay } from "rxjs/operators";
 import { IssueDetailsDto } from "../../../api/models";
+import { ProjectInfoDto } from "../../../api/models/project-info-dto";
+import { UserInfoDto } from "../../../api/models/user-info-dto";
 import { IssueEndpointService } from "../../../api/services/issue-endpoint.service";
+import { CreateIssueDialogComponent } from "../../../shared/dialog/create-issue-dialog/create-issue-dialog.component";
+import { StoreService } from "../../service/store.service";
 
 @Component({
   selector: 'bs-workspace-layout',
   templateUrl: './workspace-layout.component.html',
   styleUrls: ['./workspace-layout.component.scss'],
 })
-export class WorkspaceLayoutComponent {
+export class WorkspaceLayoutComponent implements OnInit {
 
   userContext: UserInfoDto = <UserInfoDto>{};
   selectedProject: ProjectInfoDto = <ProjectInfoDto>{};
@@ -31,7 +31,8 @@ export class WorkspaceLayoutComponent {
   constructor(private breakpointObserver: BreakpointObserver,
               private store: StoreService,
               private dialog: MatDialog,
-              private issueEndpoint: IssueEndpointService) {}
+              private issueEndpoint: IssueEndpointService) {
+  }
 
   ngOnInit() {
     this.store.reloadProjects();
@@ -42,7 +43,6 @@ export class WorkspaceLayoutComponent {
 
     this.store.getSelectedProject$().subscribe(selectedProject => {
       this.selectedProject = selectedProject;
-      this.store.emitIssuesReloaded()
     })
 
     this.store.availableProjects$.subscribe(projects => {
@@ -54,14 +54,14 @@ export class WorkspaceLayoutComponent {
       startWith(''),
       map(value => this._filter(value || '')),
     );
-    this.searchOptions = ['option1','option2','option3','option4','option1','option2','option3','option4','option1','option2','option3','option4']
+    this.searchOptions = ['option1', 'option2', 'option3', 'option4', 'option1', 'option2', 'option3', 'option4', 'option1', 'option2', 'option3', 'option4']
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
 
   _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -95,15 +95,16 @@ export class WorkspaceLayoutComponent {
     });
 
     dialogRef.afterClosed().subscribe(
-      data => { if (data) {
-        this.issueEndpoint.createIssue({
-          body: data
-        }).subscribe(
-          () => {
-            this.store.emitIssuesReloaded()
-          }
-        )
-       }
+      data => {
+        if (data) {
+          this.issueEndpoint.createIssue({
+            body: data
+          }).subscribe(
+            () => {
+              this.store.emitIssuesReloaded()
+            }
+          )
+        }
       })
   }
 }

@@ -1,38 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
 import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
+import { IssuePartialUpdate } from "../../../../api/models/issue-partial-update";
 import { IssueEndpointService } from "../../../../api/services/issue-endpoint.service";
 import { StoreService } from "../../../../core/service/store.service";
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { IssuePartialUpdate } from "../../../../api/models/issue-partial-update";
 
 @Component({
   selector: 'bs-backlog-list',
   templateUrl: './backlog-list.component.html',
   styleUrls: ['./backlog-list.component.scss']
 })
-export class BacklogListComponent implements OnInit {
+export class BacklogListComponent implements OnInit, OnDestroy {
 
   issues: IssueInfoDto[] = []
   active: IssueInfoDto[] = []
   inactive: IssueInfoDto[] = []
 
+  private projectSubscription!: Subscription;
+
   constructor(private issueEndpoint: IssueEndpointService,
-              private store: StoreService) { }
+              private store: StoreService) {
+  }
 
   ngOnInit(): void {
-    this.store.getIssuesReloaded$().subscribe(() => {
-        this.updateIssues()
-      }
-    )
+    this.projectSubscription = this.store.selectedProject$.subscribe(() => {
+      this.updateIssues()
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.projectSubscription.unsubscribe();
   }
 
   updateIssues() {
     const project = this.store.getSelectedProjectValue();
     if (project && project.id) {
-      this.issueEndpoint.getAllIssuesByProjectId({ projectId: project.id }).subscribe(
+      this.issueEndpoint.getAllIssuesByProjectId({projectId: project.id}).subscribe(
         issues => {
-              this.active = issues.filter(issue => issue.backlogList === "active")
-              this.inactive = issues.filter(issue => issue.backlogList !== "active")
+          this.active = issues.filter(issue => issue.backlogList === "active")
+          this.inactive = issues.filter(issue => issue.backlogList !== "active")
         }
       )
     }
@@ -51,7 +58,7 @@ export class BacklogListComponent implements OnInit {
       const updated = event.container.data.find(issue => issue.backlogList !== newBacklogList);
       if (updated && updated.tagId) {
         this.issueEndpoint
-          .partialIssueUpdate({ body: { tagId: updated.tagId, backlog: newBacklogList } as IssuePartialUpdate })
+          .partialIssueUpdate({body: {tagId: updated.tagId, backlog: newBacklogList} as IssuePartialUpdate})
           .subscribe();
       }
     }
