@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import {
   CreateProjectDialogComponent
-} from "../../../../shared/dialog/create-project-dialog/create-project-dialog.component";
+} from "../../../../common/dialog/create-project-dialog/create-project-dialog.component";
 import { StoreService } from "../../../../core/service/store.service";
 import { ProjectInfoDto } from "../../../../api/models/project-info-dto";
 

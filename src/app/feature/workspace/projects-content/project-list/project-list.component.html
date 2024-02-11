@@ -19,16 +19,18 @@
     </button>
   </div>
 
-  <mat-expansion-panel [class.mat-elevation-z0]="true" *ngFor="let project of projectsList" >
+  <mat-expansion-panel [class.mat-elevation-z0]="true" *ngFor="let project of projectsList">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <img src="https://api.dicebear.com/7.x/bottts/svg?seed={{project.name}}&size=70" alt="">
-        <p>{{this.project.name}}</p>
-        <p>{{this.project.tag}}</p>
+        <bs-avatar [style]="'bottts'"
+                   [seed]="project.name"
+                   [size]="70"></bs-avatar>
+        <p>{{ this.project.name }}</p>
+        <p>{{ this.project.tag }}</p>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <b>Description</b>
-    <p>{{this.project.description}}</p>
+    <p>{{ this.project.description }}</p>
   </mat-expansion-panel>
 </div>
 

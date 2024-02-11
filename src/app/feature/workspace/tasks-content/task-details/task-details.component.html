@@ -38,13 +38,21 @@
 
         <div class="heading-font">Reporter</div>
         <div class="avatar-container">
-          <img *ngIf="issue.reporter" src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=25&seed={{issue.reporter.firstName + '-' + issue.reporter.lastName}}" alt="">
+          <bs-avatar *ngIf="issue.reporter"
+                     [style]="'initials'"
+                     [seed]="issue.reporter.firstName?.charAt(0) + '' + issue.reporter.lastName?.charAt(0)"
+                     [radius]="10"
+                     [size]="25"></bs-avatar>
         </div>
         <div class="content-font" *ngIf="issue.reporter">{{issue.reporter.username}}</div>
 
         <div class="heading-font">Assignee</div>
         <div class="avatar-container">
-          <img *ngIf="issue.assignee" src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=25&seed={{issue.assignee.firstName + '-' + issue.assignee.lastName}}" alt="">
+          <bs-avatar *ngIf="issue.assignee"
+                     [style]="'initials'"
+                     [seed]="issue.assignee.firstName?.charAt(0) + '' + issue.assignee.lastName?.charAt(0)"
+                     [radius]="10"
+                     [size]="25"></bs-avatar>
         </div>
         <div class="content-font">
           <ng-container *ngIf="issue.assignee">{{issue.assignee.username}}</ng-container>

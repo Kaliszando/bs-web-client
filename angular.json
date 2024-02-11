@@ -118,5 +118,8 @@
       }
     }
   },
-  "defaultProject": "bs-web-client"
+  "defaultProject": "bs-web-client",
+  "cli": {
+    "analytics": false
+  }
 }

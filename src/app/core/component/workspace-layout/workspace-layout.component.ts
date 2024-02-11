@@ -8,7 +8,7 @@ import { IssueDetailsDto } from "../../../api/models";
 import { ProjectInfoDto } from "../../../api/models/project-info-dto";
 import { UserInfoDto } from "../../../api/models/user-info-dto";
 import { IssueEndpointService } from "../../../api/services/issue-endpoint.service";
-import { CreateIssueDialogComponent } from "../../../shared/dialog/create-issue-dialog/create-issue-dialog.component";
+import { CreateIssueDialogComponent } from "../../../common/dialog/create-issue-dialog/create-issue-dialog.component";
 import { StoreService } from "../../service/store.service";
 
 @Component({

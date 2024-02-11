@@ -41,27 +41,30 @@
         <mat-chip
           *ngFor="let username of chipsUsernames"
           (removed)="removeUserFromChips(username)">
-          {{username}}
+          {{ username }}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
           </button>
         </mat-chip>
-      <input type="text" placeholder="Search for users" matInput #userQueryInput
-             [formControl]="usersQueryForm"
-             [matAutocomplete]="auto"
-             [matChipInputFor]="chipList">
+        <input type="text" placeholder="Search for users" matInput #userQueryInput
+               [formControl]="usersQueryForm"
+               [matAutocomplete]="auto"
+               [matChipInputFor]="chipList">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngIf="usersLoading; else usersOptions" [disabled]="true" class="usersSpinner">
+        <mat-option *ngIf="usersLoading else usersOptions" [disabled]="true" class="usersSpinner">
           <mat-spinner diameter="20"></mat-spinner>
         </mat-option>
         <ng-template #usersOptions>
           <mat-option *ngFor="let user of filteredUsers" (click)="onSelectedUser(user); userQueryInput.value=''">
             <div class="user-options">
-              <img src="https://api.dicebear.com/7.x/thumbs/svg?radius=15&size=20&seed={{user.firstName + '-' + user.lastName}}" alt="">
-              <div>{{user.username}}</div>
-              <div>{{user.firstName}}</div>
-              <div>{{user.lastName}}</div>
+              <bs-avatar [style]="'initials'"
+                         [seed]="user.firstName?.charAt(0) + '' + user.lastName?.charAt(0)"
+                         [radius]="15"
+                         [size]="30"></bs-avatar>
+              <div>{{ user.username }}</div>
+              <div>{{ user.firstName }}</div>
+              <div>{{ user.lastName }}</div>
             </div>
           </mat-option>
         </ng-template>
@@ -71,6 +74,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-flat-button (click)="onNoClick()">Cancel</button>
-    <button mat-flat-button color="primary" (click)="onCreateProject()" [disabled]="!isFormValid()">Create project</button>
+    <button mat-flat-button color="primary" (click)="onCreateProject()" [disabled]="!isFormValid()">Create project
+    </button>
   </div>
 </section>
