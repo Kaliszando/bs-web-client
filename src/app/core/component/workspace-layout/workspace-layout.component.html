@@ -14,7 +14,9 @@
 
     <div class="project-container">
       <div class="project-info" (click)="projectSelectorRef.open()" *ngIf="projectAvailable">
-        <img src="https://api.dicebear.com/7.x/bottts/svg?seed={{selectedProject.name}}&size=50" alt="">
+        <bs-avatar [style]="'bottts'"
+                   [seed]="selectedProject.name"
+                   [size]="50"></bs-avatar>
         <h2 *ngIf="expanded">{{selectedProject.name}}</h2>
         <mat-icon *ngIf="expanded">expand_more</mat-icon>
         <h5 class="mat-body-1" *ngIf="expanded">{{selectedProject.tag}}</h5>
@@ -101,7 +103,10 @@
 
         <bs-language-toggle></bs-language-toggle>
 
-        <img src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=40&seed={{userContext.firstName + '-' + userContext.lastName}}" alt="">
+        <bs-avatar [style]="'initials'"
+                   [seed]="userContext.firstName?.charAt(0) + '' + userContext.lastName?.charAt(0)"
+                   [radius]="10"
+                   [size]="40"></bs-avatar>
         <div>{{userContext.username}}</div>
 
         <button mat-icon-button>

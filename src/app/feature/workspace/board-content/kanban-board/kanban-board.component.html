@@ -12,25 +12,26 @@
        (cdkDropListDropped)="drop($event, column)">
     <span class="column-header">
       <bs-status-chip [status]="column"></bs-status-chip>
-      <span>{{getListByColumnName(column).length}}</span>
+      <span>{{ getListByColumnName(column).length }}</span>
     </span>
     <div class="issue-card example-box" *ngFor="let issue of getListByColumnName(column)" cdkDrag>
       <div class="flex-row">
         <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
         <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
-        <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
+        <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{ issue.tagId }}</a>
         <bs-epic-label [epicName]="issue.epicName"></bs-epic-label>
         <mat-icon>more_vert</mat-icon>
       </div>
       <div class="flex-row">
-        <div class="icon-avatar">
-          <img *ngIf="issue.assignee"
-               src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=25&seed={{issue.assignee.firstName + '-' + issue.assignee.lastName}}" alt="">
-        </div>
-        <h2 class="over-me">{{issue.name}}</h2>
+        <bs-avatar *ngIf="issue.assignee"
+                   [style]="'initials'"
+                   [seed]="issue.assignee.firstName?.charAt(0) + '' + issue.assignee.lastName?.charAt(0)"
+                   [radius]="10"
+                   [size]="25"></bs-avatar>
+        <h2 class="over-me">{{ issue.name }}</h2>
       </div>
       <div class="flex-row" *ngIf="issue.summary">
-        <div class="summary">{{issue.summary}}</div>
+        <div class="summary">{{ issue.summary }}</div>
       </div>
     </div>
   </div>

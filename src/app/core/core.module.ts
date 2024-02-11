@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatRippleModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from "../common/shared.module";
 
 
 @NgModule({

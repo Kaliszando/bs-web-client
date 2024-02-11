@@ -42,6 +42,7 @@ mat-spinner {
 .user-options {
   display: flex;
   column-gap: 20px;
+  align-items: center;
 
   :nth-child(2) {
     font-weight: 600;

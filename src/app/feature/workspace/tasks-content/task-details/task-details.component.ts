@@ -4,7 +4,7 @@ import { IssueEndpointService } from "../../../../api/services/issue-endpoint.se
 import { IssueDetailsDto } from "../../../../api/models/issue-details-dto";
 import {
   CreateIssueDialogComponent
-} from "../../../../shared/dialog/create-issue-dialog/create-issue-dialog.component";
+} from "../../../../common/dialog/create-issue-dialog/create-issue-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { StoreService } from "../../../../core/service/store.service";
 import { MatSnackBar } from "@angular/material/snack-bar";

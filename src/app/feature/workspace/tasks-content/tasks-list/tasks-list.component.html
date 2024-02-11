@@ -76,9 +76,15 @@
       <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
       <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
+
       <div class="avatar">
-        <img *ngIf="issue.assignee" src="https://api.dicebear.com/7.x/thumbs/svg?radius=10&size=25&seed={{issue.assignee.firstName + '-' + issue.assignee.lastName}}" alt="">
+        <bs-avatar *ngIf="issue.assignee"
+                   [style]="'initials'"
+                   [seed]="issue.assignee.firstName?.charAt(0) + '' + issue.assignee.lastName?.charAt(0)"
+                   [radius]="10"
+                   [size]="25"></bs-avatar>
       </div>
+
       <bs-status-chip class="status" [status]="issue.status"></bs-status-chip>
       <div class="title">{{issue.name}}</div>
       <bs-epic-label class="epic" [epicName]="issue.epicName"></bs-epic-label>
