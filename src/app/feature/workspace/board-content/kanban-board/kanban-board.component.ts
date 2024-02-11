@@ -13,11 +13,11 @@ import { StoreService } from "../../../../core/service/store.service";
 })
 export class KanbanBoardComponent implements OnInit, OnDestroy {
 
-  issues: IssueInfoDto[] = {} as IssueInfoDto[]
-  toDo: IssueInfoDto[] = {} as IssueInfoDto[]
-  inProgress: IssueInfoDto[] = {} as IssueInfoDto[]
-  testing: IssueInfoDto[] = {} as IssueInfoDto[]
-  done: IssueInfoDto[] = {} as IssueInfoDto[]
+  issues: IssueInfoDto[] = [] as IssueInfoDto[]
+  toDo: IssueInfoDto[] = [] as IssueInfoDto[]
+  inProgress: IssueInfoDto[] = [] as IssueInfoDto[]
+  testing: IssueInfoDto[] = [] as IssueInfoDto[]
+  done: IssueInfoDto[] = [] as IssueInfoDto[]
   columns: string[] = ['to do', 'in progress', 'testing', 'done'];
 
   private projectSubscription!: Subscription;
@@ -52,16 +52,9 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  capitalizeFirst(str: string) {
-    if (str !== undefined && str !== '') {
-      return str.charAt(0).toUpperCase() + str.slice(1)
-    }
-    return
-  }
-
   prepareIssues(columnName: string): IssueInfoDto[] {
     return Object.values(this.issues)
-      .filter(value => value.status === columnName && value.backlogList === 'active')
+    .filter(value => value.status === columnName && value.backlogList === 'active')
   }
 
   drop(event: CdkDragDrop<IssueInfoDto[]>, newStatus: string) {
@@ -77,17 +70,17 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       const updated = event.container.data.find(issue => issue.status !== newStatus);
       if (updated && updated.tagId) {
         this.issueEndpoint
-          .partialIssueUpdate({
-            body: {
-              tagId: updated.tagId, status: newStatus
-            } as IssuePartialUpdate
-          })
-          .subscribe();
+        .partialIssueUpdate({
+          body: {
+            tagId: updated.tagId, status: newStatus
+          } as IssuePartialUpdate
+        })
+        .subscribe();
       }
     }
   }
 
-  getListByColumnName(column: string): any[] {
+  getListByColumnName(column: string): IssueInfoDto[] {
     if (column === 'in progress') return this.inProgress;
     if (column === 'testing') return this.testing;
     if (column === 'done') return this.done;
