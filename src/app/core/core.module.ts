@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatIconModule } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
-import { WorkspaceLayoutComponent } from './component/workspace-layout/workspace-layout.component';
-import { RouterModule } from "@angular/router";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatListModule } from "@angular/material/list";
-import { MatInputModule } from "@angular/material/input";
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatButtonModule } from "@angular/material/button";
 import { MatRippleModule } from "@angular/material/core";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatListModule } from "@angular/material/list";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { RouterModule } from "@angular/router";
 import { SharedModule } from "../common/shared.module";
+import { WorkspaceLayoutComponent } from './component/workspace-layout/workspace-layout.component';
 
 
 @NgModule({
@@ -42,4 +42,5 @@ import { SharedModule } from "../common/shared.module";
     WorkspaceLayoutComponent,
   ],
 })
-export class CoreModule { }
+export class CoreModule {
+}

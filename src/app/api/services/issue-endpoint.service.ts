@@ -11,6 +11,8 @@ import { map, filter } from 'rxjs/operators';
 
 import { IssueDetailsDto } from '../models/issue-details-dto';
 import { IssueInfoDto } from '../models/issue-info-dto';
+import { IssuePageRequest } from '../models/issue-page-request';
+import { IssuePageResponse } from '../models/issue-page-response';
 import { IssuePartialUpdate } from '../models/issue-partial-update';
 
 @Injectable({
@@ -121,6 +123,56 @@ export class IssueEndpointService extends BaseService {
 
     return this.createIssue$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation getIssuePage
+   */
+  static readonly GetIssuePagePath = '/issue/page';
+
+  /**
+   * Returns page of available issues in project
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getIssuePage()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  getIssuePage$Response(params?: {
+    body?: IssuePageRequest
+  }): Observable<StrictHttpResponse<IssuePageResponse>> {
+
+    const rb = new RequestBuilder(this.rootUrl, IssueEndpointService.GetIssuePagePath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<IssuePageResponse>;
+      })
+    );
+  }
+
+  /**
+   * Returns page of available issues in project
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `getIssuePage$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  getIssuePage(params?: {
+    body?: IssuePageRequest
+  }): Observable<IssuePageResponse> {
+
+    return this.getIssuePage$Response(params).pipe(
+      map((r: StrictHttpResponse<IssuePageResponse>) => r.body as IssuePageResponse)
     );
   }
 

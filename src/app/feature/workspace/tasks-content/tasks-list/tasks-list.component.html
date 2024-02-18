@@ -2,34 +2,34 @@
   <mat-form-field class="search-input bs-compact-form-field">
     <mat-label>Filter out by query</mat-label>
     <input matInput placeholder="Query"
-           [(ngModel)]="filter.query" (ngModelChange)="filterChange()">
+           [(ngModel)]="filter.query" (ngModelChange)="onFilterChange()">
   </mat-form-field>
   <bs-issue-type-selector [required]="false" class="filter-input bs-compact-form-field"
                           [(selectedType)]="filter.type"
-                          (selectedTypeChange)="filterChange()"></bs-issue-type-selector>
+                          (selectedTypeChange)="onFilterChange()"></bs-issue-type-selector>
   <bs-issue-severity-selector [required]="false" class="filter-input bs-compact-form-field"
                               [(selectedSeverity)]="filter.severity"
-                              (selectedSeverityChange)="filterChange()"></bs-issue-severity-selector>
+                              (selectedSeverityChange)="onFilterChange()"></bs-issue-severity-selector>
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Status</mat-label>
-    <mat-select [(value)]="filter.status" (valueChange)="filterChange()">
+    <mat-select [(value)]="filter.status" (valueChange)="onFilterChange()">
       <mat-option *ngFor="let status of statuses" [value]="status">
         {{status}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-button (click)="expanded = !expanded" color="accent" class="button-action">
-    <ng-container *ngIf="expanded">
+  <button mat-button (click)="filterExpanded = !filterExpanded" color="accent" class="button-action">
+    <ng-container *ngIf="filterExpanded">
       <span>Hide filters</span>
       <mat-icon>expand_less</mat-icon>
     </ng-container>
-    <ng-container *ngIf="!expanded">
+    <ng-container *ngIf="!filterExpanded">
       <span>More filters</span>
       <mat-icon>expand_more</mat-icon>
     </ng-container>
   </button>
 </div>
-<div class="actions expanded-actions" *ngIf="expanded">
+<div class="actions expanded-actions" *ngIf="filterExpanded">
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Reporter</mat-label>
     <mat-select>
@@ -72,7 +72,7 @@
       <div class="labels">Labels</div>
       <div></div>
     </div>
-    <div *ngFor="let issue of paged" class="table-row">
+    <div *ngFor="let issue of issues" class="table-row">
       <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
       <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
@@ -89,9 +89,14 @@
       <div class="title">{{issue.name}}</div>
       <bs-epic-label class="epic" [epicName]="issue.epicName"></bs-epic-label>
       <bs-labels [labels]="issue.labels"></bs-labels>
-      <mat-icon (click)="removeIssue(issue)">more_vert</mat-icon>
+      <mat-icon>more_vert</mat-icon>
     </div>
-    <mat-paginator [length]="issues.length" [pageSize]="25" [pageSizeOptions]="[25, 50, 100]"
+    <mat-paginator [length]="pager.totalElements"
+                   [pageSize]="pager.pageSize"
+                   [pageSizeOptions]="pager.pageSizes"
+                   [showFirstLastButtons]="true"
+                   [pageIndex]="pager.page"
+                   (page)="onPageChanged($event)"
                    class="bs-compact-form-field">
     </mat-paginator>
   </section>

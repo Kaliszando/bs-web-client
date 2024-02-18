@@ -33,6 +33,13 @@ export class StoreService {
     return this.selectedProject$.value;
   }
 
+  public getSelectedProjectId(): number {
+    if (this.selectedProject$.value.id) {
+      return this.selectedProject$.value.id;
+    }
+    throw new Error("No selected project");
+  }
+
   public getSelectedProject$(): Observable<ProjectInfoDto> {
     return this.selectedProject$.asObservable();
   }
