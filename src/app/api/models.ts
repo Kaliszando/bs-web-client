@@ -1,4 +1,6 @@
 export { BaseDetailsDto } from './models/base-details-dto';
+export { PageRequest } from './models/page-request';
+export { PageData } from './models/page-data';
 export { LoginCredentialsDto } from './models/login-credentials-dto';
 export { UserInfoDto } from './models/user-info-dto';
 export { UserDetailsDto } from './models/user-details-dto';
@@ -11,3 +13,5 @@ export { IssueType } from './models/issue-type';
 export { IssueInfoDto } from './models/issue-info-dto';
 export { IssueDetailsDto } from './models/issue-details-dto';
 export { IssuePartialUpdate } from './models/issue-partial-update';
+export { IssuePageRequest } from './models/issue-page-request';
+export { IssuePageResponse } from './models/issue-page-response';
