@@ -21,40 +21,37 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   columns: string[] = ['to do', 'in progress', 'testing', 'done'];
 
   private projectSubscription!: Subscription;
+  private issueReloadSubscription!: Subscription;
 
   constructor(private issueEndpoint: IssueEndpointService,
               private store: StoreService) {
   }
 
   ngOnInit(): void {
-    this.projectSubscription = this.store.selectedProject$.subscribe(() => {
-        this.updateIssues()
-      }
-    )
+    this.projectSubscription = this.store.selectedProject$.subscribe(() => this.updateIssues())
+    this.issueReloadSubscription = this.store.issuesReloaded$.subscribe(() => this.updateIssues())
   }
 
   ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
+    this.issueReloadSubscription.unsubscribe();
   }
 
   updateIssues() {
-    const project = this.store.getSelectedProjectValue();
-    if (project && project.id) {
-      this.issueEndpoint.getAllIssuesByProjectId({projectId: project.id}).subscribe(
-        issues => {
-          this.issues = issues
-          this.toDo = this.prepareIssues('to do');
-          this.inProgress = this.prepareIssues('in progress');
-          this.testing = this.prepareIssues('testing');
-          this.done = this.prepareIssues('done');
-        }
-      )
-    }
+    this.issueEndpoint.getAllIssuesByProjectId({ projectId: this.store.getSelectedProjectId() }).subscribe(
+      issues => {
+        this.issues = issues
+        this.toDo = this.prepareIssues('to do');
+        this.inProgress = this.prepareIssues('in progress');
+        this.testing = this.prepareIssues('testing');
+        this.done = this.prepareIssues('done');
+      }
+    )
   }
 
   prepareIssues(columnName: string): IssueInfoDto[] {
     return Object.values(this.issues)
-    .filter(value => value.status === columnName && value.backlogList === 'active')
+      .filter(value => value.status === columnName && value.backlogList === 'active')
   }
 
   drop(event: CdkDragDrop<IssueInfoDto[]>, newStatus: string) {
@@ -70,12 +67,12 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       const updated = event.container.data.find(issue => issue.status !== newStatus);
       if (updated && updated.tagId) {
         this.issueEndpoint
-        .partialIssueUpdate({
-          body: {
-            tagId: updated.tagId, status: newStatus
-          } as IssuePartialUpdate
-        })
-        .subscribe();
+          .partialIssueUpdate({
+            body: {
+              tagId: updated.tagId, status: newStatus
+            } as IssuePartialUpdate
+          })
+          .subscribe();
       }
     }
   }

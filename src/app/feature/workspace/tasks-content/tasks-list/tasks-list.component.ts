@@ -25,6 +25,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   statuses: string[] = ['None', 'to do', 'in progress', 'done', 'testing']
 
   private projectSubscription!: Subscription;
+  private issueReloadSubscription!: Subscription;
 
   constructor(private issueEndpoint: IssueEndpointService,
               private store: StoreService) {
@@ -32,13 +33,13 @@ export class TasksListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.projectSubscription = this.store.selectedProject$.subscribe(() => {
-      this.updateIssues();
-    })
+    this.projectSubscription = this.store.selectedProject$.subscribe(() => this.updateIssues())
+    this.issueReloadSubscription = this.store.issuesReloaded$.subscribe(() => this.updateIssues())
   }
 
   ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
+    this.issueReloadSubscription.unsubscribe();
   }
 
   private updateIssues() {

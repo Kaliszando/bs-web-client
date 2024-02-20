@@ -18,31 +18,29 @@ export class BacklogListComponent implements OnInit, OnDestroy {
   inactive: IssueInfoDto[] = []
 
   private projectSubscription!: Subscription;
+  private issueReloadSubscription!: Subscription;
 
   constructor(private issueEndpoint: IssueEndpointService,
               private store: StoreService) {
   }
 
   ngOnInit(): void {
-    this.projectSubscription = this.store.selectedProject$.subscribe(() => {
-      this.updateIssues()
-    })
+    this.projectSubscription = this.store.selectedProject$.subscribe(() => this.updateIssues())
+    this.issueReloadSubscription = this.store.issuesReloaded$.subscribe(() => this.updateIssues())
   }
 
   ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
+    this.issueReloadSubscription.unsubscribe();
   }
 
   updateIssues() {
-    const project = this.store.getSelectedProjectValue();
-    if (project && project.id) {
-      this.issueEndpoint.getAllIssuesByProjectId({projectId: project.id}).subscribe(
-        issues => {
-          this.active = issues.filter(issue => issue.backlogList === "active")
-          this.inactive = issues.filter(issue => issue.backlogList !== "active")
-        }
-      )
-    }
+    this.issueEndpoint.getAllIssuesByProjectId({ projectId: this.store.getSelectedProjectId() }).subscribe(
+      issues => {
+        this.active = issues.filter(issue => issue.backlogList === "active")
+        this.inactive = issues.filter(issue => issue.backlogList !== "active")
+      }
+    )
   }
 
   drop(event: CdkDragDrop<IssueInfoDto[]>, newBacklogList: string) {
@@ -58,7 +56,7 @@ export class BacklogListComponent implements OnInit, OnDestroy {
       const updated = event.container.data.find(issue => issue.backlogList !== newBacklogList);
       if (updated && updated.tagId) {
         this.issueEndpoint
-          .partialIssueUpdate({body: {tagId: updated.tagId, backlog: newBacklogList} as IssuePartialUpdate})
+          .partialIssueUpdate({ body: { tagId: updated.tagId, backlog: newBacklogList } as IssuePartialUpdate })
           .subscribe();
       }
     }

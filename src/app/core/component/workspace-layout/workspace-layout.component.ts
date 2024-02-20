@@ -41,7 +41,7 @@ export class WorkspaceLayoutComponent implements OnInit {
       this.userContext = context
     })
 
-    this.store.getSelectedProject$().subscribe(selectedProject => {
+    this.store.selectedProject$.subscribe(selectedProject => {
       this.selectedProject = selectedProject;
     })
 
@@ -58,10 +58,10 @@ export class WorkspaceLayoutComponent implements OnInit {
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  .pipe(
-    map(result => result.matches),
-    shareReplay()
-  );
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
   _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -77,7 +77,7 @@ export class WorkspaceLayoutComponent implements OnInit {
   }
 
   updateProjectState() {
-    this.store.emitSelectedProject(this.selectedProject)
+    this.store.selectedProject$.next(this.selectedProject)
   }
 
   projectSelectorChange() {
@@ -94,17 +94,14 @@ export class WorkspaceLayoutComponent implements OnInit {
       } as IssueDetailsDto,
     });
 
-    dialogRef.afterClosed().subscribe(
-      data => {
-        if (data) {
-          this.issueEndpoint.createIssue({
-            body: data
-          }).subscribe(
-            () => {
-              this.store.emitIssuesReloaded()
-            }
-          )
-        }
-      })
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.issueEndpoint.createIssue({ body: data }).subscribe(
+          () => {
+            this.store.issuesReloaded$.next()
+          }
+        )
+      }
+    })
   }
 }
