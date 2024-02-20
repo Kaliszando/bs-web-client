@@ -29,7 +29,7 @@ export class ProjectSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.getSelectedProject$().subscribe({
+    this.store.selectedProject$.subscribe({
       next: selected => {
         this.selectedProject = selected
         this.dataModel.projectId = selected.id

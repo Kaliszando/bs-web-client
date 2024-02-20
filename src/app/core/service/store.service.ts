@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
+import { BehaviorSubject, ReplaySubject, Subject } from "rxjs";
 import { ProjectInfoDto } from "../../api/models/project-info-dto";
 import { UserInfoDto } from "../../api/models/user-info-dto";
 import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
@@ -19,18 +19,9 @@ export class StoreService {
 
   selectedProject$: BehaviorSubject<ProjectInfoDto> = new BehaviorSubject<ProjectInfoDto>({} as ProjectInfoDto)
 
-  public issuesReloaded$: ReplaySubject<void> = new ReplaySubject<void>(1)
+  issuesReloaded$: Subject<void> = new Subject<void>()
 
   constructor(private projectEndpoint: ProjectEndpointService) {
-    this.emitIssuesReloaded()
-  }
-
-  public emitIssuesReloaded() {
-    this.issuesReloaded$.next()
-  }
-
-  public getSelectedProjectValue(): ProjectInfoDto {
-    return this.selectedProject$.value;
   }
 
   public getSelectedProjectId(): number {
@@ -40,22 +31,14 @@ export class StoreService {
     throw new Error("No selected project");
   }
 
-  public getSelectedProject$(): Observable<ProjectInfoDto> {
-    return this.selectedProject$.asObservable();
-  }
-
-  public emitSelectedProject(project: ProjectInfoDto) {
-    this.selectedProject$.next(project)
-  }
-
-  setSessionToken(token: string | null) {
+  setSessionToken(token: string | null): void {
     if (token != null) {
       this.sessionToken$.next(token)
       this.isAuthorized$.next(true)
     }
   }
 
-  reloadProjects() {
+  reloadProjects(): void {
     this.projectEndpoint.getProjects().subscribe(
       newProjects => {
         this.availableProjects$.next(newProjects)
