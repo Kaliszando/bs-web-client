@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { SharedModule } from "../../common/shared.module";
@@ -76,6 +77,7 @@ import { WorkspaceComponent } from './workspace.component';
     NgxChartsModule,
     DragDropModule,
     FormsModule,
+    MatSortModule,
   ]
 })
 export class WorkspaceModule {
