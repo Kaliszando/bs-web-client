@@ -60,15 +60,15 @@
 
 </div>
 <ng-template #issuesSection>
-  <section class="issue-table-container">
+  <table class="issue-table-container" matSort (matSortChange)="onSortByChanged($event)">
     <div class="table-row row-header">
       <div></div>
       <div></div>
-      <div>Tag</div>
-      <div class="avatar"></div>
-      <div class="status">Status</div>
-      <div class="title">Title</div>
-      <div class="epic">Epic</div>
+      <div mat-sort-header="id">Tag</div>
+      <div mat-sort-header="username" class="avatar">User</div>
+      <div mat-sort-header="status" class="status">Status</div>
+      <div mat-sort-header="title" class="title">Title</div>
+      <div mat-sort-header="epic" class="epic">Epic</div>
       <div class="labels">Labels</div>
       <div></div>
     </div>
@@ -99,5 +99,5 @@
                    (page)="onPageChanged($event)"
                    class="bs-compact-form-field">
     </mat-paginator>
-  </section>
+  </table>
 </ng-template>

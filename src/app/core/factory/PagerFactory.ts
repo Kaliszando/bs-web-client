@@ -7,7 +7,8 @@ export class PagerFactory {
       pageSize: 25,
       pageSizes: [5, 10, 25, 50, 100],
       totalPages: 0,
-      totalElements: 0
+      totalElements: 0,
+      sortBy: undefined
     }
   }
 }

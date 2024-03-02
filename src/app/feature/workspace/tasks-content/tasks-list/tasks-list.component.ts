@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from "@angular/material/paginator";
+import { Sort } from "@angular/material/sort";
 import { Subscription } from "rxjs";
 import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
 import { IssuePageRequest } from "../../../../api/models/issue-page-request";
@@ -54,7 +55,8 @@ export class TasksListComponent implements OnInit, OnDestroy {
     return {
       projectId: this.store.getSelectedProjectId(),
       page: this.pager.page,
-      pageSize: this.pager.pageSize
+      pageSize: this.pager.pageSize,
+      sortBy: this.pager.sortBy
     }
   }
 
@@ -75,5 +77,15 @@ export class TasksListComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(): void {
+  }
+
+  onSortByChanged(event: Sort): void {
+    if (event.direction === '' || event.active === '') {
+      this.pager.sortBy = undefined;
+    } else {
+      this.pager.sortBy = (event.direction === 'asc') ? event.active : '-'.concat(event.active);
+    }
+    this.pager.page = 0;
+    this.updateIssues();
   }
 }

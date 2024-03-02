@@ -3,5 +3,6 @@ export interface Pager {
   totalPages: number,
   page: number,
   pageSize: number,
-  pageSizes: number[]
+  pageSizes: number[],
+  sortBy?: string
 }
