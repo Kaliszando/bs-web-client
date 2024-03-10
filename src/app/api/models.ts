@@ -13,5 +13,6 @@ export { IssueType } from './models/issue-type';
 export { IssueInfoDto } from './models/issue-info-dto';
 export { IssueDetailsDto } from './models/issue-details-dto';
 export { IssuePartialUpdate } from './models/issue-partial-update';
+export { IssuePageFilter } from './models/issue-page-filter';
 export { IssuePageRequest } from './models/issue-page-request';
 export { IssuePageResponse } from './models/issue-page-response';

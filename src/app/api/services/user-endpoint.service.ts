@@ -23,25 +23,27 @@ export class UserEndpointService extends BaseService {
   }
 
   /**
-   * Path part for operation getUserByPhrase
+   * Path part for operation getUsersByParam
    */
-  static readonly GetUserByPhrasePath = '/user';
+  static readonly GetUsersByParamPath = '/user';
 
   /**
-   * Finds user by given input phrase
+   * Finds users by given param
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getUserByPhrase()` instead.
+   * To access only the response body, use `getUsersByParam()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getUserByPhrase$Response(params?: {
+  getUsersByParam$Response(params?: {
     query?: string;
+    projectId?: number;
   }): Observable<StrictHttpResponse<Array<UserInfoDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserEndpointService.GetUserByPhrasePath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, UserEndpointService.GetUsersByParamPath, 'get');
     if (params) {
       rb.query('query', params.query, {});
+      rb.query('projectId', params.projectId, {});
     }
 
     return this.http.request(rb.build({
@@ -56,18 +58,19 @@ export class UserEndpointService extends BaseService {
   }
 
   /**
-   * Finds user by given input phrase
+   * Finds users by given param
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getUserByPhrase$Response()` instead.
+   * To access the full response (for headers, for example), `getUsersByParam$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getUserByPhrase(params?: {
+  getUsersByParam(params?: {
     query?: string;
+    projectId?: number;
   }): Observable<Array<UserInfoDto>> {
 
-    return this.getUserByPhrase$Response(params).pipe(
+    return this.getUsersByParam$Response(params).pipe(
       map((r: StrictHttpResponse<Array<UserInfoDto>>) => r.body as Array<UserInfoDto>)
     );
   }

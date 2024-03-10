@@ -40,7 +40,8 @@
         <div class="avatar-container">
           <bs-avatar *ngIf="issue.reporter"
                      [style]="'initials'"
-                     [seed]="issue.reporter.firstName?.charAt(0) + '' + issue.reporter.lastName?.charAt(0)"
+                     [firstName]="issue.reporter.firstName"
+                     [lastName]="issue.reporter.lastName"
                      [radius]="10"
                      [size]="25"></bs-avatar>
         </div>
@@ -50,7 +51,8 @@
         <div class="avatar-container">
           <bs-avatar *ngIf="issue.assignee"
                      [style]="'initials'"
-                     [seed]="issue.assignee.firstName?.charAt(0) + '' + issue.assignee.lastName?.charAt(0)"
+                     [firstName]="issue.assignee.firstName"
+                     [lastName]="issue.assignee.lastName"
                      [radius]="10"
                      [size]="25"></bs-avatar>
         </div>

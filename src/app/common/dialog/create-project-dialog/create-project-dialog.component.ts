@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from "@angular/material/dialog";
 import { FormControl, Validators } from "@angular/forms";
-import { StoreService } from "../../../core/service/store.service";
-import { UserInfoDto } from "../../../api/models/user-info-dto";
-import { UserEndpointService } from "../../../api/services/user-endpoint.service";
+import { MatDialogRef } from "@angular/material/dialog";
 import { debounceTime, distinctUntilChanged } from "rxjs";
+import { UserInfoDto } from "../../../api/models/user-info-dto";
 import { ProjectEndpointService } from "../../../api/services/project-endpoint.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { UserEndpointService } from "../../../api/services/user-endpoint.service";
+import { StoreService } from "../../../core/service/store.service";
 
 @Component({
   selector: 'bs-create-project-dialog',
@@ -27,18 +26,15 @@ export class CreateProjectDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CreateProjectDialogComponent>,
               public store: StoreService,
               public userService: UserEndpointService,
-              public projectService: ProjectEndpointService,
-              public snackBar: MatSnackBar) {}
+              public projectService: ProjectEndpointService) {
+  }
 
   ngOnInit(): void {
     this.store.userContext$.subscribe({
       next: user => this.userContext = user
     })
 
-    this.usersQueryForm.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged())
-      .subscribe({
+    this.usersQueryForm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe({
         next: query => this.queryUsers(query)
       })
 
@@ -58,7 +54,7 @@ export class CreateProjectDialogComponent implements OnInit {
   }
 
   queryUsers(query: string) {
-    this.userService.getUserByPhrase({query: query}).subscribe({
+    this.userService.getUsersByParam({ query: query }).subscribe({
       next: (result) => {
         this.filteredUsers = result.filter(user => user.username !== this.userContext.username)
         this.usersLoading = false
@@ -69,11 +65,13 @@ export class CreateProjectDialogComponent implements OnInit {
   onCreateProject() {
     if (!this.isFormValid()) return
 
-    this.projectService.createProject({ body: {
+    this.projectService.createProject({
+      body: {
         name: this.nameForm.value,
         tag: this.tagForm.value,
         description: this.descriptionForm.value
-    }}).subscribe({
+      }
+    }).subscribe({
       next: () => {
         this.store.reloadProjects()
       }

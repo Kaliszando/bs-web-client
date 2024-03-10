@@ -25,7 +25,8 @@
       <div class="flex-row">
         <bs-avatar *ngIf="issue.assignee"
                    [style]="'initials'"
-                   [seed]="issue.assignee.firstName?.charAt(0) + '' + issue.assignee.lastName?.charAt(0)"
+                   [firstName]="issue.assignee.firstName"
+                   [lastName]="issue.assignee.lastName"
                    [radius]="10"
                    [size]="25"></bs-avatar>
         <h2 class="over-me">{{ issue.name }}</h2>

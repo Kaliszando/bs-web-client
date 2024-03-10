@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatFormField } from "@angular/material/form-field";
 import { IssueDetailsDto } from "../../../api/models/issue-details-dto";
+import { IssueSeverity } from "../../../api/models/issue-severity";
 
 @Component({
   selector: 'bs-issue-severity-selector',
@@ -23,23 +24,19 @@ export class IssueSeveritySelectorComponent implements OnInit {
   required: boolean = true
 
   @Input()
-  selectedSeverity: string = 'BLOCKER'
+  selectedSeverity: IssueSeverity = { issueSeverity: 'NORMAL' };
+
   @Output()
-  selectedSeverityChange: EventEmitter<string> = new EventEmitter<string>()
+  selectedSeverityChange: EventEmitter<IssueSeverity> = new EventEmitter<IssueSeverity>()
 
   severities: string[] = ['BLOCKER','CRITICAL','MAJOR','NORMAL','MINOR','TRIVIAL']
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.formFields.forEach(ff => ff.updateOutlineGap()), 100);
-  }
-
   ngOnInit(): void {
-    this.selectedSeverity = this.dataModel.issueSeverity
+    this.selectedSeverity = this.dataModel
   }
 
   onSelect() {
-    // @ts-ignore
-    this.dataModel.issueSeverity = this.selectedSeverity
+    this.dataModel = this.selectedSeverity
     this.selectedSeverityChange.emit(this.selectedSeverity);
   }
 }

@@ -1,2 +1,7 @@
-<img src='https://api.dicebear.com/7.x/{{this.style}}/svg?&seed={{this.seed}}&size={{this.size}}&radius={{this.radius}}'
+<img *ngIf="isInitial() else normal"
+     src='https://api.dicebear.com/7.x/{{this.style}}/svg?&seed={{this.createInitalsSeed()}}&size={{this.size}}&radius={{this.radius}}'
      alt="avatar">
+<ng-template #normal>
+  <img src='https://api.dicebear.com/7.x/{{this.style}}/svg?&seed={{this.seed}}&size={{this.size}}&radius={{this.radius}}'
+       alt="avatar">
+</ng-template>

@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class IssueSeverityIconComponent  {
 
   @Input()
-  severity: string = 'NORMAL'
+  severity?: string = 'NORMAL'
   severitiesMap = new Map<string, string>([
     ['BLOCKER','#ff2600'],
     ['CRITICAL','#ff2600'],
@@ -19,6 +19,6 @@ export class IssueSeverityIconComponent  {
   ])
 
   getColor() {
-    return this.severitiesMap.get(this.severity)
+    return this.severity ? this.severitiesMap.get(this.severity) : undefined;
   }
 }
