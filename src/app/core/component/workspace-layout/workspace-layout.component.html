@@ -104,7 +104,8 @@
         <bs-language-toggle></bs-language-toggle>
 
         <bs-avatar [style]="'initials'"
-                   [seed]="userContext.firstName?.charAt(0) + '' + userContext.lastName?.charAt(0)"
+                   [firstName]="userContext.firstName"
+                   [lastName]="userContext.lastName"
                    [radius]="10"
                    [size]="40"></bs-avatar>
         <div>{{userContext.username}}</div>

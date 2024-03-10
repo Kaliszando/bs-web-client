@@ -1,4 +1,6 @@
 <svg width="20" height="20">
-  <rect width="20" height="20" [style.fill]="getColor()"/>
-  <circle cx="10" cy="10" r="5" fill="white" />
+  <ng-container *ngIf="getColor()">
+    <rect width="20" height="20" [style.fill]="getColor()"/>
+    <circle cx="10" cy="10" r="5" fill="white"/>
+  </ng-container>
 </svg>

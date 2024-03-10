@@ -2,7 +2,7 @@
   <mat-form-field class="search-input bs-compact-form-field">
     <mat-label>Filter out by query</mat-label>
     <input matInput placeholder="Query"
-           [(ngModel)]="filter.query" (ngModelChange)="onFilterChange()">
+           [(ngModel)]="filter.query" (ngModelChange)="filterChange$.next()">
   </mat-form-field>
   <bs-issue-type-selector [required]="false" class="filter-input bs-compact-form-field"
                           [(selectedType)]="filter.type"
@@ -13,6 +13,7 @@
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Status</mat-label>
     <mat-select [(value)]="filter.status" (valueChange)="onFilterChange()">
+      <mat-option [value]="undefined">None</mat-option>
       <mat-option *ngFor="let status of statuses" [value]="status">
         {{status}}
       </mat-option>
@@ -32,23 +33,24 @@
 <div class="actions expanded-actions" *ngIf="filterExpanded">
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Reporter</mat-label>
-    <mat-select>
-      <mat-option>demuse</mat-option>
-      <mat-option>jantes</mat-option>
+    <mat-select [(value)]="this.filter.reporterId" (valueChange)="onFilterChange()">
+      <mat-option *ngFor="let reporter of users" [value]="reporter.id">{{reporter.username}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Assignee</mat-label>
-    <mat-select>
-      <mat-option>demuse</mat-option>
-      <mat-option>jantes</mat-option>
+    <mat-select [(value)]="this.filter.assigneeId" (valueChange)="onFilterChange()">
+      <mat-option *ngFor="let assignee of users" [value]="assignee.id">{{assignee.username}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="filter-search bs-compact-form-field">
     <mat-label>Created between</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date">
-      <input matEndDate placeholder="End date">
+      <input matStartDate placeholder="Start date" #dateRangeStart
+             [value]="filter.startDate">
+      <input matEndDate placeholder="End date" #dateRangeEnd
+             [value]="filter.endDate"
+             (dateChange)="dateRangeChange(dateRangeStart.value, dateRangeEnd.value)">
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>

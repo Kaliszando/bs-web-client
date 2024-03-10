@@ -18,5 +18,19 @@ export class AvatarComponent {
 
   @Input()
   radius: number = 10;
+
+  @Input()
+  firstName?: string;
+
+  @Input()
+  lastName?: string;
+
+  isInitial(): boolean {
+    return this.style === 'initials' && (!!this.firstName || !!this.lastName)
+  }
+
+  createInitalsSeed(): string {
+    return this.firstName?.charAt(0) + '' + this.lastName?.charAt(0);
+  }
 }
 

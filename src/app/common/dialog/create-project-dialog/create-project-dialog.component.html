@@ -59,7 +59,8 @@
           <mat-option *ngFor="let user of filteredUsers" (click)="onSelectedUser(user); userQueryInput.value=''">
             <div class="user-options">
               <bs-avatar [style]="'initials'"
-                         [seed]="user.firstName?.charAt(0) + '' + user.lastName?.charAt(0)"
+                         [firstName]="user.firstName"
+                         [lastName]="user.lastName"
                          [radius]="15"
                          [size]="30"></bs-avatar>
               <div>{{ user.username }}</div>

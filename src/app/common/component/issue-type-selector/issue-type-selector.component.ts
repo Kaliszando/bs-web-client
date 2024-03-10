@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatFormField } from "@angular/material/form-field";
 import { IssueDetailsDto } from "../../../api/models/issue-details-dto";
+import { IssueType } from "../../../api/models/issue-type";
 
 @Component({
   selector: 'bs-issue-type-selector',
@@ -23,25 +24,19 @@ export class IssueTypeSelectorComponent implements OnInit {
   required: boolean = true
 
   @Input()
-  selectedType: string = ''
+  selectedType: IssueType = { issueType: undefined }
+
   @Output()
-  selectedTypeChange: EventEmitter<string> = new EventEmitter<string>()
+  selectedTypeChange: EventEmitter<IssueType> = new EventEmitter<IssueType>()
 
   types: string[] = ['EPIC','TASK','SUBTASK','BUG','ENHANCEMENT']
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.formFields.forEach(ff => ff.updateOutlineGap()), 100);
-  }
-
   ngOnInit(): void {
-    let type = this.dataModel.issueType
-    if (type)
-      this.selectedType = type
+    this.selectedType = this.dataModel
   }
 
   onSelect() {
-    // @ts-ignore
-    this.dataModel.issueType = this.selectedType
+    this.dataModel = this.selectedType
     this.selectedTypeChange.emit(this.selectedType);
   }
 }
