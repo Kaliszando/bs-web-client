@@ -1,6 +1,6 @@
 {
   "name": "bs-web-client",
-  "version": "0.0.3-SNAPSHOT",
+  "version": "1.0.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
