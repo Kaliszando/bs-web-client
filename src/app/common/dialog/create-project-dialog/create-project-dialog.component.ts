@@ -73,7 +73,7 @@ export class CreateProjectDialogComponent implements OnInit {
       }
     }).subscribe({
       next: () => {
-        this.store.reloadProjects()
+        this.store.reloadProjects().subscribe()
       }
     })
     this.dialogRef.close()

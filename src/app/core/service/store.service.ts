@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from "rxjs";
+import { BehaviorSubject, ReplaySubject, Subject, Observable, tap } from "rxjs";
 import { ProjectInfoDto } from "../../api/models/project-info-dto";
 import { UserInfoDto } from "../../api/models/user-info-dto";
 import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
@@ -25,10 +25,10 @@ export class StoreService {
   }
 
   public getSelectedProjectId(): number {
-    if (this.selectedProject$.value.id) {
+    if (this.selectedProject$.value?.id) {
       return this.selectedProject$.value.id;
     }
-    throw new Error("No selected project");
+    throw new Error("No selected project or no defined projects for user");
   }
 
   setSessionToken(token: string | null): void {
@@ -38,12 +38,12 @@ export class StoreService {
     }
   }
 
-  reloadProjects(): void {
-    this.projectEndpoint.getProjects().subscribe(
-      newProjects => {
-        this.availableProjects$.next(newProjects)
-        this.selectedProject$.next(newProjects[0])
-      }
+  reloadProjects(): Observable<ProjectInfoDto[]> {
+    return this.projectEndpoint.getProjects().pipe(
+      tap(projects => {
+        this.availableProjects$.next(projects)
+        this.selectedProject$.next(projects[0])
+      })
     )
   }
 }

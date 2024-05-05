@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectInfoDto } from "../../api/models/project-info-dto";
-import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
+import { StoreService } from "../service/store.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectsInfoResolver implements Resolve<ProjectInfoDto[]> {
+export class ProjectContextResolver implements Resolve<ProjectInfoDto[]> {
 
-  constructor(private projectEndpointService: ProjectEndpointService) {
+  constructor(private store: StoreService) {
   }
 
   resolve(): Observable<ProjectInfoDto[]> {
-    return this.projectEndpointService.getProjects();
+    return this.store.reloadProjects();
   }
 }

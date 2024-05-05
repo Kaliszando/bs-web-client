@@ -35,8 +35,6 @@ export class WorkspaceLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.reloadProjects();
-
     this.store.userContext$.subscribe(context => {
       this.userContext = context
     })
