@@ -111,7 +111,7 @@
         <div>{{userContext.username}}</div>
 
         <button mat-icon-button>
-          <mat-icon class="logout" routerLink="/auth/sign-in">logout</mat-icon>
+          <mat-icon class="logout" routerLink="/auth/sign-in" (click)="onLogout()">logout</mat-icon>
         </button>
       </div>
 
