@@ -7,6 +7,7 @@ import { map, shareReplay } from "rxjs/operators";
 import { IssueDetailsDto } from "../../../api/models";
 import { ProjectInfoDto } from "../../../api/models/project-info-dto";
 import { UserInfoDto } from "../../../api/models/user-info-dto";
+import { AuthEndpointService } from "../../../api/services/auth-endpoint.service";
 import { IssueEndpointService } from "../../../api/services/issue-endpoint.service";
 import { CreateIssueDialogComponent } from "../../../common/dialog/create-issue-dialog/create-issue-dialog.component";
 import { StoreService } from "../../service/store.service";
@@ -31,7 +32,8 @@ export class WorkspaceLayoutComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
               private store: StoreService,
               private dialog: MatDialog,
-              private issueEndpoint: IssueEndpointService) {
+              private issueEndpoint: IssueEndpointService,
+              private authEndpoint: AuthEndpointService) {
   }
 
   ngOnInit() {
@@ -101,5 +103,9 @@ export class WorkspaceLayoutComponent implements OnInit {
         )
       }
     })
+  }
+
+  onLogout() {
+    this.authEndpoint.signOut().subscribe()
   }
 }

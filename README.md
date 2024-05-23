@@ -44,7 +44,7 @@ In order to start working with frontend, run [backend](https://github.com/Kalisz
    ```
 3. Start frontend
    ```sh
-   ng serve
+   npm start
    ```
 
 
