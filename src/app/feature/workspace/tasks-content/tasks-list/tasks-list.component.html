@@ -2,7 +2,7 @@
   <mat-form-field class="search-input bs-compact-form-field">
     <mat-label>Filter out by query</mat-label>
     <input matInput placeholder="Query"
-           [(ngModel)]="filter.query" (ngModelChange)="filterChange$.next()">
+           [(ngModel)]="filter.query" (ngModelChange)="onQueryChange()">
   </mat-form-field>
   <bs-issue-type-selector [required]="false" class="filter-input bs-compact-form-field"
                           [(selectedType)]="filter.type"
@@ -19,6 +19,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-button (click)="onClear()" color="accent" class="button-action" [disabled]="!filterTouched">
+      <span>Clear</span>
+      <mat-icon>close</mat-icon>
+  </button>
   <button mat-button (click)="filterExpanded = !filterExpanded" color="accent" class="button-action">
     <ng-container *ngIf="filterExpanded">
       <span>Hide filters</span>
