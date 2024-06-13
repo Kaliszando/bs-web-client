@@ -26,6 +26,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   filter: ListFilter = {} as ListFilter;
   noIssues: boolean = true
   filterExpanded: boolean = false
+  filterTouched: boolean = false;
   pager: Pager;
   statuses: string[] = ['to do', 'in progress', 'done', 'testing']
 
@@ -108,6 +109,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(): void {
+    this.filterTouched = true;
     this.pager.page = 0;
     this.updateIssues();
   }
@@ -125,6 +127,20 @@ export class TasksListComponent implements OnInit, OnDestroy {
   dateRangeChange(start: string, end: string): void {
     this.filter.startDate = this.reformatDate(start);
     this.filter.endDate = this.reformatDate(end);
+    this.filterChange$.next();
+  }
+
+  onClear(): void {
+    this.filter = {
+      type: { issueType: undefined },
+      severity: { issueSeverity: undefined }
+    } as ListFilter;
+    this.onFilterChange();
+    this.filterTouched = false;
+  }
+
+  onQueryChange() {
+    this.filterTouched = true;
     this.filterChange$.next();
   }
 
