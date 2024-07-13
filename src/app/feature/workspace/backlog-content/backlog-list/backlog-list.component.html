@@ -13,8 +13,8 @@
     <div class="list-title">Active kanban list {{active.length}}</div>
     <div *ngFor="let issue of active" class="backlog-list-row" cdkDrag>
       <mat-icon class="draggable">drag_indicator</mat-icon>
-      <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
-      <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
+      <bs-issue-type-icon [type]="issue.type"></bs-issue-type-icon>
+      <bs-issue-severity-icon [severity]="issue.severity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]" class="tag">{{issue.tagId}}</a>
       <bs-status-chip class="status" [status]="issue.status"></bs-status-chip>
       <div class="title">{{issue.name}}</div>
@@ -29,8 +29,8 @@
     <div class="list-title">Inactive kanban list {{inactive.length}}</div>
     <div *ngFor="let issue of inactive" class="backlog-list-row" cdkDrag>
       <mat-icon class="draggable">drag_indicator</mat-icon>
-      <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
-      <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
+      <bs-issue-type-icon [type]="issue.type"></bs-issue-type-icon>
+      <bs-issue-severity-icon [severity]="issue.severity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]" class="tag">{{issue.tagId}}</a>
       <bs-status-chip class="status" [status]="issue.status"></bs-status-chip>
       <div class="title">{{issue.name}}</div>

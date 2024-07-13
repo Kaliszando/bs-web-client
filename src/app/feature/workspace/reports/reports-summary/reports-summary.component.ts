@@ -51,11 +51,11 @@ export class ReportsSummaryComponent implements OnInit, OnDestroy {
 
   updateChartData() {
     this.issuesSummaryData = [
-      { name: "Epic", value: this.issues.filter(value => value.issueType === 'EPIC').length },
-      { name: "Task", value: this.issues.filter(value => value.issueType === 'TASK').length },
-      { name: "Subtask", value: this.issues.filter(value => value.issueType === 'SUBTASK').length },
-      { name: "Bug", value: this.issues.filter(value => value.issueType === 'BUG').length },
-      { name: "Enhancement", value: this.issues.filter(value => value.issueType === 'ENHANCEMENT').length }
+      { name: "Epic", value: this.issues.filter(value => value.type === 'EPIC').length },
+      { name: "Task", value: this.issues.filter(value => value.type === 'TASK').length },
+      { name: "Subtask", value: this.issues.filter(value => value.type === 'SUBTASK').length },
+      { name: "Bug", value: this.issues.filter(value => value.type === 'BUG').length },
+      { name: "Enhancement", value: this.issues.filter(value => value.type === 'ENHANCEMENT').length }
     ]
   }
 }

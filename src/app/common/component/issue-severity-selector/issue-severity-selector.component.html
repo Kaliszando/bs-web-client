@@ -1,9 +1,9 @@
 <mat-form-field>
-  <button mat-icon-button matPrefix tabindex="-1" *ngIf="preview && selectedSeverity.issueSeverity">
-    <bs-issue-severity-icon [severity]="selectedSeverity.issueSeverity"></bs-issue-severity-icon>
+  <button mat-icon-button matPrefix tabindex="-1" *ngIf="preview && selectedSeverity">
+    <bs-issue-severity-icon [severity]="selectedSeverity"></bs-issue-severity-icon>
   </button>
   <mat-label>Severity</mat-label>
-  <mat-select [(ngModel)]="selectedSeverity.issueSeverity" [required]="required" (selectionChange)="onSelect()">
+  <mat-select [(ngModel)]="selectedSeverity" [required]="required" (selectionChange)="onSelect()">
     <mat-option *ngIf="!required">None</mat-option>
     <mat-option *ngFor="let severity of severities" [value]="severity">
       <div>

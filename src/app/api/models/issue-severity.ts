@@ -1,5 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface IssueSeverity {
-  issueSeverity?: 'BLOCKER' | 'CRITICAL' | 'MAJOR' | 'NORMAL' | 'MINOR' | 'TRIVIAL';
+export enum IssueSeverity {
+  Blocker = 'BLOCKER',
+  Critical = 'CRITICAL',
+  Major = 'MAJOR',
+  Normal = 'NORMAL',
+  Minor = 'MINOR',
+  Trivial = 'TRIVIAL'
 }

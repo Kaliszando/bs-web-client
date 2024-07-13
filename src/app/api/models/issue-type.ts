@@ -1,5 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface IssueType {
-  issueType?: 'EPIC' | 'TASK' | 'SUBTASK' | 'ENHANCEMENT' | 'BUG';
+export enum IssueType {
+  Epic = 'EPIC',
+  Task = 'TASK',
+  Subtask = 'SUBTASK',
+  Enhancement = 'ENHANCEMENT',
+  Bug = 'BUG'
 }

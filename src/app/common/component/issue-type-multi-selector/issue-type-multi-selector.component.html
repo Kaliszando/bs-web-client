@@ -1,0 +1,11 @@
+<mat-form-field class="bs-compact-form-field">
+  <mat-label>Type</mat-label>
+  <mat-select multiple [(ngModel)]="selectedTypes" [required]="required" (selectionChange)="onSelect()">
+    <mat-option *ngFor="let type of types" [value]="type">
+      <div>
+        <bs-issue-type-icon [type]="type"></bs-issue-type-icon>
+        <p>{{type.toLowerCase()}}</p>
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

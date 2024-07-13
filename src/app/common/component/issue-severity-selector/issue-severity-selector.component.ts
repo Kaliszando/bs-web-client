@@ -24,7 +24,7 @@ export class IssueSeveritySelectorComponent implements OnInit {
   required: boolean = true
 
   @Input()
-  selectedSeverity: IssueSeverity = { issueSeverity: 'NORMAL' };
+  selectedSeverity?: IssueSeverity = 'NORMAL' as IssueSeverity;
 
   @Output()
   selectedSeverityChange: EventEmitter<IssueSeverity> = new EventEmitter<IssueSeverity>()
@@ -32,11 +32,11 @@ export class IssueSeveritySelectorComponent implements OnInit {
   severities: string[] = ['BLOCKER','CRITICAL','MAJOR','NORMAL','MINOR','TRIVIAL']
 
   ngOnInit(): void {
-    this.selectedSeverity = this.dataModel
+    this.selectedSeverity = this.dataModel.severity;
   }
 
   onSelect() {
-    this.dataModel = this.selectedSeverity
+    this.dataModel.severity = this.selectedSeverity
     this.selectedSeverityChange.emit(this.selectedSeverity);
   }
 }
