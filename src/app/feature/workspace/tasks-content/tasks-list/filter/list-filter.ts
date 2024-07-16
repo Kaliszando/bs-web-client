@@ -3,9 +3,9 @@ import { IssueType } from "../../../../../api/models/issue-type";
 
 export interface ListFilter {
   query: string,
-  severity: IssueSeverity;
-  type: IssueType;
-  status: string
+  severities: IssueSeverity[];
+  types: IssueType[];
+  statuses: string[]
   reporterId: number;
   assigneeId: number;
   endDate: string;

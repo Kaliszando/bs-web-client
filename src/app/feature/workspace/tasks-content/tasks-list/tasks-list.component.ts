@@ -82,9 +82,9 @@ export class TasksListComponent implements OnInit, OnDestroy {
   private prepareFilter(): IssuePageFilter {
     return {
       query: this.filter.query ?? undefined,
-      issueSeverity: this.filter.severity?.issueSeverity,
-      issueType: this.filter.type?.issueType,
-      status: this.filter.status ?? undefined,
+      severities: this.filter.severities ?? undefined,
+      types: this.filter.types ?? undefined,
+      statuses: this.filter.statuses ?? undefined,
       assigneeId: this.filter.assigneeId ?? undefined,
       reporterId: this.filter.reporterId ?? undefined,
       startDate: this.filter.startDate ?? undefined,
@@ -131,10 +131,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   }
 
   onClear(): void {
-    this.filter = {
-      type: { issueType: undefined },
-      severity: { issueSeverity: undefined }
-    } as ListFilter;
+    this.filter = {} as ListFilter;
     this.onFilterChange();
     this.filterTouched = false;
   }

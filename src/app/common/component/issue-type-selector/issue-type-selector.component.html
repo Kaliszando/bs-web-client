@@ -1,9 +1,9 @@
 <mat-form-field>
   <button mat-icon-button matPrefix tabindex="-1" *ngIf="preview && selectedType">
-    <bs-issue-type-icon [type]="selectedType.issueType"></bs-issue-type-icon>
+    <bs-issue-type-icon [type]="selectedType"></bs-issue-type-icon>
   </button>
   <mat-label>Type</mat-label>
-  <mat-select [(ngModel)]="selectedType.issueType" [required]="required" (selectionChange)="onSelect()">
+  <mat-select [(ngModel)]="selectedType" [required]="required" (selectionChange)="onSelect()">
     <mat-option *ngIf="!required">None</mat-option>
     <mat-option *ngFor="let type of types" [value]="type">
       <div>

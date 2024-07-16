@@ -4,16 +4,15 @@
     <input matInput placeholder="Query"
            [(ngModel)]="filter.query" (ngModelChange)="onQueryChange()">
   </mat-form-field>
-  <bs-issue-type-selector [required]="false" class="filter-input bs-compact-form-field"
-                          [(selectedType)]="filter.type"
-                          (selectedTypeChange)="onFilterChange()"></bs-issue-type-selector>
-  <bs-issue-severity-selector [required]="false" class="filter-input bs-compact-form-field"
-                              [(selectedSeverity)]="filter.severity"
-                              (selectedSeverityChange)="onFilterChange()"></bs-issue-severity-selector>
+  <bs-issue-type-multi-selector [required]="false" class="filter-input"
+                                [(selectedTypes)]="this.filter.types"
+                                (selectedTypesChange)="onFilterChange()"></bs-issue-type-multi-selector>
+  <bs-issue-severity-multi-selector [required]="false" class="filter-input"
+                                    [(selectedSeverities)]="this.filter.severities"
+                                    (selectedSeveritiesChange)="onFilterChange()"></bs-issue-severity-multi-selector>
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Status</mat-label>
-    <mat-select [(value)]="filter.status" (valueChange)="onFilterChange()">
-      <mat-option [value]="undefined">None</mat-option>
+    <mat-select multiple [(value)]="filter.statuses" (valueChange)="onFilterChange()">
       <mat-option *ngFor="let status of statuses" [value]="status">
         {{status}}
       </mat-option>
@@ -79,8 +78,8 @@
       <div></div>
     </div>
     <div *ngFor="let issue of issues" class="table-row">
-      <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
-      <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
+      <bs-issue-type-icon [type]="issue.type"></bs-issue-type-icon>
+      <bs-issue-severity-icon [severity]="issue.severity"></bs-issue-severity-icon>
       <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
 
       <div class="avatar">

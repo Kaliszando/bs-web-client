@@ -1,0 +1,11 @@
+<mat-form-field class="bs-compact-form-field">
+  <mat-label>Severity</mat-label>
+  <mat-select multiple [(ngModel)]="selectedSeverities" [required]="required" (selectionChange)="onSelect()">
+    <mat-option *ngFor="let severity of severities" [value]="severity">
+      <div>
+        <bs-issue-severity-icon [severity]="severity"></bs-issue-severity-icon>
+        <p>{{severity.toLowerCase()}}</p>
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

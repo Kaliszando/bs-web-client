@@ -16,8 +16,8 @@
     </span>
     <div class="issue-card example-box" *ngFor="let issue of getListByColumnName(column)" cdkDrag>
       <div class="flex-row">
-        <bs-issue-type-icon [type]="issue.issueType"></bs-issue-type-icon>
-        <bs-issue-severity-icon [severity]="issue.issueSeverity"></bs-issue-severity-icon>
+        <bs-issue-type-icon [type]="issue.type"></bs-issue-type-icon>
+        <bs-issue-severity-icon [severity]="issue.severity"></bs-issue-severity-icon>
         <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{ issue.tagId }}</a>
         <bs-epic-label [epicName]="issue.epicName"></bs-epic-label>
         <mat-icon>more_vert</mat-icon>

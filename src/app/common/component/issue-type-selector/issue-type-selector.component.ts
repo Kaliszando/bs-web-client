@@ -5,8 +5,8 @@ import { IssueType } from "../../../api/models/issue-type";
 
 @Component({
   selector: 'bs-issue-type-selector',
-  templateUrl: './issue-type-selector.component.html',
-  styleUrls: ['./issue-type-selector.component.scss']
+  templateUrl: 'issue-type-selector.component.html',
+  styleUrls: ['issue-type-selector.component.scss']
 })
 export class IssueTypeSelectorComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class IssueTypeSelectorComponent implements OnInit {
   required: boolean = true
 
   @Input()
-  selectedType: IssueType = { issueType: undefined }
+  selectedType?: IssueType;
 
   @Output()
   selectedTypeChange: EventEmitter<IssueType> = new EventEmitter<IssueType>()
@@ -32,11 +32,11 @@ export class IssueTypeSelectorComponent implements OnInit {
   types: string[] = ['EPIC','TASK','SUBTASK','BUG','ENHANCEMENT']
 
   ngOnInit(): void {
-    this.selectedType = this.dataModel
+    this.selectedType = this.dataModel.type
   }
 
   onSelect() {
-    this.dataModel = this.selectedType
+    this.dataModel.type = this.selectedType
     this.selectedTypeChange.emit(this.selectedType);
   }
 }

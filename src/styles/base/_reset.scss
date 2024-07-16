@@ -14,7 +14,7 @@ mat-toolbar, mat-sidenav {
   overflow: hidden !important;
 }
 
-.bs-compact-form-field { // add my-custom-component-small class to your mat-form-field element
+.bs-compact-form-field {
   .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0 !important;}
   .mat-form-field-label-wrapper { top: -1.5em; }
 

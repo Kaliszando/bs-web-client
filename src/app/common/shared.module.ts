@@ -33,6 +33,8 @@ import { StatusChipComponent } from './component/status-chip/status-chip.compone
 import { UserSelectComponent } from './component/user-select/user-select.component';
 import { CreateIssueDialogComponent } from './dialog/create-issue-dialog/create-issue-dialog.component';
 import { CreateProjectDialogComponent } from './dialog/create-project-dialog/create-project-dialog.component';
+import { IssueTypeMultiSelectorComponent } from "./component/issue-type-multi-selector/issue-type-multi-selector.component";
+import { IssueSeverityMultiSelectorComponent } from "./component/issue-severity-multi-selector/issue-severity-multi-selector.component";
 
 
 @NgModule({
@@ -42,8 +44,10 @@ import { CreateProjectDialogComponent } from './dialog/create-project-dialog/cre
     CreateIssueDialogComponent,
     ProjectSelectorComponent,
     IssueTypeSelectorComponent,
+    IssueTypeMultiSelectorComponent,
     LabelsInputComponent,
     IssueSeveritySelectorComponent,
+    IssueSeverityMultiSelectorComponent,
     IssueTypeIconComponent,
     IssueSeverityIconComponent,
     ComponentsInputComponent,
@@ -61,7 +65,9 @@ import { CreateProjectDialogComponent } from './dialog/create-project-dialog/cre
     LanguageToggleComponent,
     TranslateModule,
     IssueTypeSelectorComponent,
+    IssueTypeMultiSelectorComponent,
     IssueSeveritySelectorComponent,
+    IssueSeverityMultiSelectorComponent,
     IssueTypeIconComponent,
     IssueSeverityIconComponent,
     EpicLabelComponent,
