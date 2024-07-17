@@ -14,13 +14,13 @@
     <mat-label>Status</mat-label>
     <mat-select multiple [(value)]="filter.statuses" (valueChange)="onFilterChange()">
       <mat-option *ngFor="let status of statuses" [value]="status">
-        {{status}}
+        {{ status }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <button mat-button (click)="onClear()" color="accent" class="button-action" [disabled]="!filterTouched">
-      <span>Clear</span>
-      <mat-icon>close</mat-icon>
+    <span>Clear</span>
+    <mat-icon>close</mat-icon>
   </button>
   <button mat-button (click)="filterExpanded = !filterExpanded" color="accent" class="button-action">
     <ng-container *ngIf="filterExpanded">
@@ -37,23 +37,21 @@
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Reporter</mat-label>
     <mat-select [(value)]="this.filter.reporterId" (valueChange)="onFilterChange()">
-      <mat-option *ngFor="let reporter of users" [value]="reporter.id">{{reporter.username}}</mat-option>
+      <mat-option *ngFor="let reporter of users" [value]="reporter.id">{{ reporter.username }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="filter-input bs-compact-form-field">
     <mat-label>Assignee</mat-label>
     <mat-select [(value)]="this.filter.assigneeId" (valueChange)="onFilterChange()">
-      <mat-option *ngFor="let assignee of users" [value]="assignee.id">{{assignee.username}}</mat-option>
+      <mat-option *ngFor="let assignee of users" [value]="assignee.id">{{ assignee.username }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="filter-search bs-compact-form-field">
     <mat-label>Created between</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date" #dateRangeStart
-             [value]="filter.startDate">
-      <input matEndDate placeholder="End date" #dateRangeEnd
-             [value]="filter.endDate"
-             (dateChange)="dateRangeChange(dateRangeStart.value, dateRangeEnd.value)">
+      <input matStartDate placeholder="Start date" #dateRangeStart [value]="filter.startDate">
+      <input matEndDate placeholder="End date" #dateRangeEnd [value]="filter.endDate"
+             (dateChange)="onDateRangeChange(dateRangeStart.value, dateRangeEnd.value)">
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
@@ -80,7 +78,7 @@
     <div *ngFor="let issue of issues" class="table-row">
       <bs-issue-type-icon [type]="issue.type"></bs-issue-type-icon>
       <bs-issue-severity-icon [severity]="issue.severity"></bs-issue-severity-icon>
-      <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{issue.tagId}}</a>
+      <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{ issue.tagId }}</a>
 
       <div class="avatar">
         <bs-avatar *ngIf="issue.assignee"
@@ -91,7 +89,7 @@
       </div>
 
       <bs-status-chip class="status" [status]="issue.status"></bs-status-chip>
-      <div class="title">{{issue.name}}</div>
+      <div class="title">{{ issue.name }}</div>
       <bs-epic-label class="epic" [epicName]="issue.epicName"></bs-epic-label>
       <bs-labels [labels]="issue.labels"></bs-labels>
       <mat-icon>more_vert</mat-icon>

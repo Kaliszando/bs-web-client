@@ -71,3 +71,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.mat-datepicker-content .mat-calendar {
+  min-height: 363px;
+}
+
+.mat-calendar-table {
+  border-collapse: initial !important;
+}
