@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from "@angular/material/paginator";
 import { Sort } from "@angular/material/sort";
-import { Subscription, Subject, debounceTime } from "rxjs";
+import { debounceTime, Subject, Subscription } from "rxjs";
 import { IssueInfoDto } from "../../../../api/models/issue-info-dto";
 import { IssuePageFilter } from "../../../../api/models/issue-page-filter";
 import { IssuePageRequest } from "../../../../api/models/issue-page-request";
@@ -16,8 +16,8 @@ import { ListFilter } from "./filter/list-filter";
 
 @Component({
   selector: 'bs-tasks-list',
-  templateUrl: './tasks-list.component.html',
-  styleUrls: ['./tasks-list.component.scss']
+  templateUrl: 'tasks-list.component.html',
+  styleUrls: ['tasks-list.component.scss']
 })
 export class TasksListComponent implements OnInit, OnDestroy {
 
@@ -124,10 +124,13 @@ export class TasksListComponent implements OnInit, OnDestroy {
     this.updateIssues();
   }
 
-  dateRangeChange(start: string, end: string): void {
+  onDateRangeChange(start: string, end: string): void {
+    if (end === "") {
+      return;
+    }
     this.filter.startDate = this.reformatDate(start);
     this.filter.endDate = this.reformatDate(end);
-    this.filterChange$.next();
+    this.onFilterChange();
   }
 
   onClear(): void {
