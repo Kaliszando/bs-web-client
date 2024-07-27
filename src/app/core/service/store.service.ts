@@ -3,6 +3,7 @@ import { BehaviorSubject, ReplaySubject, Subject, Observable, tap } from "rxjs";
 import { ProjectInfoDto } from "../../api/models/project-info-dto";
 import { UserInfoDto } from "../../api/models/user-info-dto";
 import { ProjectEndpointService } from "../../api/services/project-endpoint.service";
+import { ContextData } from "../../api/models/context-data";
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,13 @@ export class StoreService {
         this.selectedProject$.next(projects[0])
       })
     )
+  }
+
+  applyContextData(context: ContextData) {
+    this.userContext$.next(context.user)
+    if (context.projects) {
+      this.availableProjects$.next(context.projects)
+      this.selectedProject$.next(context.projects[0])
+    }
   }
 }

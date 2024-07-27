@@ -5,7 +5,6 @@ import { TaskConfigManageGuard } from "../../core/guard/task-config-manage.guard
 import { TaskDetailsViewGuard } from "../../core/guard/task-details-view.guard";
 import { TaskListViewGuard } from "../../core/guard/task-list-view-guard.service";
 import { InitContextResolver } from "../../core/resolver/init-context-resolver";
-import { ProjectContextResolver } from "../../core/resolver/project-context-resolver.service";
 import { TestContentComponent } from "./admin/test-content.component";
 import { BacklogConfigComponent } from "./backlog-content/backlog-config/backlog-config.component";
 import { BacklogContentComponent } from "./backlog-content/backlog-content.component";
@@ -28,7 +27,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'projects' },
   {
     path: '', component: WorkspaceComponent, canActivate: [AuthorizedGuard],
-    resolve: { context: InitContextResolver, projects: ProjectContextResolver },
+    resolve: { context: InitContextResolver },
     children: [
       {
         path: 'tasks', component: TasksContentComponent,

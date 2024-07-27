@@ -4,7 +4,7 @@ import { StoreService } from "../../core/service/store.service";
 
 @Component({
   selector: 'bs-workspace',
-  templateUrl: './workspace.component.html',
+  templateUrl: 'workspace.component.html',
 })
 export class WorkspaceComponent implements OnInit {
 
@@ -13,7 +13,7 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ context }) => {
-      this.store.userContext$.next(context)
+      this.store.applyContextData(context);
     })
   }
 }

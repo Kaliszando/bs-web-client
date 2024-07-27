@@ -9,7 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { UserInfoDto } from '../models/user-info-dto';
+import { ContextData } from '../models/context-data';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class ContextEndpointService extends BaseService {
    * This method doesn't expect any request body.
    */
   getAppContext$Response(params?: {
-  }): Observable<StrictHttpResponse<UserInfoDto>> {
+  }): Observable<StrictHttpResponse<ContextData>> {
 
     const rb = new RequestBuilder(this.rootUrl, ContextEndpointService.GetAppContextPath, 'get');
     if (params) {
@@ -48,7 +48,7 @@ export class ContextEndpointService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<UserInfoDto>;
+        return r as StrictHttpResponse<ContextData>;
       })
     );
   }
@@ -62,10 +62,10 @@ export class ContextEndpointService extends BaseService {
    * This method doesn't expect any request body.
    */
   getAppContext(params?: {
-  }): Observable<UserInfoDto> {
+  }): Observable<ContextData> {
 
     return this.getAppContext$Response(params).pipe(
-      map((r: StrictHttpResponse<UserInfoDto>) => r.body as UserInfoDto)
+      map((r: StrictHttpResponse<ContextData>) => r.body as ContextData)
     );
   }
 
