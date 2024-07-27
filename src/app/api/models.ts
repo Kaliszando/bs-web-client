@@ -4,6 +4,7 @@ export { UserAdditionalData } from './models/user-additional-data';
 export { UserInfoDto } from './models/user-info-dto';
 export { Comment } from './models/comment';
 export { Comments } from './models/comments';
+export { ContextData } from './models/context-data';
 export { IssueAdditionalData } from './models/issue-additional-data';
 export { IssueDetailsDto } from './models/issue-details-dto';
 export { IssueInfoDto } from './models/issue-info-dto';
