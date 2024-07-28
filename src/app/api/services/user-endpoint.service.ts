@@ -35,9 +35,9 @@ export class UserEndpointService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getUsersByParam$Response(params?: {
+  getUsersByParam$Response(params: {
     query?: string;
-    projectId?: number;
+    projectId: number;
   }): Observable<StrictHttpResponse<Array<UserInfoDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserEndpointService.GetUsersByParamPath, 'get');
@@ -65,9 +65,9 @@ export class UserEndpointService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getUsersByParam(params?: {
+  getUsersByParam(params: {
     query?: string;
-    projectId?: number;
+    projectId: number;
   }): Observable<Array<UserInfoDto>> {
 
     return this.getUsersByParam$Response(params).pipe(

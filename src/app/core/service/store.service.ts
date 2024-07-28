@@ -32,6 +32,16 @@ export class StoreService {
     throw new Error("No selected project or no defined projects for user");
   }
 
+  public tryGetSelectedProjectId(): number | null {
+    try {
+      return this.getSelectedProjectId();
+    }
+    catch (error) {
+      console.warn("No selected project in working context")
+      return null
+    }
+  }
+
   setSessionToken(token: string | null): void {
     if (token != null) {
       this.sessionToken$.next(token)

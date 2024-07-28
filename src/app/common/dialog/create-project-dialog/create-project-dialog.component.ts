@@ -53,8 +53,13 @@ export class CreateProjectDialogComponent implements OnInit {
     return this.nameForm.valid && this.tagForm.valid && this.descriptionForm.valid
   }
 
-  queryUsers(query: string) {
-    this.userService.getUsersByParam({ query: query }).subscribe({
+  queryUsers(query: string): void {
+    if (this.store.tryGetSelectedProjectId() == null) {
+      this.usersLoading = false
+      return
+    }
+
+    this.userService.getUsersByParam({ query: query, projectId: this.store.getSelectedProjectId() }).subscribe({
       next: (result) => {
         this.filteredUsers = result.filter(user => user.username !== this.userContext.username)
         this.usersLoading = false
