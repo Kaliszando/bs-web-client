@@ -4,7 +4,7 @@
   <nav mat-tab-nav-bar [tabPanel]="tabPanel" color="primary">
     <a mat-tab-link routerLink="/main/tasks/list" [active]="router.url === '/main/tasks/list'">List</a>
     <a mat-tab-link routerLink="/main/tasks/config" [active]="router.url === '/main/tasks/config'">Settings</a>
-    <a mat-tab-link [routerLink]="['/main/tasks/details', routeId]" (click)="onNavChange()" [disabled]="!routeId ? true : false"
+    <a mat-tab-link *ngIf="router.url.startsWith('/main/tasks/details')" (click)="onNavChange()"
        [active]="router.url.startsWith('/main/tasks/details')">{{this.router.url.substring(20)}}</a>
   </nav>
 </section>
