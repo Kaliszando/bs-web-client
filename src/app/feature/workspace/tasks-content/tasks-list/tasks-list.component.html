@@ -65,9 +65,9 @@
 <ng-template #issuesSection>
   <table class="issue-table-container" matSort (matSortChange)="onSortByChanged($event)">
     <div class="table-row row-header">
-      <div></div>
-      <div></div>
-      <div mat-sort-header="id">Tag</div>
+      <div class="issue-type-icon"></div>
+      <div class="issue-severity-icon"></div>
+      <div mat-sort-header="id" class='details-link'>Tag</div>
       <div mat-sort-header="username" class="avatar">User</div>
       <div mat-sort-header="status" class="status">Status</div>
       <div mat-sort-header="title" class="title">Title</div>
@@ -76,9 +76,9 @@
       <div></div>
     </div>
     <div *ngFor="let issue of issues" class="table-row">
-      <bs-issue-type-icon [type]="issue.type"></bs-issue-type-icon>
-      <bs-issue-severity-icon [severity]="issue.severity"></bs-issue-severity-icon>
-      <a href="#" [routerLink]="['/main/tasks/details', issue.tagId]">{{ issue.tagId }}</a>
+      <bs-issue-type-icon class="issue-type-icon" [type]="issue.type"></bs-issue-type-icon>
+      <bs-issue-severity-icon class="issue-severity-icon" [severity]="issue.severity"></bs-issue-severity-icon>
+      <a href="#" class='details-link' [routerLink]="['/main/tasks/details', issue.tagId]">{{ issue.tagId }}</a>
 
       <div class="avatar">
         <bs-avatar *ngIf="issue.assignee"
@@ -91,7 +91,7 @@
       <bs-status-chip class="status" [status]="issue.status"></bs-status-chip>
       <div class="title">{{ issue.name }}</div>
       <bs-epic-label class="epic" [epicName]="issue.epicName"></bs-epic-label>
-      <bs-labels [labels]="issue.labels"></bs-labels>
+      <bs-labels class="labels" [labels]="issue.labels"></bs-labels>
       <mat-icon>more_vert</mat-icon>
     </div>
     <mat-paginator [length]="pager.totalElements"
