@@ -73,7 +73,7 @@
       <div mat-sort-header="title" class="title">Title</div>
       <div mat-sort-header="epic" class="epic">Epic</div>
       <div class="labels">Labels</div>
-      <div></div>
+      <div class="kebab-menu"></div>
     </div>
     <div *ngFor="let issue of issues" class="table-row">
       <bs-issue-type-icon class="issue-type-icon" [type]="issue.type"></bs-issue-type-icon>
@@ -92,7 +92,7 @@
       <div class="title">{{ issue.name }}</div>
       <bs-epic-label class="epic" [epicName]="issue.epicName"></bs-epic-label>
       <bs-labels class="labels" [labels]="issue.labels"></bs-labels>
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon class="kebab-menu">more_vert</mat-icon>
     </div>
     <mat-paginator [length]="pager.totalElements"
                    [pageSize]="pager.pageSize"
