@@ -74,9 +74,9 @@
 
     .title {
       grid-column: span 4;
-      white-space: nowrap; /* Prevent text from wrapping */
-      overflow: hidden; /* Hide overflow */
-      text-overflow: ellipsis; /* Show ellipsis when text overflows */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .epic {
