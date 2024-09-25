@@ -59,8 +59,12 @@
 </div>
 <mat-divider></mat-divider>
 
-<div *ngIf="noIssues; else issuesSection">
-
+<div *ngIf="noIssues; else issuesSection" class="no-result-container">
+  <div class="no-result-image">
+    <img src="../../../../assets/sketches/no_results.jpg" alt="no search results">
+  </div>
+  <div class="mat-title">Oops! No results found :(</div>
+  <div class="mat-subheading-2">Sorry, that filter combination has no results. Please try another way.</div>
 </div>
 <ng-template #issuesSection>
   <table class="issue-table-container" matSort (matSortChange)="onSortByChanged($event)">
