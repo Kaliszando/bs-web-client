@@ -4,11 +4,11 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { AuthEndpointService } from './services/auth-endpoint.service';
 import { ContextEndpointService } from './services/context-endpoint.service';
+import { UserEndpointService } from './services/user-endpoint.service';
+import { AuthEndpointService } from './services/auth-endpoint.service';
 import { IssueEndpointService } from './services/issue-endpoint.service';
 import { ProjectEndpointService } from './services/project-endpoint.service';
-import { UserEndpointService } from './services/user-endpoint.service';
 
 /**
  * Module that provides all services and configuration.
@@ -18,11 +18,11 @@ import { UserEndpointService } from './services/user-endpoint.service';
   exports: [],
   declarations: [],
   providers: [
-    AuthEndpointService,
     ContextEndpointService,
+    UserEndpointService,
+    AuthEndpointService,
     IssueEndpointService,
     ProjectEndpointService,
-    UserEndpointService,
     ApiConfiguration
   ],
 })
