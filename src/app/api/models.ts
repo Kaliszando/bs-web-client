@@ -14,6 +14,7 @@ export { PageRequest } from './models/page-request';
 export { IssuePageRequest } from './models/issue-page-request';
 export { ContextData } from './models/context-data';
 export { Comments } from './models/comments';
+export { ErrorResponse } from './models/error-response';
 export { UserDetailsDto } from './models/user-details-dto';
 export { IssueAdditionalData } from './models/issue-additional-data';
 export { LoginCredentialsDto } from './models/login-credentials-dto';
