@@ -27,7 +27,13 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
             panelClass: ['red-snackbar']
           })
         }
-        return throwError(error);
+        if (error.status === 429) {
+          this.snackBar.open('Too many requests. Please try again later', 'Ok', {
+            horizontalPosition: 'right',
+            panelClass: ['red-snackbar']
+          })
+        }
+        return throwError(() => new Error(error.message));
       })
     )
   }
